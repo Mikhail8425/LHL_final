@@ -15,6 +15,15 @@ const Navbar = () => {
                     <NavLink to="/blogs" activeStyle>
                         Blogs
                     </NavLink>
+                    <NavLink to="/home" activeStyle>
+                        Home
+                    </NavLink>
+                    <NavLink to="/watchlist" activeStyle>
+                        watchlist
+                    </NavLink>
+                    <NavLink to="/stock" activeStyle>
+                        Stock
+                    </NavLink>
                     <NavLink to="/sign-up" activeStyle>
                         Sign Up
                     </NavLink>
