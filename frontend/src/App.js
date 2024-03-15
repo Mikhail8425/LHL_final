@@ -5,6 +5,7 @@ import {
     Routes,
     Route,
 } from "react-router-dom";
+import useApplicationData from './hooks/useApplicationData';
 import Home from "./pages";
 import About from "./pages/about";
 import Blogs from "./pages/blogs";
@@ -15,6 +16,12 @@ import Watchlist from "./pages/watchlist";
 import Stock from "./pages/stock";
  
 function App() {
+
+  const { state } = useApplicationData();
+
+
+
+
     return (
         <Router>
             <Navbar />
