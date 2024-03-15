@@ -35,7 +35,7 @@ function App() {
                 <Route path="/blogs" element={<Blogs />} />
                 <Route path="/home" element={<Homepage />} />
                 <Route path="/watchlist" element={<Watchlist />} />
-                <Route path="/stock" element={<Stock />} />
+                <Route path="/stock" element={<Stock stocks={state.stockData} />} />
                 <Route
                     path="/sign-up"
                     element={<SignUp />}
