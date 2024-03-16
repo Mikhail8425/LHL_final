@@ -1,4 +1,10 @@
+
 import { useReducer, useEffect, useState } from "react";
+const apiKey = '5zppMBtonCBY1SJ42kijFfL2V7co5_MN';
+const symbol = 'AAPL';
+const baseUrl = 'https://api.polygon.io/v1';
+
+const url = `${baseUrl}/open-close/${symbol}/2023-01-09?adjusted=true&apiKey=${apiKey}`;
 
 const initialState = {
   stockData: [],
@@ -27,7 +33,7 @@ const useApplicationData = () => {
   const [darkMode, setDarkMode] = useState(false);
 
   useEffect(() => {
-    fetch("http://localhost:3001/stocks")
+    fetch(url)
       .then((response) => {
         if (!response.ok) {
           throw new Error("Network response was not ok");
@@ -35,7 +41,7 @@ const useApplicationData = () => {
         return response.json();
       })
       .then((data) => {
-        
+        console.log("Stock data fetched successfully:", data);
         dispatch({ type: ACTIONS.SET_STOCK_DATA, payload: data });
       })
       .catch((error) => {

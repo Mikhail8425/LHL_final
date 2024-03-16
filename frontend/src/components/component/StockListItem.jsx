@@ -2,28 +2,22 @@ import React from "react";
 
 
 
-const StockListItem = (props) => {
-
-
-
+const StockListItem = ({ stock }) => {
   return (
-    <section className="stock-list__item">
-      
-      
-      <div className="photo-list__user-details"><div className="locationandinfo">
-        
-        
-        <h1 className="photo-list__user-info">{props.stock.ticker_symbol}</h1>
-        <h2 className="photo-list__user-info">{props.stock.stock_name}</h2>
-        <h3 className="photo-list__user-info">{props.stock.price}</h3>
-        <h3 className="photo-list__user-info">{props.stock.price_change_percentage}%</h3>
-        <h3 className="photo-list__user-info">${props.stock.price_change_dollar}</h3>
-        </div><hr className='photo-details-modal__hr'></hr>
-        <h2 className="photo-list__user-location"></h2>
-        
-      </div>
-    </section>
-  )
+    <div className="stock-item">
+      <h2>{stock.symbol}</h2>
+      <p>Open: {stock.open}</p>
+      <p>High: {stock.high}</p>
+      <p>Low: {stock.low}</p>
+      <p>Close: {stock.close}</p>
+      <p>Volume: {stock.volume}</p>
+      <p>From: {stock.from}</p>
+      <p>preMarket: {stock.preMarket}</p>
+      <p>Status: {stock.status}</p>
+      <p>afterHours: {stock.afterHours}</p>
+      {/* You can display other properties similarly */}
+    </div>
+  );
 };
 
 export default StockListItem;

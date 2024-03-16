@@ -1,23 +1,16 @@
-import StockListItem from '../components/component/StockListItem';
-// Filename - pages/blogs.js
- 
 import React from "react";
- 
-const StockList = (props) => {
-  const stockItems = props.stocks.map((stock) => (
-    <StockListItem
-      key={stock.id}
-      stock={stock}
-      
-      
-    />
-  ));
+import StockListItem from '../components/component/StockListItem';
 
+const StockList = (props) => {
+  // Render a single StockListItem using props.stocks
   return (
     <ul className="photo-list">
-      {stockItems}
+      <StockListItem
+        key={props.stocks.symbol} // Assuming symbol is unique for each stock
+        stock={props.stocks}
+      />
     </ul>
   );
 };
- 
+
 export default StockList;
