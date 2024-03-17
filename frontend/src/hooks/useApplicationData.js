@@ -41,7 +41,7 @@ const useApplicationData = () => {
         return response.json();
       })
       .then((data) => {
-        console.log("Stock data fetched successfully:", data);
+        
         dispatch({ type: ACTIONS.SET_STOCK_DATA, payload: data });
       })
       .catch((error) => {
