@@ -14,6 +14,7 @@ import Contact from "./pages/contact";
 import Homepage from "./pages/homepage";
 import Watchlist from "./pages/watchlist";
 import Stock from "./pages/stock";
+import LoginPage from "./pages/login";
  
 function App() {
 
@@ -36,10 +37,8 @@ function App() {
                 <Route path="/home" element={<Homepage />} />
                 <Route path="/watchlist" element={<Watchlist />} />
                 <Route path="/stock" element={<Stock stocks={state.stockData} />} />
-                <Route
-                    path="/sign-up"
-                    element={<SignUp />}
-                />
+                <Route path="/sign-up" element={<SignUp />}/>
+                <Route path="/login" element={<LoginPage />}/>
             </Routes>
         </Router>
     );
