@@ -29,6 +29,8 @@ const StockList = () => {
         return <div>Error: {error}</div>;
     }
 
+    const displayedTickers = data.tickers ? data.tickers.slice(0, 100) : [];
+
     return (
         <div>
             {/* Search bar */}
@@ -42,7 +44,7 @@ const StockList = () => {
                 <button type="submit">Search</button>
             </form>
             {/* Check if data exists and is an array before rendering */}
-            {Array.isArray(data.tickers) && data.tickers.map((stock, index) => (
+            {Array.isArray(displayedTickers) && displayedTickers.map((stock, index) => (
                 <StockListItem key={index} stock={stock} />
             ))}
             {/* Check if data.ticker exists and render */}
