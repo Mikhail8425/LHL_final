@@ -3,6 +3,9 @@ import StockListItem from '../components/component/StockListItem';
 
 const StockList = (props) => {
   // Render a single StockListItem using props.stocks
+
+
+  
   return (
     <ul className="photo-list">
       <StockListItem
