@@ -1,13 +1,15 @@
 import React from "react";
 import PropTypes from 'prop-types';
+import { useNavigate } from 'react-router-dom';
 
 const StockListItem = ({ stock, onViewDetails, navigateToDetailsPage }) => {
   // Destructuring the stock object
   const { ticker, todaysChangePerc, todaysChange, updated, day, min, prevDay } = stock;
+  const navigate = useNavigate();
 
   const handleViewDetails = (ticker) => {
     console.log("Ticker:", ticker);
-    navigateToDetailsPage(ticker);
+    navigateToDetailsPage(ticker, navigate);
   };
  
 

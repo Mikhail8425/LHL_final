@@ -1,4 +1,5 @@
 import { useReducer, useEffect, useState } from "react";
+import { useNavigate } from 'react-router-dom';
 
 const apiKey = '5zppMBtonCBY1SJ42kijFfL2V7co5_MN';
 const symbol = 'AAPL';
@@ -57,11 +58,12 @@ const useApplicationData = () => {
     dispatch({ type: ACTIONS.TOGGLE_DARK_MODE });
   };
 
-  const navigateToDetailsPage = (ticker) => {
+  const navigateToDetailsPage = (ticker, navigate) => {
     console.log("Navigating to details page with ticker:", ticker);
-    dispatch({ type: ACTIONS.SET_CURRENT_TICKER, payload: ticker })
-    
-    console.log("current ticker",state.tickerCurrent)
+    dispatch({ type: ACTIONS.SET_CURRENT_TICKER, payload: ticker });
+  
+    // Use navigate passed as an argument
+    navigate(`/stock/${ticker}`);
   };
 
  
