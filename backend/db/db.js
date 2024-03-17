@@ -1,8 +1,9 @@
 const { Pool } = require('pg');
 
+const dbPass = process.env.DB_PASS;
 const pool = new Pool({
   user: 'labber',
-  password: '123',
+  password: dbPass,
   host: 'localhost',
   port: 5432, // default Postgres port
   database: 'final_project'
