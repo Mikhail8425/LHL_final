@@ -15,10 +15,11 @@ import Homepage from "./pages/homepage";
 import Watchlist from "./pages/watchlist";
 import Stock from "./pages/stock";
 import LoginPage from "./pages/login";
+import StockListDetailsItem from "./components/component/StockListDetailsItem";
 
 function App() {
 
-  const { state } = useApplicationData();
+  const { state, handleViewDetails, navigateToDetailsPage } = useApplicationData();
 
 
 
@@ -36,7 +37,11 @@ function App() {
         <Route path="/blogs" element={<Blogs />} />
         <Route path="/home" element={<Homepage />} />
         <Route path="/watchlist" element={<Watchlist />} />
-        <Route path="/stock" element={<Stock stocks={state.stockData} />} />
+        <Route path="/stock" element={<Stock stocks={state.stockData} navigateToDetailsPage={navigateToDetailsPage} tickerCurrent={state.tickerCurrent}
+  handleViewDetails={handleViewDetails}  />} />
+        <Route path="/stock/:ticker" element={<StockListDetailsItem stocks={state.stockData} tickerCurrent={state.tickerCurrent} navigateToDetailsPage={navigateToDetailsPage}
+   />} />
+        
         <Route path="/sign-up" element={<SignUp />} />
         <Route path="/login" element={<LoginPage />} />
       </Routes>
