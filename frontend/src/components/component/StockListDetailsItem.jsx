@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react';
 import PropTypes from 'prop-types';
 import useFinancial from '../../hooks/useFinancialsApi';
 import useChart from '../../hooks/useChart';
+import useStatement from '../../hooks/useStatement';
 import Chart from "react-apexcharts";
 import moment from "moment"
 const StockListDetailsItem = ({ tickerCurrent }) => {
@@ -24,7 +25,10 @@ const StockListDetailsItem = ({ tickerCurrent }) => {
   });
 
   const [series, setSeries] = useState([]);
+  const [selectedItemId, setSelectedItemId] = useState(null);
+
   const { data, loading, error } = useFinancial(`/reference/tickers/${tickerCurrent}?`);
+  const { data3 } = useStatement(`/reference/financials?ticker=${tickerCurrent}&`);
 
   const { data2 } = useChart(`${tickerCurrent}/range/${multiplier}/${timespan}/${start}/${end}?adjusted=true&sort=asc&limit=120&`);
 
@@ -44,8 +48,12 @@ const StockListDetailsItem = ({ tickerCurrent }) => {
     setEnd(event.target.value);
   };
 
+  const handleChange = (event) => {
+    setSelectedItemId(event.target.value);
+  };
+
   useEffect(() => {
-    console.log("Data2:", data2); // Log the value of data2
+    
     if (!data2 || !Array.isArray(data2.results)) return;
   
     
@@ -54,14 +62,15 @@ const StockListDetailsItem = ({ tickerCurrent }) => {
     });
   
     setSeries([{ data: formattedData }]);
-    console.log("Series:", series);
+    
   }, [data2]);
 
   if (loading) return <div>Loading...</div>;
   if (error) return <div>Error: {error.message}</div>;
 
   const companyInfo = data.results;
-
+  const financeInfo = data3.results;
+console.log("financeinfo",financeInfo)
 
   return (
     
@@ -77,7 +86,14 @@ const StockListDetailsItem = ({ tickerCurrent }) => {
             <input type="text" value={multiplier} onChange={handleMultiplierChange} />
     
             <label>Timespan:</label>
-            <input type="text" value={timespan} onChange={handleTimespanChange} />
+<select value={timespan} onChange={handleTimespanChange}>
+    <option value="hour">Hour</option>
+    <option value="day">Day</option>
+    <option value="week">Week</option>
+    <option value="month">Month</option>
+    <option value="quarter">Quarter</option>
+    <option value="year">Year</option>
+</select>
     
             <label>Start:</label>
             <input type="date" value={start} onChange={handleStartChange} />
@@ -117,18 +133,43 @@ const StockListDetailsItem = ({ tickerCurrent }) => {
           {companyInfo.list_date && <li><strong>List Date:</strong> {companyInfo.list_date}</li>}
           {companyInfo.branding && 
             <li>
-              <strong>Branding:</strong>
-              <ul>
-                {companyInfo.branding.logo_url && <li><strong>Logo URL:</strong> <a href={companyInfo.branding.logo_url}>{companyInfo.branding.logo_url}</a></li>}
-                {companyInfo.branding.icon_url && <li><strong>Icon URL:</strong> <a href={companyInfo.branding.icon_url}>{companyInfo.branding.icon_url}</a></li>}
-              </ul>
-            </li>
+            <strong>Branding:</strong>
+            <ul>
+              {companyInfo.branding.logo_url && <li><strong>Logo:</strong> <img src={companyInfo.branding.logo_url + '?apiKey=5zppMBtonCBY1SJ42kijFfL2V7co5_MN'} alt="Logo" style={{ width: '100px', height: 'auto' }} /></li>}
+              {companyInfo.branding.icon_url && <li><strong>Icon:</strong> <img src={companyInfo.branding.icon_url + '?apiKey=5zppMBtonCBY1SJ42kijFfL2V7co5_MN'} alt="Icon" style={{ width: '50px', height: 'auto' }} /></li>}
+            </ul>
+          </li>
           }
           {companyInfo.share_class_shares_outstanding && <li><strong>Share Class Shares Outstanding:</strong> {companyInfo.share_class_shares_outstanding}</li>}
           {companyInfo.weighted_shares_outstanding && <li><strong>Weighted Shares Outstanding:</strong> {companyInfo.weighted_shares_outstanding}</li>}
           {companyInfo.round_lot && <li><strong>Round Lot:</strong> {companyInfo.round_lot}</li>}
         </ul>
       </div>
+
+      <div className="financials">
+      <h1>Financial Information</h1>
+      <select value={selectedItemId} onChange={handleChange}>
+        <option value="">Select Item</option>
+        {data3 && data3.results && data3.results.map((item, index) => (
+          <option key={index} value={item.id}>{item.id}</option>
+        ))}
+      </select>
+      <ul>
+        {data3 && data3.results && data3.results.map((item, index) => (
+          item.id === selectedItemId && (
+            <li key={index}>
+              <strong>ID: </strong> {item.id}<br />
+              <strong>Start Date: </strong> {item.start_date}<br />
+              <strong>End Date: </strong> {item.end_date}<br />
+              <strong>Comprehensive Income: </strong> {item.financials.comprehensive_income.comprehensive_income_loss.value}<br />
+              {/* Add other properties as needed */}
+            </li>
+          )
+        ))}
+      </ul>
+            
+            
+            </div>
     </div>
   );
 };
