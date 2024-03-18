@@ -1,6 +1,6 @@
 import React, { useState } from "react";
-import useApi from '../hooks/useApi'; // Import the useApi hook
-import StockListItem from '../components/component/StockListItem'; // Import the StockListItem component
+import useApi from '../hooks/useApi'; 
+import StockListItem from '../components/component/StockListItem'; 
 
 const StockList = (props) => {
     // State to hold the search query
@@ -49,7 +49,7 @@ const StockList = (props) => {
                 <StockListItem key={index} stock={stock} navigateToDetailsPage={props.navigateToDetailsPage} handleViewDetails={props.handleViewDetails} />
             ))}
             {/* Check if data.ticker exists and render */}
-            {data.ticker && <StockListItem stock={data.ticker} onViewDetails={props.navigateToDetailsPage} handleViewDetails={props.handleViewDetails} />}
+            {data.ticker && <StockListItem stock={data.ticker} navigateToDetailsPage={props.navigateToDetailsPage} handleViewDetails={props.handleViewDetails} />}
         </div>
     );
 };

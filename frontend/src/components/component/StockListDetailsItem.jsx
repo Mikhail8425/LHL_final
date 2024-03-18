@@ -1,26 +1,61 @@
-import { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import PropTypes from 'prop-types';
-import ApexCharts from 'apexcharts';
 import useFinancial from '../../hooks/useFinancialsApi';
+import useChart from '../../hooks/useChart';
 import Chart from "react-apexcharts";
-
+import moment from "moment"
 const StockListDetailsItem = ({ tickerCurrent }) => {
-  const apiEndpoint = `/reference/tickers/${tickerCurrent}?`;
+  const [multiplier, setMultiplier] = useState(1);
+  const [timespan, setTimespan] = useState('day');
+  const [start, setStart] = useState('2024-01-01');
+  const [end, setEnd] = useState('2024-03-01');
   const [options, setOptions] = useState({
     chart: {
       id: "basic-bar"
     },
     xaxis: {
-      categories: [1991, 1992, 1993, 1994, 1995, 1996, 1997, 1998, 1999]
+      type: 'datetime',
+      labels: {
+        formatter: function(value, timestamp) {
+          return moment(timestamp).format('YYYY-MM-DD');
+        }
+      }
     }
   });
-  const [series, setSeries] = useState([
-    {
-      name: "series-1",
-      data: [30, 40, 45, 50, 49, 60, 70, 91]
-    }
-  ]);
-  const { data, loading, error } = useFinancial(apiEndpoint);
+
+  const [series, setSeries] = useState([]);
+  const { data, loading, error } = useFinancial(`/reference/tickers/${tickerCurrent}?`);
+
+  const { data2 } = useChart(`${tickerCurrent}/range/${multiplier}/${timespan}/${start}/${end}?adjusted=true&sort=asc&limit=120&`);
+
+  const handleMultiplierChange = (event) => {
+    setMultiplier(event.target.value);
+  };
+
+  const handleTimespanChange = (event) => {
+    setTimespan(event.target.value);
+  };
+
+  const handleStartChange = (event) => {
+    setStart(event.target.value);
+  };
+
+  const handleEndChange = (event) => {
+    setEnd(event.target.value);
+  };
+
+  useEffect(() => {
+    console.log("Data2:", data2); // Log the value of data2
+    if (!data2 || !Array.isArray(data2.results)) return;
+  
+    
+    const formattedData = data2.results.map(item => {
+      return [item.t, [item.o, item.h, item.l, item.c]];
+    });
+  
+    setSeries([{ data: formattedData }]);
+    console.log("Series:", series);
+  }, [data2]);
 
   if (loading) return <div>Loading...</div>;
   if (error) return <div>Error: {error.message}</div>;
@@ -35,9 +70,21 @@ const StockListDetailsItem = ({ tickerCurrent }) => {
             <Chart
               options={options}
               series={series}
-              type="line"
+              type="candlestick"
               width="500"
-            /> </div>
+            /> <div className="controls">
+            <label>Multiplier:</label>
+            <input type="text" value={multiplier} onChange={handleMultiplierChange} />
+    
+            <label>Timespan:</label>
+            <input type="text" value={timespan} onChange={handleTimespanChange} />
+    
+            <label>Start:</label>
+            <input type="date" value={start} onChange={handleStartChange} />
+    
+            <label>End:</label>
+            <input type="date" value={end} onChange={handleEndChange} />
+          </div></div>
     
       <h1>Company Information</h1>
       <div id="company-info">
