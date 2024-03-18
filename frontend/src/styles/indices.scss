@@ -23,3 +23,9 @@
   font-weight: 600;
   color: #686868;
 }
+
+@media screen and (max-width: 768px) {
+  .indices{
+    margin: 30px
+  }
+}
