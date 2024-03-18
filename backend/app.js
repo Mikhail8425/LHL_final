@@ -8,6 +8,7 @@ const indexRouter = require('./routes/index');
 const usersRouter = require('./routes/users');
 const watchlistsRouter = require('./routes/watchlists');
 const stocksRouter = require('./routes/stocks');
+const loginRouter = require('./routes/login');
 
 var app = express();
 
@@ -27,6 +28,16 @@ function read(file) {
   });
 }
 
+app.get("/abcde", async (req, res) => {
+  const data = await read("abc.txt");
+  res.send('abcde')
+  // return res.status(200).json({ data });
+});
+
+app.post("/abc", async (req, res) => {
+  console.log(req.body);
+  return res.status(200).json({ success: true });
+});
 //use section
 app.use(logger('dev'));
 app.use(express.json());
@@ -38,6 +49,7 @@ app.use('/', indexRouter);
 app.use('/users', usersRouter);
 app.use('/watchlists', watchlistsRouter);
 app.use('/stocks', stocksRouter);
+app.use('/login', loginRouter);
 
 
 
