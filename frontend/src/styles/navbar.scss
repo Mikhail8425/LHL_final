@@ -1,0 +1,67 @@
+.nav {
+  height: 100px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 5px 120px;
+  position: relative;
+}
+
+.nav-logo img {
+  max-width: 200px;
+  max-height: 100px;
+}
+
+.nav-link {
+  color: black;
+  font-weight: 600;
+  display: flex;
+  align-items: center;
+  text-decoration: none;
+  padding: 0 1rem;
+  height: 100%;
+  border-radius: 12px;
+  cursor: pointer;
+  &:hover {
+    color: #b6b6b6;
+  }
+  &.active {
+      color: #686868;
+  }
+}
+
+.bars {
+  display: none;
+  color: #808080;
+  @media screen and (max-width: 768px) {
+      display: block;
+      position: absolute;
+      top: 0;
+      right: 0;
+      transform: translate(-100%, 75%);
+      font-size: 1.8rem;
+      cursor: pointer;
+  }
+}
+
+.nav-menu {
+  display: flex;
+  align-items: center;
+  @media screen and (max-width: 768px) {
+      display: none;
+  }
+}
+
+.nav-signup {
+  display: flex;
+}
+
+.nav-link-divider {
+  margin-left: -9px;
+  margin-right: -8px;
+}
+
+.dark-mode {
+  margin-left: -100px;
+}
+

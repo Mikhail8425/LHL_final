@@ -1,0 +1,79 @@
+.stock-info {
+  position: relative;
+  margin: 24px auto;
+  padding: 8px;
+  border-width: 0.5px;
+  border-color: lightgray;
+  border-style: solid;
+  border-radius: 8px;
+  width: 280px;
+}
+
+@media screen and (max-width: 768px) {
+  .stock-info {
+    width: 100%; /* Full width on smaller screens */
+  }
+}
+
+.stock-symbol {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-color: #f8f8f8;
+  height: 50px;
+}
+
+.stock-symbol p {
+  color: #324fe1;
+  font-weight: 600;
+  font-size: 18px;
+  margin-right: 10px;
+}
+
+.stock-symbol svg {
+  position: absolute;
+  left: 250px;
+  cursor: pointer;
+  &:hover {
+    color: #b6b6b6;
+  }
+}
+
+@media screen and (max-width: 768px) {
+  .stock-symbol svg {
+    left: calc(100% - 35px); /* Adjust position for smaller screens */
+  }
+}
+
+.stock-price {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-right: 10px;
+  margin-top: 0px;
+  margin-bottom: 10px;
+}
+
+.stock-price p { 
+  font-weight: 600;
+  font-size: 20px;
+}
+
+.price-change {
+  text-align: center;
+  margin-right: 10px;
+  margin-bottom: 15px;
+}
+
+.price-change span {
+  font-weight: 600;
+  color: #686868;
+}
+
+.positive {
+  color: green; 
+}
+
+.negative {
+  color: red; 
+}

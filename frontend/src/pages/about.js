@@ -6,7 +6,7 @@ const About = () => {
     return (
         <div>
             <h1>
-                stock all about stocks.
+                About Stock Market Magnet.
             </h1>
         </div>
     );
