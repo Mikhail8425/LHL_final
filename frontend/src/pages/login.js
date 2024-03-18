@@ -16,6 +16,7 @@ const LoginPage = () => {
   };
 
   const handleSubmit = (e) => {
+    console.log('pages/login.js handleSubmit')
     e.preventDefault();
 
     console.log(formData);
