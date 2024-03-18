@@ -1,24 +1,44 @@
-import React from "react";
+import { useState } from 'react';
 import PropTypes from 'prop-types';
-import { useParams } from "react-router-dom";
-import useFinancial from '../../hooks/useFinancialsApi'; // Import the useApi hook
+import ApexCharts from 'apexcharts';
+import useFinancial from '../../hooks/useFinancialsApi';
+import Chart from "react-apexcharts";
 
 const StockListDetailsItem = ({ tickerCurrent }) => {
   const apiEndpoint = `/reference/tickers/${tickerCurrent}?`;
-
-  // Fetch data using useApi hook
+  const [options, setOptions] = useState({
+    chart: {
+      id: "basic-bar"
+    },
+    xaxis: {
+      categories: [1991, 1992, 1993, 1994, 1995, 1996, 1997, 1998, 1999]
+    }
+  });
+  const [series, setSeries] = useState([
+    {
+      name: "series-1",
+      data: [30, 40, 45, 50, 49, 60, 70, 91]
+    }
+  ]);
   const { data, loading, error } = useFinancial(apiEndpoint);
 
   if (loading) return <div>Loading...</div>;
   if (error) return <div>Error: {error.message}</div>;
 
-  // Ensure data is available before accessing its properties
-  if (!data || !data.results) return null;
-
   const companyInfo = data.results;
 
+
   return (
+    
     <div className="stock-item">
+      <div className="mixed-chart">
+            <Chart
+              options={options}
+              series={series}
+              type="line"
+              width="500"
+            /> </div>
+    
       <h1>Company Information</h1>
       <div id="company-info">
         <h2>Company Details</h2>
