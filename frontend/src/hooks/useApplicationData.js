@@ -12,14 +12,20 @@ const initialState = {
   stockData: [],
   darkMode: false,
   tickerCurrent: null,
-  watchListTicker: null
+  watchListTicker: null,
+  login: false,
+  email: "",
+  password: ""
 };
 
 const ACTIONS = {
   SET_STOCK_DATA: "SET_STOCK_DATA",
   TOGGLE_DARK_MODE: "TOGGLE_DARK_MODE",
   SET_CURRENT_TICKER: "SET_CURRENT_TICKER",
-  SET_WATCHLIST_TICKER: "SET_WATCHLIST_TICKER"
+  SET_WATCHLIST_TICKER: "SET_WATCHLIST_TICKER",
+  SET_LOGIN_STATE: "SET_LOGIN_STATE",
+  SET_EMAIL_STATE: "SET_EMAIL_STATE",
+  SET_PASSWORD_STATE: "SET_PASSWORD_STATE"
 };
 
 const reducer = (state, action) => {
@@ -30,8 +36,16 @@ const reducer = (state, action) => {
       return { ...state, tickerCurrent: action.payload }; // Updated action type
     case ACTIONS.SET_WATCHLIST_TICKER: 
       return { ...state, watchListTicker: action.payload }; 
+    case ACTIONS.SET_CURRENT_TICKER:
+      return { ...state, tickerCurrent: action.payload };
     case ACTIONS.TOGGLE_DARK_MODE:
       return { ...state, darkMode: !state.darkMode };
+    case ACTIONS.SET_LOGIN_STATE:
+      return { ...state, login: !state.login };
+    case ACTIONS.SET_EMAIL_STATE:
+      return { ...state, email: action.payload }; // Fixed action
+    case ACTIONS.SET_PASSWORD_STATE:
+      return { ...state, password: action.payload }; // Fixed action
     default:
       return state;
   }
@@ -42,6 +56,9 @@ const useApplicationData = () => {
   const [state, dispatch] = useReducer(reducer, initialState);
   const [darkMode, setDarkMode] = useState(false);
 
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
+  // const [login, setLogin] = useState(false); // Define setLogin state
 
   useEffect(() => {
     fetch(url)
@@ -64,7 +81,6 @@ const useApplicationData = () => {
   };
 
   const navigateToDetailsPage = (ticker, navigate) => {
-    console.log("Navigating to details page with ticker:", ticker);
     dispatch({ type: ACTIONS.SET_CURRENT_TICKER, payload: ticker });
 
     // Use navigate passed as an argument
@@ -74,32 +90,34 @@ const useApplicationData = () => {
   const addtoWatchList = (ticker) => {
     console.log("ADDING THE TICKER TO WATCHLIST:", ticker);
     dispatch({ type: ACTIONS.SET_WATCHLIST_TICKER, payload: ticker });
-
-
+  
     const user_id = "2";
-// Make HTTP request to add to watchlist
-axios.post("http://localhost:3001/watchlists", { user_id, ticker_symbol: ticker })
-.then((response) => {
-  console.log("Added to watchlist:", response.data);
-  alert("Added to watchlist successfully!");
-})
-.catch((error) => {
-  console.error("Error adding to watchlist:", error);
-  alert("Error adding to watchlist. Please try again.");
-});
-};
   
-  
-
-
+    // Make HTTP request to add to watchlist
+    axios.post("http://localhost:3001/watchlists", { user_id, ticker_symbol: ticker })
+      .then((response) => {
+        console.log("Added to watchlist:", response.data);
+        alert("Added to watchlist successfully!");
+      })
+      .catch((error) => {
+        console.error("Error adding to watchlist:", error);
+        alert("Error adding to watchlist. Please try again.");
+      });
+  }
 
   return {
+    dispatch,
     state,
     darkMode,
     setDarkMode,
     toggleDarkMode,
     navigateToDetailsPage,
-    addtoWatchList
+    addtoWatchList,
+    email,
+    setEmail,
+    password,
+    setPassword,
+    navigateToDetailsPage
   };
 };
 

@@ -18,7 +18,8 @@
   },
   "homepage": "https://github.com/EricBradshaw98/final#readme",
   "dependencies": {
-    "react-scripts": "^4.0.3"
+    "react-scripts": "^4.0.3",
+    "universal-cookie": "^7.1.0"
   },
   "proxy": "http://localhost:3001"
 }
