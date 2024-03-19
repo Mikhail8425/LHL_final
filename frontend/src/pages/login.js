@@ -2,46 +2,69 @@ import React, { useState } from "react";
 import axios from "axios";
 
 const LoginPage = () => {
-  const [formData, setFormData] = useState({
-    email: "",
-    password: ""
-  });
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
+  const [login, setLogin] = useState(false);
 
-  const handleChange = (e) => {
-    const { name, value } = e.target;
-    setFormData(prevState => ({
-      ...prevState,
-      [name]: value
-    }));
-  };
+  // const handleChange = (e) => {
+  //   const { name, value } = e.target;
+  //   setFormData(prevState => ({
+  //     ...prevState,
+  //     [name]: value
+  //   }));
+  // };
 
   const handleSubmit = (e) => {
-    console.log('pages/login.js handleSubmit')
+    // prevent the form from refreshing the whole page
     e.preventDefault();
-
-    console.log(formData);
-    axios.post("/users", formData)
-      .then(res => {
-        console.log(res);
+    // make a popup alert showing the "submitted" text
+    alert("Submited");
+    // set configurations
+    const configuration = {
+      method: "post",
+      url: "https://nodejs-mongodb-auth-app.herokuapp.com/login",
+      data: {
+        email,
+        password,
+      },
+    };
+    // make the API call
+    axios(configuration)
+      .then((result) => {
+        setLogin(true);
       })
-      .catch(err => {
-        console.log(err);
+      .catch((error) => {
+        error = new Error();
       });
   };
 
   return (
-    <div>
-      <h1>Login</h1>
-      <form onSubmit={handleSubmit}>
-        <label htmlFor="email">Email:</label>
-        <input type="email" id="email" name="email" value={formData.email} onChange={handleChange} required />
-
-        <label htmlFor="password">Password:</label>
-        <input type="password" id="password" name="password" value={formData.password} onChange={handleChange} required />
-
-        <button type="submit">Login</button>
+    <form onSubmit={(e) => handleSubmit(e)}>
+      {/* email */}
+      <form controlId="formBasicEmail">
+        <label>Email address</label>
+        <input type="email"
+          name="email"
+          value={email}
+          onChange={(e) => setEmail(e.target.value)}
+          placeholder="Enter email"
+        />
       </form>
-    </div>
+
+      {/* password */}
+      <form controlId="formBasicPassword">
+        <label>Password</label>
+        <input
+          type="password"
+          name="password"
+          value={password}
+          onChange={(e) => setPassword(e.target.value)}
+          placeholder="Password"
+        />
+      </form>
+      {/* submit button */}
+      <button variant="primary" type="submit" onClick={(e) => handleSubmit(e)}>Login</button>
+    </form>
   );
 };
 

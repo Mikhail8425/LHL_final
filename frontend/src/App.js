@@ -22,27 +22,18 @@ function App() {
 
   const { state, handleViewDetails, navigateToDetailsPage } = useApplicationData();
 
-
-
-
   return (
     <Router>
       <Navbar />
       <Routes>
         <Route exact path="/" element={<Home />} />
         <Route path="/about" element={<About />} />
-        <Route
-          path="/contact"
-          element={<Contact />}
-        />
+        <Route path="/contact" element={<Contact />}/>
         <Route path="/blogs" element={<Blogs />} />
         <Route path="/home" element={<Homepage />} />
         <Route path="/watchlist" element={<Watchlist />} />
-        <Route path="/stock" element={<Stock stocks={state.stockData} navigateToDetailsPage={navigateToDetailsPage} tickerCurrent={state.tickerCurrent}
-  handleViewDetails={handleViewDetails}  />} />
-        <Route path="/stock/:ticker" element={<StockListDetailsItem stocks={state.stockData} tickerCurrent={state.tickerCurrent} navigateToDetailsPage={navigateToDetailsPage}
-   />} />
-        
+        <Route path="/stock" element={<Stock stocks={state.stockData} navigateToDetailsPage={navigateToDetailsPage} tickerCurrent={state.tickerCurrent} handleViewDetails={handleViewDetails}/>}/>
+        <Route path="/stock/:ticker" element={<StockListDetailsItem stocks={state.stockData} tickerCurrent={state.tickerCurrent} navigateToDetailsPage={navigateToDetailsPage}/>} />
         <Route path="/sign-up" element={<SignUp />} />
         <Route path="/login" element={<LoginPage />} />
       </Routes>
