@@ -1,12 +1,12 @@
-INSERT INTO watchlists (user_id, stock_id, ticker_symbol) 
+INSERT INTO watchlists (user_id, ticker_symbol, created_at, updated_at, email_frequency) 
 VALUES
-  (1, 1, 'AAPL'),
-  (1, 2, 'MSFT'),
-  (2, 10, 'TSLA'),
-  (3, 5, 'WMT'),
-  (3, 4, 'CRM'),
-  (4, 9, 'INTC'),
-  (4, 7, 'PYPL'),
-  (5, 6, 'NVDA'),
-  (5, 7, 'AMZN'),
-  (5, 3, 'MSFT');
+  (1, 'AAPL', NOW(), NOW(), 'daily'),
+  (1, 'MSFT', NOW(), NOW(), 'weekly'),
+  (2, 'TSLA', NOW(), NOW(), 'monthly'),
+  (3, 'WMT', NOW(), NOW(), 'weekly'),
+  (3, 'CRM', NOW(), NOW(), 'monthly'),
+  (4, 'INTC', NOW(), NOW(), 'daily'),
+  (4, 'PYPL', NOW(), NOW(), 'monthly'),
+  (5, 'NVDA', NOW(), NOW(), 'daily'),
+  (5, 'AMZN', NOW(), NOW(), 'weekly'),
+  (5,'MSFT', NOW(), NOW(), 'weekly');

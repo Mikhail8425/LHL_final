@@ -20,7 +20,7 @@ import StockListDetailsItem from "./components/component/StockListDetailsItem";
 
 function App() {
 
-  const { state, handleViewDetails, navigateToDetailsPage } = useApplicationData();
+  const { state, handleViewDetails, navigateToDetailsPage, addtoWatchList } = useApplicationData();
 
   return (
     <Router>
@@ -32,8 +32,8 @@ function App() {
         <Route path="/blogs" element={<Blogs />} />
         <Route path="/home" element={<Homepage />} />
         <Route path="/watchlist" element={<Watchlist />} />
-        <Route path="/stock" element={<Stock stocks={state.stockData} navigateToDetailsPage={navigateToDetailsPage} tickerCurrent={state.tickerCurrent} handleViewDetails={handleViewDetails}/>}/>
-        <Route path="/stock/:ticker" element={<StockListDetailsItem stocks={state.stockData} tickerCurrent={state.tickerCurrent} navigateToDetailsPage={navigateToDetailsPage}/>} />
+        <Route path="/stock" element={<Stock stocks={state.stockData} navigateToDetailsPage={navigateToDetailsPage} tickerCurrent={state.tickerCurrent} handleViewDetails={handleViewDetails} addtoWatchList={addtoWatchList}/>}/>
+        <Route path="/stock/:ticker" element={<StockListDetailsItem stocks={state.stockData} tickerCurrent={state.tickerCurrent} navigateToDetailsPage={navigateToDetailsPage} addtoWatchList={addtoWatchList}/>} />
         <Route path="/sign-up" element={<SignUp />} />
         <Route path="/login" element={<LoginPage />} />
       </Routes>

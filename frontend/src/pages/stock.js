@@ -46,10 +46,10 @@ const StockList = (props) => {
             </form>
             {/* Check if data exists and is an array before rendering */}
             {Array.isArray(displayedTickers) && displayedTickers.map((stock, index) => (
-                <StockListItem key={index} stock={stock} navigateToDetailsPage={props.navigateToDetailsPage} handleViewDetails={props.handleViewDetails} />
+                <StockListItem key={index} stock={stock} navigateToDetailsPage={props.navigateToDetailsPage} addtoWatchList={props.addtoWatchList} handleViewDetails={props.handleViewDetails} />
             ))}
             {/* Check if data.ticker exists and render */}
-            {data.ticker && <StockListItem stock={data.ticker} navigateToDetailsPage={props.navigateToDetailsPage} handleViewDetails={props.handleViewDetails} />}
+            {data.ticker && <StockListItem stock={data.ticker} navigateToDetailsPage={props.navigateToDetailsPage} handleViewDetails={props.handleViewDetails} addtoWatchList={props.addtoWatchList} />}
         </div>
     );
 };

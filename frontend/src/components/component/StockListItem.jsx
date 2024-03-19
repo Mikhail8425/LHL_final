@@ -2,7 +2,7 @@ import React from "react";
 import PropTypes from 'prop-types';
 import { useNavigate } from 'react-router-dom';
 
-const StockListItem = ({ stock, onViewDetails, navigateToDetailsPage }) => {
+const StockListItem = ({ stock, onViewDetails, navigateToDetailsPage, addtoWatchList }) => {
   // Destructuring the stock object
   const { ticker, todaysChangePerc, todaysChange, updated, day, min, prevDay } = stock;
   const navigate = useNavigate();
@@ -11,6 +11,11 @@ const StockListItem = ({ stock, onViewDetails, navigateToDetailsPage }) => {
     console.log("Ticker:", ticker);
     navigateToDetailsPage(ticker, navigate);
   };
+
+  const handleAddToWatchlist = (ticker) => {
+    console.log("Ticker:", ticker);
+    addtoWatchList(ticker);
+  }
  
 
   return (
@@ -55,6 +60,7 @@ const StockListItem = ({ stock, onViewDetails, navigateToDetailsPage }) => {
       </div>
       {/* Button to view details */}
       <button onClick={() => handleViewDetails(ticker)}>View Details</button>
+      <button onClick={() =>  handleAddToWatchlist(ticker)}>Add to Watchlist</button>
     </div>
   );
 };
