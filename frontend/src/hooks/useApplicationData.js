@@ -50,7 +50,7 @@ const useApplicationData = () => {
   const [darkMode, setDarkMode] = useState(false);
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
-  const [login, setLogin] = useState(false); // Define setLogin state
+  // const [login, setLogin] = useState(false); // Define setLogin state
 
   useEffect(() => {
     fetch(url)
@@ -77,11 +77,12 @@ const useApplicationData = () => {
     navigate(`/stock/${ticker}`);
   };
 
-  const toggleLogIn = () => {
-    setLogin(!login); // Toggle login state
-  }
+  // const toggleLogIn = () => {
+  //   setLogin(!login); // Toggle login state
+  // }
   
   return {
+    dispatch,
     state,
     darkMode,
     setDarkMode,
@@ -90,8 +91,6 @@ const useApplicationData = () => {
     setEmail,
     password,
     setPassword,
-    login,
-    toggleLogIn,
     navigateToDetailsPage
   };
 };

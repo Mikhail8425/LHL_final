@@ -1,23 +1,28 @@
-import React, { useState } from "react";
+import React, { useReducer, useState } from "react";
 import axios from "axios";
 
-const LoginPage = ({ setLogin }) => {
+const LoginPage = (props) => {
+  const { dispatch, state } = props;
+  // console.log('state', state)
+  // console.log('props', props)
+
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
+  
 
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
       const response = await axios.post("http://localhost:3001/login", { email, password });
       console.log(response.data);
-      alert("Login successful!");
-      setLogin(true); // Change login state to true
+      // Change login state to true
+      dispatch({ type: "SET_LOGIN_STATE" });
     } catch (error) {
       console.log(error);
       alert("Login failed!");
     }
   };
-
+  // console.log('state', state)
   return (
     <form onSubmit={handleSubmit}>
       {/* email */}

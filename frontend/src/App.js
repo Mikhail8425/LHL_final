@@ -20,7 +20,7 @@ import StockListDetailsItem from "./components/component/StockListDetailsItem";
 
 function App() {
 
-  const { state, handleViewDetails, navigateToDetailsPage, setEmail, setPassword, toggleLogIn } = useApplicationData();
+  const { state, handleViewDetails, navigateToDetailsPage, setEmail, setPassword, dispatch } = useApplicationData();
 
   return (
     <Router>
@@ -39,12 +39,13 @@ function App() {
           path="/login"
           element={
             <LoginPage
-              login={state.login}
+              dispatch={dispatch}
+              state={state}
+              // login={state.login}
               email={state.email}
               password={state.password}
               setEmail={setEmail}
               setPassword={setPassword}
-              toggleLogIn={toggleLogIn}
             />
           }
         />
