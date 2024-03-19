@@ -6,5 +6,6 @@ CREATE TABLE stocks(
     price INTEGER NOT NULL,
     price_change_percentage INTEGER NOT NULL,
     price_change_dollar INTEGER NOT NULL,
-    change BOOLEAN NOT NULL
+    change BOOLEAN NOT NULL,
+    category TEXT
 );
