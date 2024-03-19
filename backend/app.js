@@ -12,6 +12,7 @@ const usersRouter = require('./routes/users');
 const watchlistsRouter = require('./routes/watchlists');
 const stocksRouter = require('./routes/stocks');
 const loginRouter = require('./routes/login');
+const registerRouter = require('./routes/register');
 
 var app = express();
 
@@ -53,84 +54,16 @@ app.use('/users', usersRouter);
 app.use('/watchlists', watchlistsRouter);
 app.use('/stocks', stocksRouter);
 app.use('/login', loginRouter);
+app.use('/register', registerRouter);
 
-app.post("/register", (request, response) => {
-
-// hash the password
-bcrypt.hash(request.body.password, 10)
-    .then((hashedPassword) => {
-      // Execute an SQL query to insert the new user into the database
-      const insertUserQuery = 'INSERT INTO users (email, password, first_name, last_name) VALUES ($1, $2, $3, $4) RETURNING *';
-      const queryValues = [request.body.email, hashedPassword, request.body.first_name, request.body.last_name];
-
-      query(insertUserQuery, queryValues)
-        .then((result) => {
-          response.status(201).send({
-            message: "User Created Successfully",
-            result: result.rows[0] // Assuming you want to send back the inserted user data
-          });
-        })
-        .catch((error) => {
-          response.status(500).send({
-            message: "Error creating user",
-            error: error.message // Send only the error message to avoid exposing sensitive info
-          });
-        });
-    })
-    .catch((error) => {
-      response.status(500).send({
-        message: "Password hashing failed",
-        error: error.message // Send only the error message to avoid exposing sensitive info
-      });
-    });
+// free endpoint
+app.get("/free-endpoint", (request, response) => {
+  response.json({ message: "You are free to access me anytime" });
 });
 
-// Define your route handler for login
-app.post("/login", (request, response) => {
-  const { email, password } = request.body;
-
-  // Check if email exists in the database
-  const getUserQuery = 'SELECT * FROM users WHERE email = $1';
-  query(getUserQuery, [email])
-    .then((result) => {
-      const user = result.rows[0];
-
-      // If email does not exist
-      if (!user) {
-        return response.status(404).json({ message: "Email not found" });
-      }
-
-      // Compare the provided password with the hashed password in the database
-      bcrypt.compare(password, user.password)
-        .then((passwordCheck) => {
-          if (!passwordCheck) {
-            return response.status(400).json({ message: "Passwords do not match" });
-          }
-
-          // Generate JWT token
-          const token = jwt.sign(
-            {
-              userId: user.id,
-              userEmail: user.email,
-            },
-            "YOUR_SECRET_KEY", // Replace with your secret key
-            { expiresIn: "24h" }
-          );
-
-          // Return success response with token
-          response.status(200).json({
-            message: "Login Successful",
-            email: user.email,
-            token: token,
-          });
-        })
-        .catch((error) => {
-          response.status(500).json({ message: "Error comparing passwords", error: error.message });
-        });
-    })
-    .catch((error) => {
-      response.status(500).json({ message: "Error retrieving user", error: error.message });
-    });
+// authentication endpoint
+app.get("/auth-endpoint", (request, response) => {
+  response.json({ message: "You are authorized to access me" });
 });
 
 
