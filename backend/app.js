@@ -3,6 +3,9 @@ var path = require('path');
 var cookieParser = require('cookie-parser');
 var logger = require('morgan');
 const db = require('./db');
+const bcrypt = require("bcrypt");
+const { query } = require('./db/db'); // Assuming db.js is in the same directory
+const jwt = require('jsonwebtoken');
 
 const indexRouter = require('./routes/index');
 const usersRouter = require('./routes/users');
