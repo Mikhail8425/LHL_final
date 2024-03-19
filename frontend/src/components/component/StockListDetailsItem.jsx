@@ -26,6 +26,11 @@ const StockListDetailsItem = ({ tickerCurrent }) => {
 
   const [series, setSeries] = useState([]);
   const [selectedItemId, setSelectedItemId] = useState(null);
+  const [selectedFinancialCategory, setSelectedFinancialCategory] = useState('comprehensive_income');
+
+  const handleChangeFinancialCategory = (event) => {
+    setSelectedFinancialCategory(event.target.value);
+  };
 
   const { data, loading, error } = useFinancial(`/reference/tickers/${tickerCurrent}?`);
   const { data3 } = useStatement(`/reference/financials?ticker=${tickerCurrent}&`);
@@ -146,34 +151,49 @@ console.log("financeinfo",financeInfo)
         </ul>
       </div>
 
+      
       <div className="financials">
-      <h1>Financial Information</h1>
-      <select value={selectedItemId} onChange={handleChange}>
-        <option value="">Select Item</option>
-        {data3 && data3.results && data3.results.map((item, index) => (
-          <option key={index} value={item.id}>{item.id}</option>
-        ))}
-      </select>
-      <ul>
-        {data3 && data3.results && data3.results.map((item, index) => (
-          item.id === selectedItemId && (
-            <li key={index}>
-              <strong>ID: </strong> {item.id}<br />
-              <strong>Start Date: </strong> {item.start_date}<br />
-              <strong>End Date: </strong> {item.end_date}<br />
-              <strong>Comprehensive Income: </strong> {item.financials.comprehensive_income.comprehensive_income_loss.value}<br />
-              {/* Add other properties as needed */}
-            </li>
-          )
-        ))}
-      </ul>
-            
-            
-            </div>
+        <h1>Financial Information</h1>
+        <select value={selectedItemId} onChange={handleChange}>
+          <option value="">Select Item</option>
+          {data3 && data3.results && data3.results.map((item, index) => (
+            <option key={index} value={item.id}>{item.id}</option>
+          ))}
+        </select>
+
+        <select value={selectedFinancialCategory} onChange={handleChangeFinancialCategory}>
+          <option value="">Select Financial Category</option>
+          {Object.keys(data3 && data3.results[0] && data3.results[0].financials || {}).map(category => (
+            Object.keys(data3.results[0].financials[category]).map((subCategory, index) => (
+              <option key={index} value={`${category}.${subCategory}`}>{data3.results[0].financials[category][subCategory].label}</option>
+            ))
+          ))}
+        </select>
+
+        <ul>
+          {data3 && data3.results && data3.results.map((item, index) => (
+            item.id === selectedItemId && (
+              <li key={index}>
+                <strong>ID: </strong> {item.id}<br />
+                <strong>Start Date: </strong> {item.start_date}<br />
+                <strong>End Date: </strong> {item.end_date}<br />
+                {selectedFinancialCategory && (
+                  <>
+                    <strong>{selectedFinancialCategory}: </strong>
+                    {item.financials[selectedFinancialCategory.split('.')[0]][selectedFinancialCategory.split('.')[1]].value}
+                    {item.financials[selectedFinancialCategory.split('.')[0]][selectedFinancialCategory.split('.')[1]].unit && ` ${item.financials[selectedFinancialCategory.split('.')[0]][selectedFinancialCategory.split('.')[1]].unit}`}
+                    <br /><br />
+                  </>
+                )}
+                {/* Add other properties as needed */}
+              </li>
+            )
+          ))}
+        </ul>
+      </div>
     </div>
   );
 };
-
 StockListDetailsItem.propTypes = {
   tickerCurrent: PropTypes.string.isRequired,
 };
