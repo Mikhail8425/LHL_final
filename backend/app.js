@@ -6,6 +6,14 @@ const db = require('./db');
 const bcrypt = require("bcrypt");
 const { query } = require('./db/db'); // Assuming db.js is in the same directory
 const jwt = require('jsonwebtoken');
+const auth = require("./auth");
+const cors = require('cors');
+var app = express();
+
+
+
+
+
 
 const indexRouter = require('./routes/index');
 const usersRouter = require('./routes/users');
@@ -14,8 +22,23 @@ const stocksRouter = require('./routes/stocks');
 const loginRouter = require('./routes/login');
 const registerRouter = require('./routes/register');
 
-var app = express();
 
+
+
+app.use(cors({ origin: 'http://localhost:3000' }));
+// Curb Cores Error by adding a header here
+app.use((req, res, next) => {
+  res.setHeader("Access-Control-Allow-Origin", "*");
+  res.setHeader(
+    "Access-Control-Allow-Headers",
+    "Origin, X-Requested-With, Content, Accept, Content-Type, Authorization"
+  );
+  res.setHeader(
+    "Access-Control-Allow-Methods",
+    "GET, POST, PUT, DELETE, PATCH, OPTIONS"
+  );
+  next();
+});
 
 function read(file) {
   return new Promise((resolve, reject) => {
@@ -62,7 +85,7 @@ app.get("/free-endpoint", (request, response) => {
 });
 
 // authentication endpoint
-app.get("/auth-endpoint", (request, response) => {
+app.get("/auth-endpoint", auth, (request, response) => {
   response.json({ message: "You are authorized to access me" });
 });
 
