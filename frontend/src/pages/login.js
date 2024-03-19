@@ -6,36 +6,20 @@ const LoginPage = () => {
   const [password, setPassword] = useState("");
   const [login, setLogin] = useState(false);
 
-  // const handleChange = (e) => {
-  //   const { name, value } = e.target;
-  //   setFormData(prevState => ({
-  //     ...prevState,
-  //     [name]: value
-  //   }));
-  // };
-
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     // prevent the form from refreshing the whole page
     e.preventDefault();
     // make a popup alert showing the "submitted" text
-    alert("Submited");
-    // set configurations
-    const configuration = {
-      method: "post",
-      url: "https://nodejs-mongodb-auth-app.herokuapp.com/login",
-      data: {
-        email,
-        password,
-      },
-    };
-    // make the API call
-    axios(configuration)
-      .then((result) => {
-        setLogin(true);
-      })
-      .catch((error) => {
-        error = new Error();
-      });
+    try {
+      const response = await axios.post("http://localhost:3001/login", {email, password});
+      console.log(response.data); // Log the response from the server
+      alert("Login successful!");
+      setLogin(true);
+    }
+    catch (error) {
+      console.log(error); // Log the error for debugging
+      alert("Login failed!");
+    }
   };
 
   return (
