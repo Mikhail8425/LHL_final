@@ -24,32 +24,42 @@ watchlist.post("/", async (request, response) => {
   console.log("Data being inserted:", { user_id, ticker_symbol });
 
   try {
-    
+    // Check if the entry already exists
     const checkExistingQuery = `
       SELECT * FROM watchlists 
       WHERE user_id = $1 AND ticker_symbol = $2
     `;
     const existingResult = await query(checkExistingQuery, [user_id, ticker_symbol]);
-    
-   
-    if (existingResult.rows.length > 0) {
-      return response.status(400).json({ error: "Entry already exists for this user and ticker symbol." });
-    }
 
-    const insertWatchList = `
-      INSERT INTO watchlists (user_id, ticker_symbol, created_at, updated_at) 
-      VALUES ($1, $2, NOW(), NOW()) 
-      RETURNING *
-    `;
-    const result = await query(insertWatchList, [user_id, ticker_symbol]);
-    
-    
-    response.json(result.rows[0]);
+    // If the entry already exists, delete it
+    if (existingResult.rows.length > 0) {
+      console.log("Entry already exists. Deleting...");
+      const deleteExistingQuery = `
+        DELETE FROM watchlists 
+        WHERE user_id = $1 AND ticker_symbol = $2
+        RETURNING *
+      `;
+      const deletedResult = await query(deleteExistingQuery, [user_id, ticker_symbol]);
+      console.log("Deleted entry:", deletedResult.rows[0]);
+    } else {
+      console.log("Entry does not exist. Proceeding with insertion...");
+
+      // Insert the new entry
+      const insertWatchList = `
+        INSERT INTO watchlists (user_id, ticker_symbol, created_at, updated_at) 
+        VALUES ($1, $2, NOW(), NOW()) 
+        RETURNING *
+      `;
+      const result = await query(insertWatchList, [user_id, ticker_symbol]);
+      response.json(result.rows[0]);
+    }
   } catch (error) {
     console.error("Error inserting into watchlists:", error);
     response.status(500).send("Error inserting into watchlists");
   }
 });
+
+
 
 watchlist.delete("/", async (request, response) => {
   const { user_id, ticker_symbol } = request.body;
