@@ -20,7 +20,7 @@ import StockListDetailsItem from "./components/component/StockListDetailsItem";
 
 function App() {
 
-  const { state, handleViewDetails, navigateToDetailsPage } = useApplicationData();
+  const { state, handleViewDetails, navigateToDetailsPage, setEmail, setPassword, toggleLogIn } = useApplicationData();
 
   return (
     <Router>
@@ -28,14 +28,26 @@ function App() {
       <Routes>
         <Route exact path="/" element={<Home />} />
         <Route path="/about" element={<About />} />
-        <Route path="/contact" element={<Contact />}/>
+        <Route path="/contact" element={<Contact />} />
         <Route path="/blogs" element={<Blogs />} />
         <Route path="/home" element={<Homepage />} />
         <Route path="/watchlist" element={<Watchlist />} />
-        <Route path="/stock" element={<Stock stocks={state.stockData} navigateToDetailsPage={navigateToDetailsPage} tickerCurrent={state.tickerCurrent} handleViewDetails={handleViewDetails}/>}/>
-        <Route path="/stock/:ticker" element={<StockListDetailsItem stocks={state.stockData} tickerCurrent={state.tickerCurrent} navigateToDetailsPage={navigateToDetailsPage}/>} />
+        <Route path="/stock" element={<Stock stocks={state.stockData} navigateToDetailsPage={navigateToDetailsPage} tickerCurrent={state.tickerCurrent} handleViewDetails={handleViewDetails} />} />
+        <Route path="/stock/:ticker" element={<StockListDetailsItem stocks={state.stockData} tickerCurrent={state.tickerCurrent} navigateToDetailsPage={navigateToDetailsPage} />} />
         <Route path="/sign-up" element={<SignUp />} />
-        <Route path="/login" element={<LoginPage />} />
+        <Route
+          path="/login"
+          element={
+            <LoginPage
+              login={state.login}
+              email={state.email}
+              password={state.password}
+              setEmail={setEmail}
+              setPassword={setPassword}
+              toggleLogIn={toggleLogIn}
+            />
+          }
+        />
       </Routes>
     </Router>
   );
