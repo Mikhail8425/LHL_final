@@ -20,6 +20,7 @@
     "morgan": "~1.9.1",
     "pg": "^8.11.3",
     "socket.io": "^2.2.0",
+    "universal-cookie": "^7.1.0",
     "ws": "^7.0.0"
   },
   "devDependencies": {

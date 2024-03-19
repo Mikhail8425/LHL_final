@@ -1,6 +1,8 @@
 import { useReducer, useEffect, useState } from "react";
 import { useNavigate } from 'react-router-dom';
 import axios from "axios";
+import Cookies from "universal-cookie";
+const cookies = new Cookies();
 
 const apiKey = '5zppMBtonCBY1SJ42kijFfL2V7co5_MN';
 const symbol = 'AAPL';
@@ -61,6 +63,9 @@ const useApplicationData = () => {
   // const [login, setLogin] = useState(false); // Define setLogin state
 
   useEffect(() => {
+
+
+    
     fetch(url)
       .then((response) => {
         if (!response.ok) {
@@ -91,8 +96,9 @@ const useApplicationData = () => {
     console.log("ADDING THE TICKER TO WATCHLIST:", ticker);
     dispatch({ type: ACTIONS.SET_WATCHLIST_TICKER, payload: ticker });
   
-    const user_id = "2";
+    const user_id = cookies.get("user_id"); // Retrieve user_id from the cookie
   
+    console.log("User ID:", user_id);
     // Make HTTP request to add to watchlist
     axios.post("http://localhost:3001/watchlists", { user_id, ticker_symbol: ticker })
       .then((response) => {
