@@ -13,7 +13,7 @@ register.post("/", (request, response) => {
   bcrypt.hash(request.body.password, 10)
       .then((hashedPassword) => {
         // Execute an SQL query to insert the new user into the database
-        const insertUserQuery = 'INSERT INTO users (email, password, first_name, last_name) VALUES ($1, $2, $3, $4) RETURNING *';
+        const insertUserQuery = 'INSERT INTO users (email, password, first_name, last_name, created_at, updated_at) VALUES ($1, $2, $3, $4, NOW(), NOW()) RETURNING *';
         const queryValues = [request.body.email, hashedPassword, request.body.first_name, request.body.last_name];
   
         query(insertUserQuery, queryValues)

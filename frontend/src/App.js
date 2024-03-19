@@ -10,7 +10,7 @@ import useApplicationData from './hooks/useApplicationData';
 import Home from "./pages";
 import About from "./pages/about";
 import Blogs from "./pages/blogs";
-import SignUp from "./pages/signup";
+import SignUp from "./pages/RegistrationPage";
 import Contact from "./pages/contact";
 import Homepage from "./pages/homepage";
 import Watchlist from "./pages/watchlist";

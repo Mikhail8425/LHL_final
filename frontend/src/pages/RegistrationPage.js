@@ -25,6 +25,14 @@ const RegistrationPage = () => {
       const response = await axios.post("http://localhost:3001/register", formData);
       console.log(response.data); // Log the response from the server
       alert("Registration successful!");
+
+      setFormData({
+        email: "",
+        password: "",
+        first_name: "",
+        last_name: ""
+      });
+      
     } catch (error) {
       console.error("Registration failed:", error);
       alert("Registration failed. Please try again.");

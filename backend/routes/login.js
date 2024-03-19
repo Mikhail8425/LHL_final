@@ -34,7 +34,7 @@ login.post("/", (request, response) => {
               userId: user.id,
               userEmail: user.email,
             },
-            "YOUR_SECRET_KEY", // Replace with your secret key
+            "RANDOM-TOKEN", // Replace with your secret key
             { expiresIn: "24h" }
           );
 
