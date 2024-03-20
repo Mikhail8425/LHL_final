@@ -57,48 +57,37 @@ login.post("/", (request, response) => {
 
 // Route to change email
 login.put('/', async (req, res) => {
-  const { email } = req.body;
-  const userId = req.user.id; // Assuming you have middleware to extract user ID
+  const { email, password, id: userId } = req.body;
+  
+  console.log("email", "password", "id", email, password, userId, req.body);
 
   try {
-    // Update the email in the database
-    const updateEmailQuery = `
-      UPDATE users 
-      SET email = $1
-      WHERE id = $2
-      RETURNING *;
-    `;
-    const result = await query(updateEmailQuery, [email, userId]);
-
-    // Respond with the updated user object
-    res.json(result.rows[0]);
+    if (email) {
+      // Update email
+      const updateEmailQuery = `
+        UPDATE users 
+        SET email = $1
+        WHERE id = $2
+        RETURNING *;
+      `;
+      const result = await query(updateEmailQuery, [email, userId]);
+      res.json(result.rows[0]);
+    } else if (password) {
+      // Update password
+      const hashedPassword = await bcrypt.hash(password, 10);
+      const updatePasswordQuery = `
+        UPDATE users 
+        SET password = $1
+        WHERE id = $2;
+      `;
+      await query(updatePasswordQuery, [hashedPassword, userId]);
+      res.send("Password updated successfully");
+    } else {
+      res.status(400).send("Bad request: Neither email nor password provided.");
+    }
   } catch (error) {
-    console.error("Error updating email:", error);
-    res.status(500).send("Error updating email");
-  }
-});
-
-// Route to change password
-login.put('/', async (req, res) => {
-  const { password } = req.body;
-  const userId = req.user.id; // Assuming you have middleware to extract user ID
-
-  try {
-    // Hash the new password
-    const hashedPassword = await bcrypt.hash(password, 10);
-
-    // Update the password in the database
-    const updatePasswordQuery = `
-      UPDATE users 
-      SET password = $1
-      WHERE id = $2;
-    `;
-    await query(updatePasswordQuery, [hashedPassword, userId]);
-
-    res.send("Password updated successfully");
-  } catch (error) {
-    console.error("Error updating password:", error);
-    res.status(500).send("Error updating password");
+    console.error("Error updating:", error);
+    res.status(500).send("Error updating");
   }
 });
 

@@ -39,6 +39,7 @@ const LoginPage = (props) => {
   const handleChangeEmail = async () => {
     try {
       const user_id = cookies.get("user_id");
+      console.log("User ID:", user_id);
       // Make an HTTP request to change the email
       const response = await axios.put("http://localhost:3001/login", {
         email: newEmail, id:user_id 
@@ -53,9 +54,12 @@ const LoginPage = (props) => {
 
   const handleChangePassword = async () => {
     try {
+
+      const user_id = cookies.get("user_id");
+      console.log("User ID:", user_id);
       // Make an HTTP request to change the password
       const response = await axios.put("http://localhost:3001/login", {
-        password: newPassword,
+        password: newPassword, id:user_id
       });
       console.log(response.data);
       alert("Password changed successfully!");
@@ -77,10 +81,11 @@ const LoginPage = (props) => {
 
 
 
-
+  const user_id = cookies.get("user_id");
+  console.log("User ID:", user_id);
 
   // Conditionally render based on login state
-  if (!state.login) {
+  if (!user_id) {
     return (
       <form onSubmit={handleSubmit}>
         {/* email */}
