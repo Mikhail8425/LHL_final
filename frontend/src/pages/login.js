@@ -17,7 +17,7 @@ const LoginPage = (props) => {
 
       // Set a cookie with the value of the user
       cookies.set("user_id", response.data.userId, { path: "/" });
-
+      cookies.set("email", response.data.email, { path: "/" });
       // Change login state to true
       dispatch({ type: "SET_LOGIN_STATE" });
     } catch (error) {
@@ -34,6 +34,7 @@ const LoginPage = (props) => {
     // Dispatch an action to reset the login state
     dispatch({ type: "SET_LOGIN_STATE" });
     cookies.remove("user_id");
+    cookies.remove("email");
   };
 
   const handleChangeEmail = async () => {
