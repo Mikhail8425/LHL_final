@@ -38,10 +38,10 @@ const runSeedFiles = async () => {
   try {
     console.log(`-> Connecting to PG using ${pool.options.connectionString} ...`);
     await pool.connect();
-    
+    await runSchemaFiles();
+    await runSeedFiles();
     pool.end();
     console.log(`-> Database setup completed successfully.`);
-    console.log(`-> Server is now running.`);
   } catch (err) {
     console.error(chalk.red(`Failed due to error: ${err}`));
     pool.end();
