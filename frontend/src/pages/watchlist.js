@@ -1,9 +1,14 @@
 import React, { useState, useEffect } from "react";
 import Cookies from "universal-cookie";
 import axios from "axios";
-const cookies = new Cookies();
+import useApi from '../hooks/useApi';
+import StockListItem from '../components/component/StockListItem';
+
 
 const Watchlist = (props) => {
+  const apiEndpoint = `/snapshot/locale/us/markets/stocks/tickers/?`;
+  const { data, loading, error } = useApi(apiEndpoint);
+  const cookies = new Cookies();
   const [tickerSymbols, setTickerSymbols] = useState([]);
   const user_id = cookies.get("user_id");
 
@@ -25,14 +30,24 @@ const Watchlist = (props) => {
     }
   }, [user_id]);
 
+  if (loading) {
+    return <div>Loading...</div>;
+  }
+
+  // if (error) {
+  //   return <div>Error: {error}</div>;
+  // }
+  const displayedTickers = tickerSymbols.map(symbol => symbol);
+  console.log('displayedTickers', displayedTickers);
   return (
     <div>
       <h1>Watchlist</h1>
+
       {user_id ? (
         <div>
           <p>Here are the stocks you are watching:</p>
           <ul>
-            {tickerSymbols.map((symbol, index) => (
+            {displayedTickers.map((symbol, index) => (
               <li key={index}>
                 {symbol}
               </li>

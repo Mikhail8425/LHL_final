@@ -37,6 +37,11 @@ function App() {
           element={
             <Watchlist
               state={state}
+              stocks={state.stockData}
+              navigateToDetailsPage={navigateToDetailsPage}
+              tickerCurrent={state.tickerCurrent}
+              handleViewDetails={handleViewDetails}
+              addtoWatchList={addtoWatchList} 
             />
           }
         />
