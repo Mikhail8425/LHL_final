@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import axios from "axios";
+import emailjs from '@emailjs/browser';
 
 const RegistrationPage = () => {
   const [formData, setFormData] = useState({
@@ -8,6 +9,10 @@ const RegistrationPage = () => {
     first_name: "",
     last_name: ""
   });
+
+  const [name, setName] = useState('');
+  const [email, setEmail] = useState('');
+  const [message, setMessage] = useState('');
 
   const handleChange = (e) => {
     const { name, value } = e.target;
@@ -19,11 +24,31 @@ const RegistrationPage = () => {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    
     // Make HTTP request to register user
     try {
       const response = await axios.post("http://localhost:3001/register", formData);
       console.log(response.data); // Log the response from the server
+      const serviceId = 'service_dmqchgw';
+      const templateId = 'template_6t5wma1';
+      const publicKey = 'VbbEmsg2jvp21wFyq';
+      // Create a new instance of EmailJS
+      const templateParams = {
+        from_name: name,
+        from_email: email,
+        to_name: 'Stocks App',
+        message: "Welcome to Stocks App! You have successfully registered.",
+      };
+  
+      emailjs.send(serviceId, templateId, templateParams, publicKey)
+        .then((response) => { 
+          console.log('SUCCESS!', response);
+          setName('');
+          setEmail('');
+          setMessage('');
+        })
+        .catch((error) => {
+          console.log('FAILED...', error);
+        });
       alert("Registration successful!");
 
       setFormData({
