@@ -38,9 +38,10 @@ const LoginPage = (props) => {
 
   const handleChangeEmail = async () => {
     try {
+      const user_id = cookies.get("user_id");
       // Make an HTTP request to change the email
       const response = await axios.put("http://localhost:3001/login", {
-        email: newEmail,
+        email: newEmail, id:user_id 
       });
       console.log(response.data);
       alert("Email changed successfully!");
