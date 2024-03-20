@@ -2,8 +2,9 @@ import React, { useState, useEffect } from 'react';
 import PropTypes from 'prop-types';
 import useFinancial from '../../hooks/useFinancialsApi';
 import useChart from '../../hooks/useChart';
+import useStatement from '../../hooks/useStatement';
 import Chart from "react-apexcharts";
-import moment from "moment"
+import moment from "moment";
 const StockListDetailsItem = ({ tickerCurrent }) => {
   const [multiplier, setMultiplier] = useState(1);
   const [timespan, setTimespan] = useState('day');
@@ -24,9 +25,17 @@ const StockListDetailsItem = ({ tickerCurrent }) => {
   });
 
   const [series, setSeries] = useState([]);
-  const { data, loading, error } = useFinancial(`/reference/tickers/${tickerCurrent}?`);
+  const [selectedItemId, setSelectedItemId] = useState(null);
+  const [selectedFinancialCategory, setSelectedFinancialCategory] = useState('comprehensive_income');
 
-  const { data2 } = useChart(`${tickerCurrent}/range/${multiplier}/${timespan}/${start}/${end}?adjusted=true&sort=asc&limit=120&`);
+  const handleChangeFinancialCategory = (event) => {
+    setSelectedFinancialCategory(event.target.value);
+  };
+
+  const { data, loading, error } = useFinancial(`/reference/tickers/${tickerCurrent}?`);
+  const { data3, loading3, error3 } = useStatement(`/reference/financials?ticker=${tickerCurrent}&`);
+
+  const { data2, loading2, error2 } = useChart(`${tickerCurrent}/range/${multiplier}/${timespan}/${start}/${end}?adjusted=true&sort=asc&limit=120&`);
 
   const handleMultiplierChange = (event) => {
     setMultiplier(event.target.value);
@@ -44,48 +53,64 @@ const StockListDetailsItem = ({ tickerCurrent }) => {
     setEnd(event.target.value);
   };
 
+  const handleChange = (event) => {
+    setSelectedItemId(event.target.value);
+  };
+
   useEffect(() => {
-    console.log("Data2:", data2); // Log the value of data2
+
     if (!data2 || !Array.isArray(data2.results)) return;
-  
-    
+
+
     const formattedData = data2.results.map(item => {
       return [item.t, [item.o, item.h, item.l, item.c]];
     });
-  
+
     setSeries([{ data: formattedData }]);
-    console.log("Series:", series);
+
   }, [data2]);
 
   if (loading) return <div>Loading...</div>;
   if (error) return <div>Error: {error.message}</div>;
+  if (loading2) return <div>Loading Chart...</div>;
+  if (error2) return <div>Error Loading Chart: {error.message}</div>;
+  if (loading3) return <div>Loading Financials...</div>;
+  if (error3) return <div>Error Loading Financials: {error.message}</div>;
 
   const companyInfo = data.results;
-
+  const financeInfo = data3.results;
+  console.log("financeinfo", financeInfo);
 
   return (
-    
+
     <div className="stock-item">
       <div className="mixed-chart">
-            <Chart
-              options={options}
-              series={series}
-              type="candlestick"
-              width="500"
-            /> <div className="controls">
-            <label>Multiplier:</label>
-            <input type="text" value={multiplier} onChange={handleMultiplierChange} />
-    
-            <label>Timespan:</label>
-            <input type="text" value={timespan} onChange={handleTimespanChange} />
-    
-            <label>Start:</label>
-            <input type="date" value={start} onChange={handleStartChange} />
-    
-            <label>End:</label>
-            <input type="date" value={end} onChange={handleEndChange} />
-          </div></div>
-    
+        <Chart
+          options={options}
+          series={series}
+          type="candlestick"
+          width="500"
+        /> <div className="controls">
+          <label>Multiplier:</label>
+          <input type="text" value={multiplier} onChange={handleMultiplierChange} />
+
+          <label>Timespan:</label>
+          <select value={timespan} onChange={handleTimespanChange}>
+            <option value="hour">Hour</option>
+            <option value="day">Day</option>
+            <option value="week">Week</option>
+            <option value="month">Month</option>
+            <option value="quarter">Quarter</option>
+            <option value="year">Year</option>
+          </select>
+
+          <label>Start:</label>
+          <input type="date" value={start} onChange={handleStartChange} />
+
+          <label>End:</label>
+          <input type="date" value={end} onChange={handleEndChange} />
+        </div></div>
+
       <h1>Company Information</h1>
       <div id="company-info">
         <h2>Company Details</h2>
@@ -115,12 +140,12 @@ const StockListDetailsItem = ({ tickerCurrent }) => {
           {companyInfo.homepage_url && <li><strong>Homepage URL:</strong> <a href={companyInfo.homepage_url}>{companyInfo.homepage_url}</a></li>}
           {companyInfo.total_employees && <li><strong>Total Employees:</strong> {companyInfo.total_employees}</li>}
           {companyInfo.list_date && <li><strong>List Date:</strong> {companyInfo.list_date}</li>}
-          {companyInfo.branding && 
+          {companyInfo.branding &&
             <li>
               <strong>Branding:</strong>
               <ul>
-                {companyInfo.branding.logo_url && <li><strong>Logo URL:</strong> <a href={companyInfo.branding.logo_url}>{companyInfo.branding.logo_url}</a></li>}
-                {companyInfo.branding.icon_url && <li><strong>Icon URL:</strong> <a href={companyInfo.branding.icon_url}>{companyInfo.branding.icon_url}</a></li>}
+                {companyInfo.branding.logo_url && <li><strong>Logo:</strong> <img src={companyInfo.branding.logo_url + '?apiKey=5zppMBtonCBY1SJ42kijFfL2V7co5_MN'} alt="Logo" style={{ width: '100px', height: 'auto' }} /></li>}
+                {companyInfo.branding.icon_url && <li><strong>Icon:</strong> <img src={companyInfo.branding.icon_url + '?apiKey=5zppMBtonCBY1SJ42kijFfL2V7co5_MN'} alt="Icon" style={{ width: '50px', height: 'auto' }} /></li>}
               </ul>
             </li>
           }
@@ -129,10 +154,54 @@ const StockListDetailsItem = ({ tickerCurrent }) => {
           {companyInfo.round_lot && <li><strong>Round Lot:</strong> {companyInfo.round_lot}</li>}
         </ul>
       </div>
+
+
+      <div className="financials">
+  <h1>Financial Information</h1>
+  <select value={selectedItemId} onChange={handleChange}>
+    <option value="">Select Item</option>
+    {data3 && data3.results && data3.results.map((item, index) => (
+      <option key={index} value={item.id}>{item.id}</option>
+    ))}
+  </select>
+
+  <select value={selectedFinancialCategory} onChange={handleChangeFinancialCategory}>
+    <option value="">Select Financial Category</option>
+    {selectedItemId && data3 && data3.results && data3.results.find(item => item.id === selectedItemId) &&
+      Object.keys(data3.results.find(item => item.id === selectedItemId).financials || {}).map(category => (
+        Object.keys(data3.results.find(item => item.id === selectedItemId).financials[category]).map((subCategory, index) => (
+          <option key={index} value={`${category}.${subCategory}`}>{data3.results.find(item => item.id === selectedItemId).financials[category][subCategory].label}</option>
+        ))
+      ))
+    }
+  </select>
+
+  <ul>
+    {selectedItemId && data3 && data3.results && data3.results.map((item, index) => (
+      item.id === selectedItemId && (
+        <li key={index}>
+          <strong>ID: </strong> {item.id}<br />
+          <strong>Start Date: </strong> {item.start_date}<br />
+          <strong>End Date: </strong> {item.end_date}<br />
+          {selectedFinancialCategory && item.financials[selectedFinancialCategory.split('.')[0]] && item.financials[selectedFinancialCategory.split('.')[0]][selectedFinancialCategory.split('.')[1]] && (
+            <>
+              <strong>{selectedFinancialCategory.replace('_', ' ').replace('.', ': ')}: </strong>
+              {item.financials[selectedFinancialCategory.split('.')[0]][selectedFinancialCategory.split('.')[1]].unit === 'USD' &&
+                `$`}
+              {item.financials[selectedFinancialCategory.split('.')[0]][selectedFinancialCategory.split('.')[1]].value}
+              {item.financials[selectedFinancialCategory.split('.')[0]][selectedFinancialCategory.split('.')[1]].unit && ` ${item.financials[selectedFinancialCategory.split('.')[0]][selectedFinancialCategory.split('.')[1]].unit}`}
+              <br /><br />
+            </>
+          )}
+          {/* Add other properties as needed */}
+        </li>
+      )
+    ))}
+  </ul>
+</div>
     </div>
   );
 };
-
 StockListDetailsItem.propTypes = {
   tickerCurrent: PropTypes.string.isRequired,
 };

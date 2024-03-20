@@ -10,7 +10,7 @@ import useApplicationData from './hooks/useApplicationData';
 import Home from "./pages";
 import About from "./pages/about";
 import Blogs from "./pages/blogs";
-import SignUp from "./pages/signup";
+import SignUp from "./pages/RegistrationPage";
 import Contact from "./pages/contact";
 import Homepage from "./pages/homepage";
 import Watchlist from "./pages/watchlist";
@@ -20,31 +20,67 @@ import StockListDetailsItem from "./components/component/StockListDetailsItem";
 
 function App() {
 
-  const { state, handleViewDetails, navigateToDetailsPage } = useApplicationData();
-
-
+  const { state, handleViewDetails, navigateToDetailsPage, addtoWatchList, setEmail, setPassword, dispatch } = useApplicationData();
 
 
   return (
     <Router>
-      <Navbar />
+      <Navbar dispatch={dispatch}
+              state={state} />
       <Routes>
         <Route exact path="/" element={<Home />} />
         <Route path="/about" element={<About />} />
-        <Route
-          path="/contact"
-          element={<Contact />}
-        />
+        <Route path="/contact" element={<Contact />} />
         <Route path="/blogs" element={<Blogs />} />
         <Route path="/home" element={<Homepage />} />
-        <Route path="/watchlist" element={<Watchlist />} />
-        <Route path="/stock" element={<Stock stocks={state.stockData} navigateToDetailsPage={navigateToDetailsPage} tickerCurrent={state.tickerCurrent}
-  handleViewDetails={handleViewDetails}  />} />
-        <Route path="/stock/:ticker" element={<StockListDetailsItem stocks={state.stockData} tickerCurrent={state.tickerCurrent} navigateToDetailsPage={navigateToDetailsPage}
-   />} />
-        
+        <Route
+          path="/watchlist"
+          element={
+            <Watchlist
+              state={state}
+              stocks={state.stockData}
+              navigateToDetailsPage={navigateToDetailsPage}
+              tickerCurrent={state.tickerCurrent}
+              handleViewDetails={handleViewDetails}
+              addtoWatchList={addtoWatchList} 
+            />
+          }
+        />
+        <Route
+          path="/stock"
+          element={
+            <Stock
+              stocks={state.stockData}
+              navigateToDetailsPage={navigateToDetailsPage}
+              tickerCurrent={state.tickerCurrent}
+              handleViewDetails={handleViewDetails}
+              addtoWatchList={addtoWatchList} 
+            />
+          }
+        />
+        <Route
+          path="/stock/:ticker"
+          element={<StockListDetailsItem
+            stocks={state.stockData}
+            tickerCurrent={state.tickerCurrent}
+            navigateToDetailsPage={navigateToDetailsPage}
+            addtoWatchList={addtoWatchList}/>
+          }
+        />
         <Route path="/sign-up" element={<SignUp />} />
-        <Route path="/login" element={<LoginPage />} />
+        <Route
+          path="/login"
+          element={
+            <LoginPage
+              dispatch={dispatch}
+              state={state}
+              email={state.email}
+              password={state.password}
+              setEmail={setEmail}
+              setPassword={setPassword}
+            />
+          }
+        />
       </Routes>
     </Router>
   );
