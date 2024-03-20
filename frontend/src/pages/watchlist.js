@@ -1,11 +1,10 @@
-
 import React, { useState, useEffect } from "react";
 import Cookies from "universal-cookie";
 import axios from "axios";
 const cookies = new Cookies();
 
 const Watchlist = (props) => {
-  const [watchlist, setWatchlist] = useState([]);
+  const [tickerSymbols, setTickerSymbols] = useState([]);
   const user_id = cookies.get("user_id");
 
   useEffect(() => {
@@ -14,7 +13,8 @@ const Watchlist = (props) => {
       try {
         const response = await axios.get(`http://localhost:3001/watchlists/${user_id}`);
         console.log(response.data);
-        setWatchlist(response.data);
+        const symbols = response.data.map(item => item.ticker_symbol);
+        setTickerSymbols(symbols);
       } catch (error) {
         console.error("Error getting watchlist:", error);
       }
@@ -32,13 +32,9 @@ const Watchlist = (props) => {
         <div>
           <p>Here are the stocks you are watching:</p>
           <ul>
-            {watchlist.map((item, index) => (
+            {tickerSymbols.map((symbol, index) => (
               <li key={index}>
-                {Object.entries(item).map(([key, value]) => (
-                  <p key={key}>
-                    <strong>{key}:</strong> {value}
-                  </p>
-                ))}
+                {symbol}
               </li>
             ))}
           </ul>
