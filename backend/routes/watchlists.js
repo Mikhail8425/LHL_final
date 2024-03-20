@@ -2,7 +2,6 @@ const express = require('express');
 const watchlist = express.Router();
 const { query } = require('../db/db'); 
 
-
 watchlist.get('/:user_id', async (req, res) => {
   const { user_id } = req.params;
 
@@ -14,10 +13,6 @@ watchlist.get('/:user_id', async (req, res) => {
     res.status(500).send('Internal Server Error');
   }
 });
-
-
-
-
 
 watchlist.post("/", async (request, response) => {
   const { user_id, ticker_symbol } = request.body;
@@ -58,8 +53,6 @@ watchlist.post("/", async (request, response) => {
     response.status(500).send("Error inserting into watchlists");
   }
 });
-
-
 
 watchlist.delete("/", async (request, response) => {
   const { user_id, ticker_symbol } = request.body;
@@ -126,6 +119,5 @@ watchlist.put("/", async (request, response) => {
     response.status(500).send("Error updating watchlist entry");
   }
 });
-
 
 module.exports = watchlist;

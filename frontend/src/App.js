@@ -21,7 +21,7 @@ import StockListDetailsItem from "./components/component/StockListDetailsItem";
 function App() {
 
   const { state, handleViewDetails, navigateToDetailsPage, addtoWatchList, setEmail, setPassword, dispatch } = useApplicationData();
-  
+
 
   return (
     <Router>
@@ -33,9 +33,40 @@ function App() {
         <Route path="/contact" element={<Contact />} />
         <Route path="/blogs" element={<Blogs />} />
         <Route path="/home" element={<Homepage />} />
-        <Route path="/watchlist" element={<Watchlist />} />
-        <Route path="/stock" element={<Stock stocks={state.stockData} navigateToDetailsPage={navigateToDetailsPage} tickerCurrent={state.tickerCurrent} handleViewDetails={handleViewDetails} addtoWatchList={addtoWatchList}/>}/>
-        <Route path="/stock/:ticker" element={<StockListDetailsItem stocks={state.stockData} tickerCurrent={state.tickerCurrent} navigateToDetailsPage={navigateToDetailsPage} addtoWatchList={addtoWatchList}/>} />
+        <Route
+          path="/watchlist"
+          element={
+            <Watchlist
+              state={state}
+              stocks={state.stockData}
+              navigateToDetailsPage={navigateToDetailsPage}
+              tickerCurrent={state.tickerCurrent}
+              handleViewDetails={handleViewDetails}
+              addtoWatchList={addtoWatchList} 
+            />
+          }
+        />
+        <Route
+          path="/stock"
+          element={
+            <Stock
+              stocks={state.stockData}
+              navigateToDetailsPage={navigateToDetailsPage}
+              tickerCurrent={state.tickerCurrent}
+              handleViewDetails={handleViewDetails}
+              addtoWatchList={addtoWatchList} 
+            />
+          }
+        />
+        <Route
+          path="/stock/:ticker"
+          element={<StockListDetailsItem
+            stocks={state.stockData}
+            tickerCurrent={state.tickerCurrent}
+            navigateToDetailsPage={navigateToDetailsPage}
+            addtoWatchList={addtoWatchList}/>
+          }
+        />
         <Route path="/sign-up" element={<SignUp />} />
         <Route
           path="/login"
@@ -43,7 +74,6 @@ function App() {
             <LoginPage
               dispatch={dispatch}
               state={state}
-              // login={state.login}
               email={state.email}
               password={state.password}
               setEmail={setEmail}

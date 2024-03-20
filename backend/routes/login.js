@@ -22,11 +22,11 @@ login.post("/", (request, response) => {
 
       // Compare the provided password with the hashed password in the database
       bcrypt.compare(password, user.password)
-  .then((passwordCheck) => {
-    console.log("Password comparison result:", password, user.password); // Add this line for console log
-    if (!passwordCheck) {
-      return response.status(400).json({ message: "Passwords do not match" });
-    }
+        .then((passwordCheck) => {
+          console.log("Password comparison result:", password, user.password); // Add this line for console log
+          if (!passwordCheck) {
+            return response.status(400).json({ message: "Passwords do not match" });
+          }
 
           // Generate JWT token
           const token = jwt.sign(
