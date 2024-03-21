@@ -39,9 +39,9 @@ const RegistrationPage = () => {
         to_name: 'Stocks App',
         message: "Welcome to Stocks App! You have successfully registered.",
       };
-  
+
       emailjs.send(serviceId, templateId, templateParams, publicKey)
-        .then((response) => { 
+        .then((response) => {
           console.log('SUCCESS!', response);
           setName('');
           setEmail('');
@@ -58,15 +58,15 @@ const RegistrationPage = () => {
         first_name: "",
         last_name: ""
       });
-      
+
     } catch (error) {
       console.error("Registration failed:", error);
       alert("Registration failed. Please try again.");
     }
   };
-  
+
   return (
-    <div className="registration-container">
+    <div className="body-wrapper registration-container">
       <h2>Registration</h2>
       <form onSubmit={handleSubmit} className="registration-form">
         <div className="form-group">

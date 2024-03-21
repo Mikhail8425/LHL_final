@@ -45,7 +45,7 @@ const LoginPage = (props) => {
       console.log("User ID:", user_id);
       // Make an HTTP request to change the email
       const response = await axios.put("http://localhost:3001/login", {
-        email: newEmail, id:user_id 
+        email: newEmail, id: user_id
       });
       console.log(response.data);
       alert("Email changed successfully!");
@@ -62,7 +62,7 @@ const LoginPage = (props) => {
       console.log("User ID:", user_id);
       // Make an HTTP request to change the password
       const response = await axios.put("http://localhost:3001/login", {
-        password: newPassword, id:user_id
+        password: newPassword, id: user_id
       });
       console.log(response.data);
       alert("Password changed successfully!");
@@ -95,7 +95,7 @@ const LoginPage = (props) => {
             className="form-control"
           />
         </div>
-  
+
         {/* password */}
         <div controlId="formBasicPassword" className="form-group">
           <label htmlFor="password">Password</label>
@@ -109,15 +109,15 @@ const LoginPage = (props) => {
             className="form-control"
           />
         </div>
-  
+
         {/* submit button */}
         <button type="submit" className="btn btn-primary">
           Login
         </button>
       </form>
     );
-  
-  
+
+
   } else {
     return <div className="login-form">
       <div className="form-group">

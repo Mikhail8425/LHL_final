@@ -16,6 +16,7 @@ import Watchlist from "./pages/watchlist";
 import Stock from "./pages/stock";
 import LoginPage from "./pages/login";
 import StockListDetailsItem from "./components/component/StockListDetailsItem";
+import "./styles/app.scss";
 
 function App() {
 
