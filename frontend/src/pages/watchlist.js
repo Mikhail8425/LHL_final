@@ -32,7 +32,7 @@ const Watchlist = (props) => {
   if (tickerSymbols.length === 0) {
     return <div>Your Watchlist is empty. Go to the Stocks page to add some...</div>;
   }
-  
+
   if (loading) {
     return <div>Loading...</div>;
   }
@@ -46,12 +46,12 @@ const Watchlist = (props) => {
           <p>Here are the stocks you are watching:</p>
           <ul>
             {tickerSymbols.map((symbol, index) => (
-              <WatchListItem 
-                key={index} 
-                symbol={symbol} 
-                navigateToDetailsPage={props.navigateToDetailsPage} 
-                addtoWatchList={props.addtoWatchList} 
-                handleViewDetails={props.handleViewDetails} 
+              <WatchListItem
+                key={index}
+                symbol={symbol}
+                navigateToDetailsPage={props.navigateToDetailsPage}
+                addtoWatchList={props.addtoWatchList}
+                handleViewDetails={props.handleViewDetails}
               />
             ))}
           </ul>

@@ -16,6 +16,7 @@ import Watchlist from "./pages/watchlist";
 import Stock from "./pages/stock";
 import LoginPage from "./pages/login";
 import StockListDetailsItem from "./components/component/StockListDetailsItem";
+import "./styles/app.scss";
 
 function App() {
 
@@ -25,12 +26,12 @@ function App() {
   return (
     <Router>
       <Navbar dispatch={dispatch}
-              state={state} />
+        state={state} />
       <Routes>
         <Route exact path="/" element={<Home />} />
         <Route path="/about" element={<About />} />
-        <Route 
-          path="/emailform" 
+        <Route
+          path="/emailform"
           element={<EmailForm />}
         />
         <Route path="/blogs" element={<Blogs />} />
@@ -43,7 +44,7 @@ function App() {
               navigateToDetailsPage={navigateToDetailsPage}
               tickerCurrent={state.tickerCurrent}
               handleViewDetails={handleViewDetails}
-              addtoWatchList={addtoWatchList} 
+              addtoWatchList={addtoWatchList}
             />
           }
         />
@@ -55,7 +56,7 @@ function App() {
               navigateToDetailsPage={navigateToDetailsPage}
               tickerCurrent={state.tickerCurrent}
               handleViewDetails={handleViewDetails}
-              addtoWatchList={addtoWatchList} 
+              addtoWatchList={addtoWatchList}
             />
           }
         />
@@ -65,7 +66,7 @@ function App() {
             stocks={state.stockData}
             tickerCurrent={state.tickerCurrent}
             navigateToDetailsPage={navigateToDetailsPage}
-            addtoWatchList={addtoWatchList}/>
+            addtoWatchList={addtoWatchList} />
           }
         />
         <Route path="/sign-up" element={<SignUp />} />

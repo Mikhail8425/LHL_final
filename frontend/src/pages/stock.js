@@ -63,7 +63,7 @@ const StockList = (props) => {
           </button>
         </form>
       </div>
-      
+
       {/* Check loading state */}
       {loading && <div className="loading">Loading...</div>}
 
@@ -72,7 +72,7 @@ const StockList = (props) => {
 
       {/* Render stock list items */}
       {/* Check if data exists and is an array before rendering */}
-      
+
       <div className="home-stock">
         <div className="stock-list">
           {data && data.tickers && data.tickers.map((stock, index) => (
@@ -100,6 +100,7 @@ const StockList = (props) => {
       </div>
     </div>
   );
+
 };
 
 export default StockList;
