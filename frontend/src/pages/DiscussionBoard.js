@@ -17,10 +17,10 @@ import post2 from '../components/component/blogcomponents/blog-post.2.md';
 import post3 from '../components/component/blogcomponents/blog-post.3.md';
 
 
-const DisussionBoard = () => {
+const DiscussionBoard = () => {
   return (
     <div className="body-wrapper">
-      <h1>Disussion Board</h1>
+      <h1>Discussion Board</h1>
       <p>Explore our latest articles, tips, and insights on stock trading and investing:</p>
       <div className="board-list">
         <div className="board-item">
@@ -39,4 +39,4 @@ const DisussionBoard = () => {
   );
 };
 
-export default DisussionBoard;
+export default DiscussionBoard;

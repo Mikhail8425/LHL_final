@@ -23,10 +23,10 @@ const sections = [
   { title: 'Culture', url: '#' },
   { title: 'Business', url: '#' },
   { title: 'Politics', url: '#' },
-  { title: 'Opinion', url: '#' },
+  { title: 'Events', url: '#' },
   { title: 'Science', url: '#' },
   { title: 'Health', url: '#' },
-  { title: 'Style', url: '#' },
+  { title: 'Energy', url: '#' },
   { title: 'Travel', url: '#' },
 ];
 

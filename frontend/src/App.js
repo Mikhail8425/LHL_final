@@ -9,7 +9,7 @@ import {
 import useApplicationData from './hooks/useApplicationData';
 import Home from "./pages";
 import About from "./pages/about";
-import DisussionBoard from "./pages/DisussionBoard";
+import DiscussionBoard from "./pages/DiscussionBoard";
 import SignUp from "./pages/RegistrationPage";
 import EmailForm from "./pages/emailform";
 import Watchlist from "./pages/watchlist";

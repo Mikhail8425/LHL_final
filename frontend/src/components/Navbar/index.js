@@ -30,8 +30,8 @@ const Navbar = (props) => {
           <NavLink to="/contact" activeStyle>
             Contact Us
           </NavLink>
-          <NavLink to="/DisussionBoard" activeStyle>
-            Disussion Board
+          <NavLink to="/DiscussionBoard" activeStyle>
+            Discussion Board
           </NavLink>
           <NavLink to="/home" activeStyle>
             Home

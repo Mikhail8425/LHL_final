@@ -59,37 +59,37 @@ const Navbar = (props) => {
                             Manage Account
                         </NavLink>
 
-                    ) : (
-                        ""
-                    )}
-                </div>
-                <div className="nav-signup">
-                    {user_id ? (
-                        <>  
-                            <div className="logged-in">
-                                <div className="nav-user">Logged in as: <span>{user_email}</span></div>
-                                <span>/</span>
-                                <button className="nav-link" onClick={handleLogout}>Logout</button>
-                            </div>
-                        </>
-                    ) : (
-                        <>
-                            <NavLink to="/sign-up" className="nav-link" activeclassname="active">
-                                Sign Up
-                            </NavLink>
-                            <span className="nav-link-divider">/</span>
-                            <NavLink to="/login" className="nav-link" activeclassname="active">
-                                Login
-                            </NavLink>
-                        </>
-                    )}
-                </div>
-                <div className="dark-mode" onClick={toggleDarkMode}>
-                    {dark ? <SunIcon /> : <MoonIcon />}
-                </div>
-            </nav>
-        </>
-    );
+          ) : (
+            ""
+          )}
+        </div>
+        <div className="nav-signup">
+          {user_id ? (
+            <>
+              <div className="logged-in">
+                <div className="nav-user">Logged in as: <span>{user_email}</span></div>
+                <span>/</span>
+                <button className="nav-link" onClick={handleLogout}>Logout</button>
+              </div>
+            </>
+          ) : (
+            <>
+              <NavLink to="/sign-up" className="nav-link" activeclassname="active">
+                Sign Up
+              </NavLink>
+              <span className="nav-link-divider">/</span>
+              <NavLink to="/login" className="nav-link" activeclassname="active">
+                Login
+              </NavLink>
+            </>
+          )}
+        </div>
+        <div className="dark-mode" onClick={toggleDarkMode}>
+          {dark ? <SunIcon /> : <MoonIcon />}
+        </div>
+      </nav>
+    </>
+  );
 };
 
 export default Navbar;
