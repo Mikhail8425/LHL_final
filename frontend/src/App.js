@@ -9,7 +9,7 @@ import {
 import useApplicationData from './hooks/useApplicationData';
 import Home from "./pages";
 import About from "./pages/about";
-import Blogs from "./pages/blogs";
+import DisussionBoard from "./pages/DisussionBoard";
 import SignUp from "./pages/RegistrationPage";
 import EmailForm from "./pages/emailform";
 import Watchlist from "./pages/watchlist";
@@ -34,7 +34,13 @@ function App() {
           path="/emailform"
           element={<EmailForm />}
         />
-        <Route path="/blogs" element={<Blogs />} />
+        <Route 
+          path="/DisussionBoard" 
+          element={
+            <DisussionBoard 
+            />
+          }
+        />
         <Route
           path="/watchlist"
           element={
