@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import { NavLink } from "react-router-dom";
-import SunIcon from "./Sunicon";
-import MoonIcon from "./Moonicon";
+import SunIcon from "../components/icon/Sunicon";
+import MoonIcon from "../components/icon/Moonicon";
 import "../styles/navbar.scss";
 import logo from "../assets/stocklogo.png"
 

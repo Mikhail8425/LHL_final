@@ -1,8 +1,8 @@
 import React from "react";
 import PropTypes from 'prop-types';
 import { useNavigate } from 'react-router-dom';
-import Addicon from "../Addicon"
-import RemoveIcon from "../Removeicon";
+import Addicon from "../icon/Addicon"
+import RemoveIcon from "../icon/Removeicon";
 import "../../styles/stockinfo.scss";
 
 const StockListItem = ({ stock, onViewDetails, navigateToDetailsPage, addtoWatchList }) => {

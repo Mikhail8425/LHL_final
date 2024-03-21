@@ -1,39 +1,56 @@
 import React from "react";
+import PhoneIcon from '../components/icon/Phoneicon';
+import EmailIcon from '../components/icon/Emailicon';
+import FacebookIcon from "../components/icon/Facebookicon";
+import TwitterIcon from "../components/icon/Twittericon";
+import "../styles/contact.scss";
 
 const ContactUs = () => {
-    return (
+  return (
+    <div className="contact-us-container">
         <div>
-            <h1>Contact Us</h1>
-            <p>Have a question or feedback? We'd love to hear from you!</p>
-            <h2>Get in Touch:</h2>
-            <p>If you have any inquiries or suggestions, please feel free to contact us using the form below:</p>
-            <form>
-                <label htmlFor="name">Name:</label>
-                <input type="text" id="name" name="name" required />
-
-                <label htmlFor="email">Email:</label>
-                <input type="email" id="email" name="email" required />
-
-                <label htmlFor="message">Message:</label>
-                <textarea id="message" name="message" rows="4" required></textarea>
-
-                <button type="submit">Send Message</button>
-            </form>
-            <h2>Reach Out Directly:</h2>
-            <p>If you prefer to reach out to us via email or phone, you can do so using the contact information below:</p>
-            <ul>
-                <li>Email: <a href="mailto:contact@stockmarketmagnet.com">contact@stockmarketmagnet.com</a></li>
-                <li>Phone: +1 (123) 456-7890</li>
-            </ul>
-            <h2>Connect on Social Media:</h2>
-            <p>Stay updated with the latest news and updates by following us on social media:</p>
-            <ul>
-                <li><a href="https://twitter.com/StockMarketMagnet" target="_blank" rel="noopener noreferrer">Twitter</a></li>
-                <li><a href="https://facebook.com/StockMarketMagnet" target="_blank" rel="noopener noreferrer">Facebook</a></li>
-                
-            </ul>
+            <h2>Contact Us</h2>
+            <p className="description">Have a question or feedback? We'd love to hear from you! Please feel free to contact us using the form below:</p>
         </div>
-    );
+      <form className="contact-form">
+        <div className="form-group">
+          <label htmlFor="name">Name:</label>
+          <input type="text" id="name" name="name" required className="input-field" />
+        </div>
+
+        <div className="form-group">
+          <label htmlFor="email">Email:</label>
+          <input type="email" id="email" name="email" required className="input-field" />
+        </div>
+
+        <div className="form-group">
+          <label htmlFor="message">Message:</label>
+          <textarea id="message" name="message" rows="4" required className="input-field"></textarea>
+        </div>
+
+        <button type="submit" className="submit-button">Send Message</button>
+      </form>
+      <div className="contact-info">
+            <div className="contact-directly">
+                <h3>Reach Out Directly</h3>
+                <ul>
+                    <li><EmailIcon /> <a href="mailto:contact@stockmarketmagnet.com">contact@stockmarketmagnet.com</a></li>
+                    <li><PhoneIcon /> +1 (123) 456-7890</li>
+                </ul>
+            </div>
+
+            <div className="contact-directly">
+                <h3>Connect on Social Media</h3>
+                <ul className="social-media-links">
+                    <li><a href="https://twitter.com/StockMarketMagnet" target="_blank" rel="noopener noreferrer"><TwitterIcon /></a></li>
+                    <li><a href="https://facebook.com/StockMarketMagnet" target="_blank" rel="noopener noreferrer"><FacebookIcon /></a></li>
+                </ul>
+            </div>
+      </div>
+    </div>
+  );
 };
 
 export default ContactUs;
+
+

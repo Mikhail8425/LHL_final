@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import useApi from '../hooks/useApi';
 import StockListItem from '../components/component/StockListItem';
-import SearchIcon from '../components/SearchIcon'
+import SearchIcon from '../components/icon/SearchIcon';
 import IndicesList from '../components/Indiceslist';
 import "../styles/searchbar.scss";
 
