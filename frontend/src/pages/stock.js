@@ -75,7 +75,7 @@ const StockList = (props) => {
             />
           )}
         </div>
-        <IndicesList />
+        {!submittedQuery && <IndicesList />}
       </div>
     </div>
   );
