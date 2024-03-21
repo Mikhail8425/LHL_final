@@ -37,5 +37,40 @@ register.post("/", (request, response) => {
         });
       });
   });
+
+  register.delete("/", async (request, response) => {
+    const { id } = request.body;
+  
+    try {
+      console.log("Deleting user with ID:", id);
+      // Remove entries from the watchlists table associated with the user
+      const removeWatchlistEntriesQuery = `
+        DELETE FROM watchlists
+        WHERE user_id = $1
+        RETURNING *
+      `;
+      const removedWatchlistResult = await query(removeWatchlistEntriesQuery, [id]);
+      console.log("Removed watchlist entries:", removedWatchlistResult.rowCount);
+  
+      // Remove the user from the users table
+      const removeUserQuery = `
+        DELETE FROM users 
+        WHERE id = $1
+        RETURNING *
+      `;
+      const removedUserResult = await query(removeUserQuery, [id]);
+      console.log("Removed user:", removedUserResult.rows);
+  
+      // Return the removed user data
+      response.json({
+        removedUser: removedUserResult.rows[0],
+        removedWatchlistEntries: removedWatchlistResult.rowCount
+      });
+    } catch (error) {
+      console.error("Error deleting:", error);
+      response.status(500).send("Error removing user");
+    }
+  });
+
   
   module.exports = register;

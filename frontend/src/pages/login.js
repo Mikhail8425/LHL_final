@@ -1,9 +1,8 @@
+import "../styles/login.scss";
 import React, { useState } from "react";
 import axios from "axios";
 import Cookies from "universal-cookie";
-import "../styles/login.scss";
 const cookies = new Cookies();
-
 
 const LoginPage = (props) => {
   const { dispatch, state } = props;
@@ -31,6 +30,7 @@ const LoginPage = (props) => {
 
   const [newEmail, setNewEmail] = useState("");
   const [newPassword, setNewPassword] = useState("");
+  const [newId, setNewId] = useState("");
 
   const handleLogout = () => {
     // Dispatch an action to reset the login state
@@ -72,7 +72,38 @@ const LoginPage = (props) => {
     }
   };
 
+
+  const handleDelete = async () => {
+    try {
+      const user_id = cookies.get("user_id");
+      console.log("User ID:", user_id);
+      // Make an HTTP request to delete the user account
+      const response = await axios.delete("http://localhost:3001/register", {
+        data: { id: user_id } // Include the user ID in the request body
+      });
+      console.log(response.data);
+      alert("User deleted successfully!");
+      handleLogout(); // Log out the user after deleting the account
+    } catch (error) {
+      console.error("Error deleting user:", error);
+      alert("Failed to delete user. Please try again.");
+    }
+  };
+
+
+
+
+
+
+
+
+
+
+
+
+
   const user_id = cookies.get("user_id");
+  const user_email = cookies.get("email")
   console.log("User ID:", user_id);
 
   // Conditionally render based on login state
@@ -150,8 +181,24 @@ const LoginPage = (props) => {
           <button className="btn-change" onClick={handleChangePassword}>Change</button>
         </div>
       </div>
-      <button onClick={handleLogout} className="btn btn-primary">Log Out</button>
+      <div className="form-group">
+<label htmlFor="password">Delete User - {user_id}</label>
+<div className="form-change">
+  <input
+   type="text"
+   value={newId}
+   onChange={(e) => setNewId(e.target.value)}
+   placeholder="Input account ID to delete your account"
+    className="form-control"
+  />
+  <button className="btn-change" onClick={handleDelete}> Delete </button>
+</div>
+</div>
     </div>;
+
+
+
+
   }
 };
 

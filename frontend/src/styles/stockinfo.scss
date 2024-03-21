@@ -188,10 +188,12 @@
   background-color: #007bff;
   color: #fff;
   border-radius: 0 5px 5px 0;
-  padding: 8px 15px;
+  padding: 6px 9px; /* Adjusted padding to make it smaller */
   cursor: pointer;
+  transition: background-color 0.3s ease; /* Adding transition effect */
 }
 
 .search-button:hover {
-  background-color: #0056b3; // Darker shade of blue on hover
+  background-color: #0056b3; /* Darker shade of blue on hover */
 }
+
