@@ -12,7 +12,6 @@ import About from "./pages/about";
 import Blogs from "./pages/blogs";
 import SignUp from "./pages/RegistrationPage";
 import Contact from "./pages/contact";
-import Homepage from "./pages/homepage";
 import Watchlist from "./pages/watchlist";
 import Stock from "./pages/stock";
 import LoginPage from "./pages/login";
@@ -32,7 +31,6 @@ function App() {
         <Route path="/about" element={<About />} />
         <Route path="/contact" element={<Contact />} />
         <Route path="/blogs" element={<Blogs />} />
-        <Route path="/home" element={<Homepage />} />
         <Route
           path="/watchlist"
           element={

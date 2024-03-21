@@ -1,3 +1,9 @@
+.home-stock {
+  display: flex;
+  padding: 50px;
+  margin-top: -25px;
+}
+
 .search {
   display: flex;
   justify-content: center;
@@ -11,22 +17,26 @@
 }
 
 .search-form input {
-  width: 600px;
+  width: 700px;
   padding: 9px 20px;
   border: 2px solid #686868;
   border-radius: 5px;
   outline: none;
+  @media screen and (max-width: 768px) {
+    width: 500px;
+  }
 }
 
 .search-button {
   font-size: 16px;
   position: absolute;
-  top: 50%;
-  right: 10px;
-  transform: translateY(-50%);
+  top: 65%;
+  right: 5px;
+  transform: translateY(-60%);
   border: none;
   padding: 5px 10px;
   background-color: transparent;
   border-radius: 20px;
   cursor: pointer;  
 }
+

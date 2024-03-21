@@ -17,12 +17,12 @@ const Navbar = () => {
         <>
             <nav className="nav">
                 <div className="nav-logo">
-                    <NavLink to="/home" activeclassname="active">
+                    <NavLink to="/stock" activeclassname="active">
                         <img src={logo} alt="logo" />
                     </NavLink>
                 </div>
                 <div className="nav-menu">
-                    <NavLink to="/home" className="nav-link" activeclassname="active">
+                    <NavLink to="/stock" className="nav-link" activeclassname="active">
                         Overview
                     </NavLink>
                     <NavLink to="/blogs" className="nav-link" activeclassname="active">
@@ -30,9 +30,6 @@ const Navbar = () => {
                     </NavLink>
                     <NavLink to="/watchlist" className="nav-link" activeclassname="active">
                         My Watchlist
-                    </NavLink>
-                    <NavLink to="/stock" className="nav-link" activeclassname="active">
-                        Stock
                     </NavLink>
                     <NavLink to="/about" className="nav-link" activeclassname="active">
                         About Us

@@ -9,7 +9,7 @@ const Indiceslist = () => {
       </div>
       <div className="indices-info">
         <p>Name</p>
-        <p>Last Price</p>
+        <p>Price</p>
         <p>Change</p>
       </div>
     </div>
