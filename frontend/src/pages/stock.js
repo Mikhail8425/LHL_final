@@ -65,10 +65,10 @@ const StockList = (props) => {
       </div>
       
       {/* Check loading state */}
-      {loading && <div>Loading...</div>}
+      {loading && <div className="loading">Loading...</div>}
 
       {/* Check error state */}
-      {error && <div>Error: {error}</div>}
+      {error && <div className="error">Error: {error}</div>}
 
       {/* Render stock list items */}
       {/* Check if data exists and is an array before rendering */}
@@ -84,6 +84,7 @@ const StockList = (props) => {
               handleViewDetails={props.handleViewDetails}
             />
           ))}
+          <div className="stock-single">
           {/* Check if data.ticker exists and render */}
           {data && data.ticker && (
             <StockListItem
@@ -93,12 +94,12 @@ const StockList = (props) => {
               addtoWatchList={props.addtoWatchList}
             />
           )}
+          </div>
         </div>
         {!searchQuery && <IndicesList />}
       </div>
     </div>
   );
-  
 };
 
 export default StockList;

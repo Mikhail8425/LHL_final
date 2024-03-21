@@ -2,7 +2,7 @@
   display: flex;
   flex-wrap: wrap;
   justify-content: space-between;
-  width: 1070.61px
+  width: 85%
 }
 
 .stock-info {
@@ -145,4 +145,53 @@
   &:hover {
     text-decoration: underline;
   }
+}
+
+// YourComponent.scss
+
+.loading, .error {
+  background-color: #f8d7da; // Light red for error, can be changed
+  color: #721c24; // Dark red for error text, can be changed
+  padding: 20px; // Increased padding for a bigger size
+  border-radius: 10px; // Increased border radius for a smoother look
+  margin: 0 auto 20px; // Centered and adds some space at the bottom
+  width: 50%; // Adjust the width as needed
+  text-align: center; // Center the text
+  font-size: 2em; // Double the font size
+  font-weight: bold; // Make the text bold
+}
+
+
+.loading {
+  background-color: #d4edda; // Light green for loading, can be changed
+  color: #155724; // Dark green for loading text, can be changed
+}
+
+.search {
+  margin-bottom: 20px;
+}
+
+.search-form {
+  display: flex;
+}
+
+.search-input {
+  flex: 1;
+  padding: 8px 10px;
+  border: 1px solid #ccc;
+  border-radius: 5px 0 0 5px;
+  font-size: 16px;
+}
+
+.search-button {
+  border: none;
+  background-color: #007bff;
+  color: #fff;
+  border-radius: 0 5px 5px 0;
+  padding: 8px 15px;
+  cursor: pointer;
+}
+
+.search-button:hover {
+  background-color: #0056b3; // Darker shade of blue on hover
 }
