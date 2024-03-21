@@ -42,7 +42,7 @@ const Navbar = (props) => {
                     <NavLink to="/stock" className="nav-link" activeclassname="active">
                         Overview
                     </NavLink>
-                    <NavLink to="/blogs" className="nav-link" activeclassname="active">
+                    <NavLink to="/discussionboard" className="nav-link" activeclassname="active">
                         Blogs
                     </NavLink>
                     <NavLink to="/watchlist" className="nav-link" activeclassname="active">

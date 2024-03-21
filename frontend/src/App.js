@@ -16,6 +16,7 @@ import Watchlist from "./pages/watchlist";
 import Stock from "./pages/stock";
 import LoginPage from "./pages/login";
 import StockListDetailsItem from "./components/component/StockListDetailsItem";
+import Blog from "./components/component/blogcomponents/Blog";
 import "./styles/app.scss";
 
 function App() {
@@ -35,10 +36,9 @@ function App() {
           element={<EmailForm />}
         />
         <Route 
-          path="/DisussionBoard" 
-          element={
-            <DisussionBoard 
-            />
+          path="/discussionboard" 
+          element={<Blog
+             />
           }
         />
         <Route

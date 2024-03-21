@@ -1,4 +1,21 @@
 import React from "react";
+import CssBaseline from '@mui/material/CssBaseline';
+import Grid from '@mui/material/Grid';
+import Container from '@mui/material/Container';
+import GitHubIcon from '@mui/icons-material/GitHub';
+import FacebookIcon from '@mui/icons-material/Facebook';
+import XIcon from '@mui/icons-material/X';
+import { createTheme, ThemeProvider } from '@mui/material/styles';
+import Header from '../components/component/blogcomponents/Header';
+import MainFeaturedPost from '../components/component/blogcomponents/MainFeaturedPost';
+import FeaturedPost from '../components/component/blogcomponents/FeaturedPost';
+import Main from '../components/component/blogcomponents/Main';
+import Sidebar from '../components/component/blogcomponents/Sidebar';
+import Footer from '../components/component/blogcomponents/Footer';
+import post1 from '../components/component/blogcomponents/blog-post.1.md';
+import post2 from '../components/component/blogcomponents/blog-post.2.md';
+import post3 from '../components/component/blogcomponents/blog-post.3.md';
+
 
 const DisussionBoard = () => {
   return (
