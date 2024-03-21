@@ -17,52 +17,52 @@ const Navbar = (props) => {
   const handleLogout = () => {
     cookies.remove("user_id");
     dispatch({ type: "SET_LOGIN_STATE" });
-};
+  };
 
 
-return (
-  <>
+  return (
+    <>
       <Nav>
-          <NavMenu>
-              <NavLink to="/about" activeStyle>
-                  About
+        <NavMenu>
+          <NavLink to="/about" activeStyle>
+            About
+          </NavLink>
+          <NavLink to="/contact" activeStyle>
+            Contact Us
+          </NavLink>
+          <NavLink to="/DisussionBoard" activeStyle>
+            Disussion Board
+          </NavLink>
+          <NavLink to="/home" activeStyle>
+            Home
+          </NavLink>
+          <NavLink to="/watchlist" activeStyle>
+            watchlist
+          </NavLink>
+          <NavLink to="/stock" activeStyle>
+            Stock
+          </NavLink>
+          {user_id ? (
+            <>
+              <NavLink to="/login" activeStyle>
+                Manage your Account
+              </NavLink><div>Logged in as: {user_email} </div>
+              <button onClick={handleLogout}>Logout</button>
+            </>
+          ) : (
+            <>
+              <NavLink to="/sign-up" activeStyle>
+                Sign Up
               </NavLink>
-              <NavLink to="/contact" activeStyle>
-                  Contact Us
+              <NavLink to="/login" activeStyle>
+                Login
               </NavLink>
-              <NavLink to="/blogs" activeStyle>
-                  Blogs
-              </NavLink>
-              <NavLink to="/home" activeStyle>
-                  Home
-              </NavLink>
-              <NavLink to="/watchlist" activeStyle>
-                  watchlist
-              </NavLink>
-              <NavLink to="/stock" activeStyle>
-                  Stock
-              </NavLink>
-              {user_id ? (
-                  <>
-                      <NavLink to="/login" activeStyle>
-                          Manage your Account
-                      </NavLink><div>Logged in as: {user_email} </div>
-                      <button onClick={handleLogout}>Logout</button>
-                  </>
-              ) : (
-                  <>
-                      <NavLink to="/sign-up" activeStyle>
-                          Sign Up
-                      </NavLink>
-                      <NavLink to="/login" activeStyle>
-                          Login
-                      </NavLink>
-                  </>
-              )}
-          </NavMenu>
+            </>
+          )}
+        </NavMenu>
       </Nav>
-  </>
-);
+    </>
+  );
 };
 
 export default Navbar;
