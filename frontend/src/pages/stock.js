@@ -1,39 +1,50 @@
-import React, { useState } from "react";
-import useApi from '../hooks/useApi';
+import React, { useState, useEffect } from "react";
+import axios from 'axios'; // Import axios for making HTTP requests
 import StockListItem from '../components/component/StockListItem';
 import SearchIcon from '../components/icon/SearchIcon';
 import IndicesList from '../components/Indiceslist';
 import "../styles/searchbar.scss";
 
 const StockList = (props) => {
-  // State to hold the search query
   const [searchQuery, setSearchQuery] = useState('');
-  const [submittedQuery, setSubmittedQuery] = useState('');
+  const [data, setData] = useState(null);
+  const [loading, setLoading] = useState(true); // Set loading to true initially
+  const [error, setError] = useState(null);
 
-
-  // Define the API endpoint based on the presence of the search query
-  const apiEndpoint = submittedQuery
-    ? `/snapshot/locale/us/markets/stocks/tickers/${submittedQuery}?`
-    : '/snapshot/locale/us/markets/stocks/tickers?';
-
-  // Fetch data using useApi hook
-  const { data, loading, error } = useApi(apiEndpoint);
-
-  // Handle search form submission
-  const handleSubmit = (e) => {
-    e.preventDefault();
-    setSubmittedQuery(searchQuery.toUpperCase());;
+  // Function to fetch default data
+  const fetchData = async () => {
+    setLoading(true);
+    try {
+      const response = await axios.get('/api/stocks');
+      setData(response.data);
+      setLoading(false);
+    } catch (error) {
+      setError(error.message);
+      setLoading(false);
+    }
   };
 
-  if (loading) {
-    return <div>Loading...</div>;
-  }
+  // Fetch default data when component mounts
+  useEffect(() => {
+    fetchData();
+  }, []);
 
-  if (error) {
-    return <div>Error: {error}</div>;
-  }
-
-  const displayedTickers = data.tickers ? data.tickers.slice(0, 100) : [];
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+    setLoading(true);
+    try {
+      const response = await axios.get('/api/stocks', {
+        params: {
+          submittedQuery: searchQuery.toUpperCase()
+        }
+      });
+      setData(response.data);
+      setLoading(false);
+    } catch (error) {
+      setError(error.message);
+      setLoading(false);
+    }
+  };
 
   return (
     <div>
@@ -52,11 +63,19 @@ const StockList = (props) => {
           </button>
         </form>
       </div>
-  
+      
+      {/* Check loading state */}
+      {loading && <div>Loading...</div>}
+
+      {/* Check error state */}
+      {error && <div>Error: {error}</div>}
+
+      {/* Render stock list items */}
       {/* Check if data exists and is an array before rendering */}
+      
       <div className="home-stock">
         <div className="stock-list">
-          {Array.isArray(displayedTickers) && displayedTickers.map((stock, index) => (
+          {data && data.tickers && data.tickers.map((stock, index) => (
             <StockListItem
               key={index}
               stock={stock}
@@ -66,7 +85,7 @@ const StockList = (props) => {
             />
           ))}
           {/* Check if data.ticker exists and render */}
-          {data.ticker && (
+          {data && data.ticker && (
             <StockListItem
               stock={data.ticker}
               navigateToDetailsPage={props.navigateToDetailsPage}
@@ -75,7 +94,7 @@ const StockList = (props) => {
             />
           )}
         </div>
-        {!submittedQuery && <IndicesList />}
+        {!searchQuery && <IndicesList />}
       </div>
     </div>
   );
@@ -83,3 +102,5 @@ const StockList = (props) => {
 };
 
 export default StockList;
+
+

@@ -77,6 +77,16 @@ const StockListDetailsItem = ({ tickerCurrent }) => {
   if (loading3) return <div>Loading Financials...</div>;
   if (error3) return <div>Error Loading Financials: {error.message}</div>;
 
+  if (loading || !data) return <div>Loading...</div>; // Check if data is loading or undefined
+
+  if (error) return <div>Error: {error.message}</div>; // Check if there's an error
+
+  // Check if data.results is undefined
+  if (!data.results) {
+    return <div>No results found</div>;
+  }
+
+  // Continue with rendering if data.results is defined
   const companyInfo = data.results;
   const financeInfo = data3.results;
   console.log("financeinfo", financeInfo);
