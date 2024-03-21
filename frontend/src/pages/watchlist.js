@@ -1,15 +1,12 @@
 import React, { useState, useEffect } from "react";
 import Cookies from "universal-cookie";
 import axios from "axios";
-import useApi from '../hooks/useApi';
-import StockListItem from '../components/component/StockListItem';
-
+import WatchListItem from '../components/component/WatchListItem';
 
 const Watchlist = (props) => {
-  const apiEndpoint = `/snapshot/locale/us/markets/stocks/tickers/?`;
-  const { data, loading, error } = useApi(apiEndpoint);
-  const cookies = new Cookies();
   const [tickerSymbols, setTickerSymbols] = useState([]);
+  const [loading, setLoading] = useState(true); // Add loading state
+  const cookies = new Cookies();
   const user_id = cookies.get("user_id");
 
   useEffect(() => {
@@ -20,8 +17,10 @@ const Watchlist = (props) => {
         console.log(response.data);
         const symbols = response.data.map(item => item.ticker_symbol);
         setTickerSymbols(symbols);
+        setLoading(false); // Update loading state after fetching data
       } catch (error) {
         console.error("Error getting watchlist:", error);
+        setLoading(false); // Update loading state even if there's an error
       }
     };
 
@@ -30,27 +29,30 @@ const Watchlist = (props) => {
     }
   }, [user_id]);
 
+  if (tickerSymbols.length === 0) {
+    return <div>Your Watchlist is empty. Go to the Stocks page to add some...</div>;
+  }
+  
   if (loading) {
     return <div>Loading...</div>;
   }
 
-  // if (error) {
-  //   return <div>Error: {error}</div>;
-  // }
-  const displayedTickers = tickerSymbols.map(symbol => symbol);
-  console.log('displayedTickers', displayedTickers);
   return (
     <div>
       <h1>Watchlist</h1>
 
-      {user_id ? (
+      {user_id && tickerSymbols.length > 0 ? (
         <div>
           <p>Here are the stocks you are watching:</p>
           <ul>
-            {displayedTickers.map((symbol, index) => (
-              <li key={index}>
-                {symbol}
-              </li>
+            {tickerSymbols.map((symbol, index) => (
+              <WatchListItem 
+                key={index} 
+                symbol={symbol} 
+                navigateToDetailsPage={props.navigateToDetailsPage} 
+                addtoWatchList={props.addtoWatchList} 
+                handleViewDetails={props.handleViewDetails} 
+              />
             ))}
           </ul>
         </div>

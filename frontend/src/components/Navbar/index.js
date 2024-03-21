@@ -5,7 +5,9 @@ const cookies = new Cookies();
 
 
 const user_id = cookies.get("user_id");
-console.log("User ID:", user_id);
+
+const user_email = cookies.get("email");
+
 
 const Navbar = (props) => {
   const { dispatch, state } = props;
@@ -42,9 +44,9 @@ return (
               </NavLink>
               {user_id ? (
                   <>
-                      <NavLink to="/manage-account" activeStyle>
+                      <NavLink to="/login" activeStyle>
                           Manage your Account
-                      </NavLink>
+                      </NavLink><div>Logged in as: {user_email} </div>
                       <button onClick={handleLogout}>Logout</button>
                   </>
               ) : (

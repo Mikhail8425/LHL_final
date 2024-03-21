@@ -1,16 +1,31 @@
 import React, { useState } from "react";
-import { NavLink } from "react-router-dom";
+import { Nav, NavLink, NavMenu } from "react-router-dom";
 import SunIcon from "../components/icon/Sunicon";
 import MoonIcon from "../components/icon/Moonicon";
 import "../styles/navbar.scss";
 import logo from "../assets/stocklogo.png"
+import Cookies from "universal-cookie";
+const cookies = new Cookies();
+
+const user_id = cookies.get("user_id");
+
+const user_email = cookies.get("email");
 
 
-const Navbar = () => {
+const Navbar = (props) => {
     const [dark, setDark] = useState(false);
 
     const toggleDarkMode = () => {
         setDark(!dark);
+    };
+
+    const { dispatch, state } = props;
+    const user_id = cookies.get("user_id");
+    console.log("User ID:", user_id);
+  
+    const handleLogout = () => {
+      cookies.remove("user_id");
+      dispatch({ type: "SET_LOGIN_STATE" });
     };
 
     return (
@@ -34,18 +49,38 @@ const Navbar = () => {
                     <NavLink to="/about" className="nav-link" activeclassname="active">
                         About Us
                     </NavLink>
-                    <NavLink to="/contact" className="nav-link" activeclassname="active">
+                    <NavLink to="/emailform" className="nav-link" activeclassname="active">
                         Contact
                     </NavLink>
+                    {user_id ? (
+                        <NavLink to="/login" className="nav-link" activeStyle>
+                            Manage Account
+                        </NavLink>
+
+                    ) : (
+                        ""
+                    )}
                 </div>
                 <div className="nav-signup">
-                    <NavLink to="/sign-up" className="nav-link" activeclassname="active">
-                        Sign Up
-                    </NavLink>
-                    <span className="nav-link-divider">/</span>
-                    <NavLink to="/login" className="nav-link" activeclassname="active">
-                        Login
-                    </NavLink>
+                    {user_id ? (
+                        <>  
+                            <div className="logged-in">
+                                <div className="nav-user">Logged in as: <span>{user_email}</span></div>
+                                <span>/</span>
+                                <button className="nav-link" onClick={handleLogout}>Logout</button>
+                            </div>
+                        </>
+                    ) : (
+                        <>
+                            <NavLink to="/sign-up" className="nav-link" activeclassname="active">
+                                Sign Up
+                            </NavLink>
+                            <span className="nav-link-divider">/</span>
+                            <NavLink to="/login" className="nav-link" activeclassname="active">
+                                Login
+                            </NavLink>
+                        </>
+                    )}
                 </div>
                 <div className="dark-mode" onClick={toggleDarkMode}>
                     {dark ? <SunIcon /> : <MoonIcon />}

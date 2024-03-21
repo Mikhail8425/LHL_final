@@ -56,6 +56,41 @@
   display: flex;
 }
 
+.logged-in {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  margin-right: 110px;
+  font-weight: 600;
+}
+
+.nav-user  {
+  @media screen and (max-width: 768px) {
+    display: flex;
+    flex-direction: column;
+    margin-right: 10px;
+  }
+}
+
+.nav-user span {
+  margin-right: 0px;
+}
+
+.logged-in span {
+  margin-right: 8px;
+}
+
+.logged-in button {
+  background: none;
+  border: none;
+  text-align: center;
+  font-size: 16px;
+  padding: 0px;
+  &:hover {
+    color: #324fe1;
+  }
+}
+
 .nav-link-divider {
   margin-left: -9px;
   margin-right: -8px;

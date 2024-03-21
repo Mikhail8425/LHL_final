@@ -1,7 +1,7 @@
 .contact-us-container {
   max-width: 800px;
   margin: 0 auto;
-  padding: 20px;
+  padding: 0px 20px;
 }
 
 .description {
@@ -16,9 +16,14 @@
   margin-bottom: 20px;
 }
 
+.form-group label {
+  font-weight: 600;
+}
+
 .label {
   display: block;
   margin-bottom: 5px;
+
 }
 
 .input-field {

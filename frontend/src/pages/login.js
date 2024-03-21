@@ -19,7 +19,7 @@ const LoginPage = (props) => {
 
       // Set a cookie with the value of the user
       cookies.set("user_id", response.data.userId, { path: "/" });
-
+      cookies.set("email", response.data.email, { path: "/" });
       // Change login state to true
       dispatch({ type: "SET_LOGIN_STATE" });
     } catch (error) {
@@ -36,6 +36,7 @@ const LoginPage = (props) => {
     // Dispatch an action to reset the login state
     dispatch({ type: "SET_LOGIN_STATE" });
     cookies.remove("user_id");
+    cookies.remove("email");
   };
 
   const handleChangeEmail = async () => {
@@ -70,18 +71,6 @@ const LoginPage = (props) => {
       alert("Failed to change password. Please try again.");
     }
   };
-
-
-
-
-
-
-
-
-
-
-
-
 
   const user_id = cookies.get("user_id");
   console.log("User ID:", user_id);
@@ -130,29 +119,38 @@ const LoginPage = (props) => {
   
   
   } else {
-    return <div>
-      <h2>Manage Your Account</h2>
-      <button onClick={handleLogout}>Log Out</button>
-      <div>
-        <h3>Change Email</h3>
-        <input
-          type="email"
-          value={newEmail}
-          onChange={(e) => setNewEmail(e.target.value)}
-          placeholder="Enter new email"
-        />
-        <button onClick={handleChangeEmail}>Change Email</button>
+    return <div className="login-form">
+      <div className="form-group">
+        <div>
+          <h2>Manage Your Account</h2>
+        </div>
+        <label htmlFor="email">Change Email</label>
+        <div className="form-change">
+          <input
+            type="email"
+            value={newEmail}
+            onChange={(e) => setNewEmail(e.target.value)}
+            placeholder="Enter new email"
+            className="form-control"
+          />
+          <button className="btn-change" onClick={handleChangeEmail}>Change</button>
+        </div>
+
       </div>
-      <div>
-        <h3>Change Password</h3>
-        <input
-          type="password"
-          value={newPassword}
-          onChange={(e) => setNewPassword(e.target.value)}
-          placeholder="Enter new password"
-        />
-        <button onClick={handleChangePassword}>Change Password</button>
+      <div className="form-group">
+        <label htmlFor="password">Change Password</label>
+        <div className="form-change">
+          <input
+            type="password"
+            value={newPassword}
+            onChange={(e) => setNewPassword(e.target.value)}
+            placeholder="Enter new password"
+            className="form-control"
+          />
+          <button className="btn-change" onClick={handleChangePassword}>Change</button>
+        </div>
       </div>
+      <button onClick={handleLogout} className="btn btn-primary">Log Out</button>
     </div>;
   }
 };

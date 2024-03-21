@@ -11,7 +11,7 @@ import Home from "./pages";
 import About from "./pages/about";
 import Blogs from "./pages/blogs";
 import SignUp from "./pages/RegistrationPage";
-import Contact from "./pages/contact";
+import EmailForm from "./pages/emailform";
 import Watchlist from "./pages/watchlist";
 import Stock from "./pages/stock";
 import LoginPage from "./pages/login";
@@ -29,7 +29,10 @@ function App() {
       <Routes>
         <Route exact path="/" element={<Home />} />
         <Route path="/about" element={<About />} />
-        <Route path="/contact" element={<Contact />} />
+        <Route 
+          path="/emailform" 
+          element={<EmailForm />}
+        />
         <Route path="/blogs" element={<Blogs />} />
         <Route
           path="/watchlist"
