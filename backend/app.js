@@ -15,6 +15,7 @@ const stocksRouter = require('./routes/stocks');
 const loginRouter = require('./routes/login');
 const registerRouter = require('./routes/register');
 const apiRouter = require('./routes/api');
+const indicesRouter = require('./routes/indices');
 const app = express();
 
 app.use(cors({ origin: 'http://localhost:3000' }));
@@ -61,6 +62,7 @@ app.use('/stocks', stocksRouter);
 app.use('/login', loginRouter);
 app.use('/register', registerRouter);
 app.use('/api', apiRouter);
+app.use('/indices', indicesRouter);
 
 
 
