@@ -1,7 +1,9 @@
 import React, { useState } from "react";
 import axios from "axios";
 import Cookies from "universal-cookie";
+import "../styles/login.scss";
 const cookies = new Cookies();
+
 
 const LoginPage = (props) => {
   const { dispatch, state } = props;
@@ -87,35 +89,46 @@ const LoginPage = (props) => {
   // Conditionally render based on login state
   if (!user_id) {
     return (
-      <form onSubmit={handleSubmit}>
+      <form onSubmit={handleSubmit} className="login-form">
         {/* email */}
-        <div controlId="formBasicEmail">
-          <label>Email address</label>
+        <div controlId="formBasicEmail" className="form-group">
+          <div>
+            <h2>Login</h2>
+          </div>
+          <label htmlFor="email">Email address</label>
           <input
             type="email"
+            id="email"
             name="email"
             value={email}
             onChange={(e) => setEmail(e.target.value)}
             placeholder="Enter email"
+            className="form-control"
           />
         </div>
-
+  
         {/* password */}
-        <div controlId="formBasicPassword">
-          <label>Password</label>
+        <div controlId="formBasicPassword" className="form-group">
+          <label htmlFor="password">Password</label>
           <input
             type="password"
+            id="password"
             name="password"
             value={password}
             onChange={(e) => setPassword(e.target.value)}
             placeholder="Password"
+            className="form-control"
           />
         </div>
-
+  
         {/* submit button */}
-        <button type="submit">Login</button>
+        <button type="submit" className="btn btn-primary">
+          Login
+        </button>
       </form>
     );
+  
+  
   } else {
     return <div>
       <h2>Manage Your Account</h2>

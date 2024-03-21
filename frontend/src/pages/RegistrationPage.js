@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import axios from "axios";
+import "../styles/registration.scss";
 
 const RegistrationPage = () => {
   const [formData, setFormData] = useState({
@@ -40,10 +41,10 @@ const RegistrationPage = () => {
   };
   
   return (
-    <div>
-      <h1>Registration</h1>
-      <form onSubmit={handleSubmit}>
-        <div>
+    <div className="registration-container">
+      <h2>Registration</h2>
+      <form onSubmit={handleSubmit} className="registration-form">
+        <div className="form-group">
           <label htmlFor="email">Email address</label>
           <input
             type="email"
@@ -52,10 +53,11 @@ const RegistrationPage = () => {
             value={formData.email}
             placeholder="Enter email"
             onChange={handleChange}
+            className="form-control"
           />
         </div>
 
-        <div>
+        <div className="form-group">
           <label htmlFor="password">Password</label>
           <input
             type="password"
@@ -64,10 +66,11 @@ const RegistrationPage = () => {
             value={formData.password}
             placeholder="Password"
             onChange={handleChange}
+            className="form-control"
           />
         </div>
 
-        <div>
+        <div className="form-group">
           <label htmlFor="first_name">First Name</label>
           <input
             type="text"
@@ -76,10 +79,11 @@ const RegistrationPage = () => {
             value={formData.first_name}
             placeholder="Enter first name"
             onChange={handleChange}
+            className="form-control"
           />
         </div>
 
-        <div>
+        <div className="form-group">
           <label htmlFor="last_name">Last Name</label>
           <input
             type="text"
@@ -88,10 +92,11 @@ const RegistrationPage = () => {
             value={formData.last_name}
             placeholder="Enter last name"
             onChange={handleChange}
+            className="form-control"
           />
         </div>
 
-        <button type="submit">Submit</button>
+        <button type="submit" className="btn btn-primary">Submit</button>
       </form>
     </div>
   );
