@@ -43,7 +43,8 @@ login.post("/", (request, response) => {
             message: "Login Successful",
             email: user.email,
             token: token,
-            userId: user.id
+            userId: user.id,
+            username: user.username
           });
         })
         .catch((error) => {

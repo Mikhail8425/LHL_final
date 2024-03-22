@@ -8,7 +8,8 @@ const RegistrationPage = () => {
     email: "",
     password: "",
     first_name: "",
-    last_name: ""
+    last_name: "",
+    username: ""
   });
 
   const [name, setName] = useState('');
@@ -116,6 +117,18 @@ const RegistrationPage = () => {
             name="last_name"
             value={formData.last_name}
             placeholder="Enter last name"
+            onChange={handleChange}
+            className="form-control"
+          />
+        </div>
+        <div className="form-group">
+          <label htmlFor="username">Username</label>
+          <input
+            type="text"
+            id="username"
+            name="username"
+            value={formData.username}
+            placeholder="Enter username"
             onChange={handleChange}
             className="form-control"
           />

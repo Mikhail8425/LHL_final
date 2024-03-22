@@ -1,7 +1,14 @@
 import React, { useState, useEffect } from 'react';
 import CssBaseline from '@mui/material/CssBaseline';
 import Grid from '@mui/material/Grid';
+import TextField from '@mui/material/TextField';
 import Container from '@mui/material/Container';
+import Button from '@mui/material/Button';
+import Dialog from '@mui/material/Dialog';
+import DialogTitle from '@mui/material/DialogTitle';
+import DialogContent from '@mui/material/DialogContent';
+import DialogActions from '@mui/material/DialogActions';
+
 import GitHubIcon from '@mui/icons-material/GitHub';
 import FacebookIcon from '@mui/icons-material/Facebook';
 import XIcon from '@mui/icons-material/X';
@@ -16,6 +23,8 @@ import post1 from './blog-post.1.md';
 import post2 from './blog-post.2.md';
 import post3 from './blog-post.3.md';
 import axios from "axios";
+import Cookies from "universal-cookie";
+const cookies = new Cookies();
 
 const sections = [
   { title: 'Technology', url: '#' },
@@ -66,7 +75,55 @@ const sidebar = {
 const defaultTheme = createTheme();
 
 export default function Blog() {
+  const user_id = cookies.get("user_id");
+  const user_name = cookies.get("user_name");
   const [newPosts, setPosts] = useState([]);
+  const [openModal, setOpenModal] = useState(false);
+
+
+
+const getCurrentDate = () => {
+  const today = new Date();
+  const year = today.getFullYear();
+  const month = String(today.getMonth() + 1).padStart(2, '0');
+  const day = String(today.getDate()).padStart(2, '0');
+  return `${year}-${month}-${day}`;
+};
+
+const [postData, setPostData] = useState({
+  title: '',
+  date: getCurrentDate(), // Set initial state with today's date
+  description: '',
+  likes: 0,
+  image: '',
+  image_label: '',
+  user_id: user_id,
+  username: user_name
+  // Add more fields here as needed
+});
+
+
+  const handleOpenModal = () => {
+    setOpenModal(true);
+  };
+
+  const handleCloseModal = () => {
+    setOpenModal(false);
+  };
+
+  const handleAddPost = async () => {
+    try {
+      const response = await axios.post("/blogs", postData);
+      console.log("New post added:", response.data);
+      // Assuming your backend returns the newly created post in the response
+      // You can add code here to update the state with the new post or fetch the posts again to refresh the list
+      window.location.reload(); // Reload the page
+    } catch (error) {
+      console.error("Error posting:", error);
+    }
+    handleCloseModal();
+  };
+  
 
   const fetchPosts = async () => {
     try {
@@ -87,6 +144,7 @@ export default function Blog() {
     <ThemeProvider theme={defaultTheme}>
       <CssBaseline />
       <Container maxWidth="lg">
+      <Button variant="contained" color="primary" onClick={handleOpenModal}>Create New Post</Button>
         <Header title="Blog" sections={sections} />
         <main>
           <MainFeaturedPost post={mainFeaturedPost} />
@@ -104,12 +162,64 @@ export default function Blog() {
               social={sidebar.social}
             />
           </Grid>
+          <Button variant="contained" color="primary" onClick={handleOpenModal}>Create New Post</Button>
         </main>
       </Container>
       <Footer
         title="Footer"
         description="Something here to give the footer a purpose!"
       />
+      {/* Modal for adding new posts */}
+      <Dialog open={openModal} onClose={handleCloseModal}>
+  <DialogTitle>Add New Post</DialogTitle>
+  <DialogContent>
+    <TextField
+      autoFocus
+      margin="dense"
+      id="title"
+      label="Title"
+      fullWidth
+      value={postData.title}
+      onChange={(e) => setPostData({ ...postData, title: e.target.value })}
+    />
+    <TextField
+      margin="dense"
+      id="description"
+      label="Description"
+      fullWidth
+      multiline
+      rows={4}
+      value={postData.description}
+      onChange={(e) => setPostData({ ...postData, description: e.target.value })}
+    />
+    <TextField
+      margin="dense"
+      id="image"
+      label="Image URL"
+      fullWidth
+      value={postData.image}
+      onChange={(e) => setPostData({ ...postData, image: e.target.value })}
+    />
+    <TextField
+      margin="dense"
+      id="description"
+      label="imageDescription"
+      fullWidth
+      multiline
+      rows={4}
+      value={postData.image_label}
+      onChange={(e) => setPostData({ ...postData, image_label: e.target.value })}
+    />
+    {/* Add more fields as needed */}
+  </DialogContent>
+  <DialogActions>
+    <Button onClick={handleCloseModal}>Cancel</Button>
+    <Button onClick={handleAddPost} variant="contained" color="primary">Add Post</Button>
+  </DialogActions>
+</Dialog>
+
+      {/* Button to open the modal */}
+      <Button onClick={handleOpenModal} variant="contained" color="primary">Add New Post</Button>
     </ThemeProvider>
   );
 }
