@@ -12,6 +12,7 @@ const cookies = new Cookies();
 const user_id = cookies.get("user_id");
 
 const user_email = cookies.get("email");
+const user_username = cookies.get("user_name");
 
 
 const Navbar = (props) => {
@@ -72,7 +73,7 @@ const Navbar = (props) => {
           {user_id ? (
             <>
               <div className="logged-in">
-                <div className="nav-user">Logged in as: <span>{user_email}</span></div>
+                <div className="nav-user">Logged in as: <span>{user_username}</span></div>
                 <span>/</span>
                 <button className="nav-link" onClick={handleLogout}>Logout</button>
               </div>

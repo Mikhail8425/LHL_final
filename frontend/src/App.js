@@ -16,7 +16,7 @@ import Watchlist from "./pages/watchlist";
 import Stock from "./pages/stock";
 import LoginPage from "./pages/login";
 import StockListDetailsItem from "./components/component/StockListDetailsItem";
-import SignInSide from "./components/component/loginItem";
+import SignUp2 from "./components/component/SignUpItem";
 import Blog from "./components/component/blogcomponents/Blog";
 import "./styles/app.scss";
 
@@ -94,7 +94,7 @@ function App() {
 <Route
           path="/test"
           element={
-            <SignInSide
+            <SignUp2
             dispatch={dispatch}
             state={state}
             email={state.email}
