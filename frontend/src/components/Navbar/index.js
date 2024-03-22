@@ -42,6 +42,9 @@ const Navbar = (props) => {
           <NavLink to="/stock" activeStyle>
             Stock
           </NavLink>
+          <NavLink to="/test" activeStyle>
+            Test
+          </NavLink>
           {user_id ? (
             <>
               <NavLink to="/login" activeStyle>

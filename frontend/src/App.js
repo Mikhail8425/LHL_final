@@ -16,6 +16,7 @@ import Watchlist from "./pages/watchlist";
 import Stock from "./pages/stock";
 import LoginPage from "./pages/login";
 import StockListDetailsItem from "./components/component/StockListDetailsItem";
+import SignInSide from "./components/component/loginItem";
 import Blog from "./components/component/blogcomponents/Blog";
 import "./styles/app.scss";
 
@@ -86,6 +87,20 @@ function App() {
               password={state.password}
               setEmail={setEmail}
               setPassword={setPassword}
+            />
+          }
+        />
+
+<Route
+          path="/test"
+          element={
+            <SignInSide
+            dispatch={dispatch}
+            state={state}
+            email={state.email}
+            password={state.password}
+            setEmail={setEmail}
+            setPassword={setPassword}
             />
           }
         />

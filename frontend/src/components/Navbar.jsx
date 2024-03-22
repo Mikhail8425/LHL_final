@@ -27,6 +27,8 @@ const Navbar = (props) => {
 
   const handleLogout = () => {
     cookies.remove("user_id");
+    cookies.remove("user_name");
+    cookies.remove("email");
     dispatch({ type: "SET_LOGIN_STATE" });
   };
 
@@ -41,6 +43,9 @@ const Navbar = (props) => {
                 <div className="nav-menu">
                     <NavLink to="/stock" className="nav-link" activeclassname="active">
                         Overview
+                    </NavLink>
+                    <NavLink to="/test" className="nav-link" activeclassname="active">
+                        test
                     </NavLink>
                     <NavLink to="/discussionboard" className="nav-link" activeclassname="active">
                         Blogs
