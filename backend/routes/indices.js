@@ -34,16 +34,14 @@ indices.get('/', async (req, res) => {
     const day = String(yesterday.getDate()).padStart(2, '0');
     const formattedDate = `${year}-${month}-${day}`;
 
-    const [compData, xauData, ndxData] = await Promise.all([
+    const [compData] = await Promise.all([
       fetchData('NDX', formattedDate),
-
     ]);
 
     console.log('COMP data:', compData);
-    console.log('XAU data:', xauData);
-    console.log('NDX data:', ndxData);
 
-    res.json({ compData, xauData, ndxData });
+
+    res.json({ compData });
   } catch (error) {
     console.error('Error fetching data:', error);
     res.status(500).json({ error: 'Internal Server Error' });

@@ -93,16 +93,16 @@ const useApplicationData = () => {
   };
 
   const addtoWatchList = (ticker) => {
-    console.log("ADDING THE TICKER TO WATCHLIST:", ticker);
+    // console.log("ADDING THE TICKER TO WATCHLIST:", ticker);
     dispatch({ type: ACTIONS.SET_WATCHLIST_TICKER, payload: ticker });
   
     const user_id = cookies.get("user_id"); // Retrieve user_id from the cookie
   
-    console.log("User ID:", user_id);
+    // console.log("User ID:", user_id);
     // Make HTTP request to add to watchlist
     axios.post("http://localhost:3001/watchlists", { user_id, ticker_symbol: ticker })
       .then((response) => {
-        console.log("Added to watchlist:", response.data);
+        // console.log("Added to watchlist:", response.data);
         alert("Added to watchlist successfully!");
       })
       .catch((error) => {

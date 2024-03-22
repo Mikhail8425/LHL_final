@@ -16,7 +16,7 @@ watchlist.get('/:user_id', async (req, res) => {
 
 watchlist.post("/", async (request, response) => {
   const { user_id, ticker_symbol } = request.body;
-  console.log("Data being inserted:", { user_id, ticker_symbol });
+  // console.log("Data being inserted:", { user_id, ticker_symbol });
 
   try {
     // Check if the entry already exists
@@ -35,7 +35,7 @@ watchlist.post("/", async (request, response) => {
         RETURNING *
       `;
       const deletedResult = await query(deleteExistingQuery, [user_id, ticker_symbol]);
-      console.log("Deleted entry:", deletedResult.rows[0]);
+      // console.log("Deleted entry:", deletedResult.rows[0]);
     } else {
       console.log("Entry does not exist. Proceeding with insertion...");
 
