@@ -134,12 +134,7 @@ const StockListDetailsItem = ({ tickerCurrent }) => {
 
           <div className='company-details'>
             <li>
-            {companyInfo.branding.logo_url &&
-                  <img
-                    src={companyInfo.branding.logo_url + '?apiKey=5zppMBtonCBY1SJ42kijFfL2V7co5_MN'}
-                    alt="Logo"
-                    
-                  />}
+            
                    {companyInfo.name && <li><strong>Stock:</strong> {companyInfo.name} ({companyInfo.ticker})</li>}
               {companyInfo.market && <li><strong>Market:</strong> {companyInfo.market}</li>}
               {companyInfo.locale && <li><strong>Locale:</strong> {companyInfo.locale}</li>}
