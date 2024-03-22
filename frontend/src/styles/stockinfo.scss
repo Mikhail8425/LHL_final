@@ -197,3 +197,13 @@
   background-color: #0056b3; /* Darker shade of blue on hover */
 }
 
+.watchlist {
+  text-align: center;
+}
+
+.watchlist-container {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+}
+

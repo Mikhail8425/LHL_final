@@ -2,6 +2,7 @@ import React, { useState, useEffect } from "react";
 import Cookies from "universal-cookie";
 import axios from "axios";
 import WatchListItem from '../components/component/WatchListItem';
+import "./../styles/stockinfo.scss";
 
 const Watchlist = (props) => {
   const [tickerSymbols, setTickerSymbols] = useState([]);
@@ -38,13 +39,12 @@ const Watchlist = (props) => {
   }
 
   return (
-    <div>
-      <h1>Watchlist</h1>
+    <div className="watchlist">
+      <h3>Here Are the Stocks You're Watching</h3>
 
       {user_id && tickerSymbols.length > 0 ? (
         <div>
-          <p>Here are the stocks you are watching:</p>
-          <ul>
+          <ul className="watchlist-container">
             {tickerSymbols.map((symbol, index) => (
               <WatchListItem
                 key={index}

@@ -2,6 +2,8 @@ import React, { useState, useEffect } from "react";
 import PropTypes from 'prop-types';
 import { useNavigate } from 'react-router-dom';
 import useApi from '../../hooks/useApi';
+import RemoveIcon from "../icon/Removeicon";
+import "../../styles/stockinfo.scss";
 
 const WatchListItem = ({ symbol, navigateToDetailsPage, addtoWatchList }) => {
   const [stockData, setStockData] = useState(null);
@@ -40,25 +42,58 @@ const WatchListItem = ({ symbol, navigateToDetailsPage, addtoWatchList }) => {
     return <div>Error: {error}</div>;
   }
 
+  let priceChangeArrow;
+  if (data.ticker.todaysChangePerc.toFixed(2) > 0 || data.ticker.todaysChange.toFixed(2) > 0) {
+    priceChangeArrow = "\u25B2";
+  } else if (data.ticker.todaysChangePerc.toFixed(2) < 0 || data.ticker.todaysChange.toFixed(2) < 0) {
+    priceChangeArrow = "\u25BC";
+  } else {
+    priceChangeArrow = "";
+  }
+
   return (
     <div className="stock-item">
-      <div className="header">
-        <h2>{symbol}</h2>
-        <p>Updated: {new Date(data.ticker.updated / 1000000).toLocaleString()}</p>
+      <div className="stock-info">
+      <div className="stock-symbol">
+        <p>{symbol}</p>
+        <RemoveIcon onClick={handleAddToWatchlist}/>
       </div>
-      <div className="change-info">
-        <p>Today's Change Percentage: {data.ticker.todaysChangePerc.toFixed(2)} %</p>
-        <p>Today's Change: ${data.ticker.todaysChange.toFixed(2)} </p>
-        <p>Open: ${data.ticker.day.o.toFixed(2)}</p>
-        <p>High: ${data.ticker.day.h.toFixed(2)}</p>
-        <p>Low: ${data.ticker.day.l.toFixed(2)}</p>
-        <p>Close: ${data.ticker.day.c.toFixed(2)}</p>
-        <p>Volume: {data.ticker.day.v}</p>
+      <div className="stock-price">
+        <p>${data.ticker.day.o.toFixed(2)}</p>
       </div>
-      {/* Render other stock data as needed */}
-      {/* Button to view details */}
-      <button onClick={handleViewDetails}>View Details</button>
-      <button onClick={handleAddToWatchlist}>Remove from Watchlist</button>
+      <div className="stock-change">
+        <div className="price-change">
+          <p className={(data.ticker.todaysChange.toFixed(2) > 0 || data.ticker.todaysChangePerc.toFixed(2) > 0) ? "positive" : (data.ticker.todaysChange.toFixed(2) < 0 || data.ticker.todaysChangePerc.toFixed(2) < 0) ? "negative" : "stock-detail"}>
+          {priceChangeArrow} <span>Today's Change:</span> ${data.ticker.todaysChange.toFixed(2)}({data.ticker.todaysChangePerc.toFixed(2)}%) 
+          </p>
+        </div>
+        <div className="stock-day-info">
+          <div className="info-details"> 
+            <p>High: <span>${data.ticker.day.h.toFixed(2)}</span></p>
+          </div>
+          <div className="info-details">
+            <p>Low: <span>${data.ticker.day.l.toFixed(2)}</span></p>
+          </div>
+        </div>
+        <div className="stock-day-info">
+          <div className="info-details">
+            <p>Volume: <span>{data.ticker.day.v}</span></p>
+          </div>
+          <div className="info-details"> 
+            <p>Close: <span>${data.ticker.day.c.toFixed(2)}</span></p>
+          </div>
+        </div>
+        <div className="updated-time">
+          <p>Updated: <span>{new Date(data.ticker.updated / 1000000).toLocaleString()}</span></p>
+        </div>
+      </div>
+      <div className="stock-details-button">
+        {/* Button to view details */}
+        <button className="button" onClick={handleViewDetails}>View Details &raquo; </button>
+        {/* <button onClick={() =>  handleAddToWatchlist(ticker)}>Add to Watchlist</button> */}
+      </div>
+
+    </div>
     </div>
   );
 };
