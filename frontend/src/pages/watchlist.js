@@ -14,7 +14,7 @@ const Watchlist = (props) => {
       console.log('getWatchlist is getting the list for user_id', user_id);
       try {
         const response = await axios.get(`http://localhost:3001/watchlists/${user_id}`);
-        console.log(response.data);
+        // console.log(response.data);
         const symbols = response.data.map(item => item.ticker_symbol);
         setTickerSymbols(symbols);
         setLoading(false); // Update loading state after fetching data

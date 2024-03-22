@@ -31,7 +31,7 @@ const useChart = (endpoint) => {
           throw new Error('Network response was not ok');
         }
         const data2 = await response.json();
-        console.log("Stock data fetched successfully:", data2);
+        // console.log("Stock data fetched successfully:", data2);
         dispatch({ type: 'FETCH_SUCCESS', payload: data2 });
       } catch (error) {
         dispatch({ type: 'FETCH_ERROR', payload: error.message });

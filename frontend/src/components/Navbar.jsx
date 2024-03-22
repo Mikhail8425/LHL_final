@@ -23,7 +23,7 @@ const Navbar = (props) => {
 
   const { dispatch, state } = props;
   const user_id = cookies.get("user_id");
-  console.log("User ID:", user_id);
+  // console.log("User ID:", user_id);
 
   const handleLogout = () => {
     cookies.remove("user_id");

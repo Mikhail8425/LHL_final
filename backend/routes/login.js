@@ -60,7 +60,7 @@ login.post("/", (request, response) => {
 login.put('/', async (req, res) => {
   const { email, password, id: userId } = req.body;
   
-  console.log("email", "password", "id", email, password, userId, req.body);
+  // console.log("email", "password", "id", email, password, userId, req.body);
 
   try {
     if (email) {
