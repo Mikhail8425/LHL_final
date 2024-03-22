@@ -1,0 +1,138 @@
+.stock-container {
+  background-color: #f8f8f8;
+  padding: 40px;
+  border: 1px solid grey;
+  border-radius: 10px;
+  width: 1250px;
+  margin-left: 55px;
+}
+
+.mixed-chart {
+  display: flex;
+  justify-content: center;
+}
+
+.stock-name h3 {
+  text-align: center;
+  list-style-type: none;
+  margin-bottom: 40px;
+}
+
+.stock-chart {
+  display: flex;
+  width: 800px;
+  justify-content: center;
+}
+
+.company-title {
+  display: flex;
+  justify-content: center;
+  padding: 15px;
+}
+
+.company-details {
+  list-style-type: none;
+}
+
+.controls {
+  text-align: center;
+  font-size: 14px;
+  margin-left: 5px;
+}
+
+.controls label {
+  font-weight: 600;
+  margin-right: 2px;
+  margin-left: 8px;
+}
+
+.controls input {
+  padding: 3px;
+  border: 1px solid #ccc;
+  border-radius: 5px 
+}
+
+.controls select {
+  border: 1px solid #ccc;
+  border-radius: 5px;
+}
+
+
+.company-details li {
+  font-weight: 600;
+  margin-bottom: 5px;
+}
+
+.company-details strong {
+  font-weight: 600;
+  color: #373d3f;
+}
+
+.company-info-container {
+  display: flex;
+  justify-content: center;
+  padding: 30px;
+  margin-bottom: 30px;
+}
+
+.company-info {
+  list-style-type: none;
+  width: 1000px;
+  background-color: #f8f8f8;
+  padding: 20px;
+  border: 1px solid grey;
+  border-radius: 10px
+}
+
+.company-info h3 {
+  text-align: center;
+}
+
+.company-links {
+  text-align: center;
+  margin-top: 15px;
+}
+
+.financials-container {
+  display: flex;
+  justify-content: center;
+  margin-top: 25px;
+}
+
+.financials select {
+  background-color: #f8f8f8;
+  width: 100%;
+  padding: 10px;
+  font-size: 16px;
+  border: 1px solid #ccc;
+  border-radius: 5px 
+}
+
+.financials ul {
+  list-style-type: none;
+  padding: 1px;
+  display: flex;
+  flex-direction: column-reverse;
+  justify-content: space-evenly;
+}
+
+.financials li {
+  display: flex;
+  flex-direction: column;
+  border: 1px solid;
+  padding: 10px;
+  width: 810px;
+  border: 1px solid gray;
+  border-radius: 5px 
+}
+
+.finance-list-item {
+  margin-top: 20px;
+}
+
+.company-info-financials {
+  display: flex;
+  flex-direction: column-reverse;
+}
+
+
