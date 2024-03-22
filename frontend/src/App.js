@@ -100,19 +100,7 @@ function App() {
           }
         />
 
-        <Route
-          path="/test"
-          element={
-            <SignUp2
-              dispatch={dispatch}
-              state={state}
-              email={state.email}
-              password={state.password}
-              setEmail={setEmail}
-              setPassword={setPassword}
-            />
-          }
-        />
+        
       </Routes>
     </Router>
   );
