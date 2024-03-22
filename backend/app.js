@@ -38,17 +38,6 @@ app.use((req, res, next) => {
 });
 
 
-
-app.get("/abcde", async (req, res) => {
-  const data = await read("abc.txt");
-  res.send('abcde')
-  // return res.status(200).json({ data });
-});
-
-app.post("/abc", async (req, res) => {
-  console.log(req.body);
-  return res.status(200).json({ success: true });
-});
 //use section
 app.use(logger('dev'));
 app.use(express.json());
@@ -65,7 +54,5 @@ app.use('/register', registerRouter);
 app.use('/api', apiRouter);
 app.use('/indices', indicesRouter);
 app.use('/blogs', blogsRouter);
-
-
 
 module.exports = app;

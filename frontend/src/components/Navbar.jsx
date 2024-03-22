@@ -33,37 +33,37 @@ const Navbar = (props) => {
     dispatch({ type: "SET_LOGIN_STATE" });
   };
 
-    return (
-        <>
-            <nav className="nav">
-                <div className="nav-logo">
-                    <NavLink to="/stock" activeclassname="active">
-                        <img src={logo} alt="logo" />
-                    </NavLink>
-                </div>
-                <div className="nav-menu">
-                    <NavLink to="/stock" className="nav-link" activeclassname="active">
-                        Overview
-                    </NavLink>
-                    <NavLink to="/test" className="nav-link" activeclassname="active">
-                        test
-                    </NavLink>
-                    <NavLink to="/discussionboard" className="nav-link" activeclassname="active">
-                        Blogs
-                    </NavLink>
-                    <NavLink to="/watchlist" className="nav-link" activeclassname="active">
-                        My Watchlist
-                    </NavLink>
-                    <NavLink to="/about" className="nav-link" activeclassname="active">
-                        About Us
-                    </NavLink>
-                    <NavLink to="/emailform" className="nav-link" activeclassname="active">
-                        Contact
-                    </NavLink>
-                    {user_id ? (
-                        <NavLink to="/login" className="nav-link" activeStyle>
-                            Manage Account
-                        </NavLink>
+  return (
+    <>
+      <nav className="nav">
+        <div className="nav-logo">
+          <NavLink to="/stock" activeclassname="active">
+            <img src={logo} alt="logo" />
+          </NavLink>
+        </div>
+        <div className="nav-menu">
+          <NavLink to="/stock" className="nav-link" activeclassname="active">
+            Overview
+          </NavLink>
+          <NavLink to="/Plans" className="nav-link" activeclassname="active">
+            Plans
+          </NavLink>
+          <NavLink to="/discussionboard" className="nav-link" activeclassname="active">
+            Blogs
+          </NavLink>
+          <NavLink to="/watchlist" className="nav-link" activeclassname="active">
+            My Watchlist
+          </NavLink>
+          <NavLink to="/about" className="nav-link" activeclassname="active">
+            About Us
+          </NavLink>
+          <NavLink to="/emailform" className="nav-link" activeclassname="active">
+            Contact
+          </NavLink>
+          {user_id ? (
+            <NavLink to="/login" className="nav-link" activeStyle>
+              Manage Account
+            </NavLink>
 
           ) : (
             ""
