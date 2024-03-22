@@ -1,27 +1,36 @@
+
+.stock-item {
+  display: flex;
+  justify-content: center;
+  flex-direction: column; /* Display items in a column */
+  align-items: center; /* Center items horizontally */
+}
+
 .stock-container {
+  
+   
   background-color: #f8f8f8;
   padding: 40px;
   border: 1px solid grey;
   border-radius: 10px;
-  width: 1250px;
-  margin-left: 55px;
+  width: 90%;
+  border-radius: 10px;
+  
 }
 
 .mixed-chart {
   display: flex;
-  justify-content: center;
+  justify-content: space-around;
 }
 
-.stock-name h3 {
-  text-align: center;
-  list-style-type: none;
-  margin-bottom: 40px;
-}
+
 
 .stock-chart {
   display: flex;
-  width: 800px;
+  width: 100%;
   justify-content: center;
+  border: 1px solid grey;
+  
 }
 
 .company-title {
@@ -31,7 +40,16 @@
 }
 
 .company-details {
+  display: flex;
+  justify-content: center; /* Center items horizontally */
+  align-items: center; /* Center items vertically */
   list-style-type: none;
+}
+
+.company-details li {
+  margin: 5px; /* Add margin around each item */
+  border: 1px solid #ccc; /* Add a border to each item */
+  padding: 10px; /* Add padding inside each item */
 }
 
 .controls {
@@ -77,7 +95,7 @@
 
 .company-info {
   list-style-type: none;
-  width: 1000px;
+  width: 70%;
   background-color: #f8f8f8;
   padding: 20px;
   border: 1px solid grey;
