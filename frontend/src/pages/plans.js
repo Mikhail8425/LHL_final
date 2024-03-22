@@ -1,5 +1,8 @@
 import React from "react";
 import "../styles/plans.scss";
+import Cookies from "universal-cookie";
+const cookies = new Cookies();
+
 
 const Plans = () => {
   const plans = [
@@ -19,16 +22,22 @@ const Plans = () => {
     }
   ];
 
+  const handlePlanSelection = () => {
+    console.log('abc')
+  };
+
   return (
     <div className="body-wrapper subscription-plans-container" >
       <h2>Subscription Plans</h2>
       <ul>
         {plans.map(plan => (
-          <li key={plan.id} >
-            <h3>{plan.name}</h3>
-            <p>${plan.price.toFixed(2)} / {plan.billingCycle}</p>
-            <p>{plan.description}</p>
-            {/* You can add more details here, like features included in each plan */}
+          <li key={plan.id}>
+            <button className="plan-button" onClick={() => handlePlanSelection(plan.id)}>
+              <h3>{plan.name}</h3>
+              <p>${plan.price.toFixed(2)} / {plan.billingCycle}</p>
+              <p>{plan.description}</p>
+              {/* You can add more details here, like features included in each plan */}
+            </button>
           </li>
         ))}
       </ul>
