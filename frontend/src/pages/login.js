@@ -59,6 +59,7 @@ export default function LoginPage(props) {
       cookies.set("user_name", response.data.username, { path: "/" });
       // Change login state to true
       dispatch({ type: "SET_LOGIN_STATE" });
+      window.location.reload();
     } catch (error) {
       console.log(error);
       alert("Login failed!");

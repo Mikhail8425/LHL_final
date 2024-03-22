@@ -145,7 +145,7 @@ function FeaturedPost(props) {
             </Typography>
             
             {user_name === post.username && (
-              <Button onClick={() => handleDeletePost(post.id)} variant="contained" color="primary">
+              <Button onClick={() => handleDeletePost(post.id)} variant="contained" color="primary" sx={{ mr: 1 }}>
                 Delete Post
               </Button>
             )}
