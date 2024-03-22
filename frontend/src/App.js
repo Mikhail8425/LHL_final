@@ -10,6 +10,7 @@ import useApplicationData from './hooks/useApplicationData';
 import Home from "./pages";
 import About from "./pages/about";
 import DiscussionBoard from "./pages/DiscussionBoard";
+import Plans from "./pages/plans";
 import SignUp from "./pages/RegistrationPage";
 import EmailForm from "./pages/emailform";
 import Watchlist from "./pages/watchlist";
@@ -36,10 +37,10 @@ function App() {
           path="/emailform"
           element={<EmailForm />}
         />
-        <Route 
-          path="/discussionboard" 
+        <Route
+          path="/discussionboard"
           element={<Blog
-             />
+          />
           }
         />
         <Route
@@ -52,6 +53,13 @@ function App() {
               tickerCurrent={state.tickerCurrent}
               handleViewDetails={handleViewDetails}
               addtoWatchList={addtoWatchList}
+            />
+          }
+        />
+        <Route 
+          path="/plans"  
+          element={
+            <Plans
             />
           }
         />
@@ -91,16 +99,16 @@ function App() {
           }
         />
 
-<Route
+        <Route
           path="/test"
           element={
             <SignUp2
-            dispatch={dispatch}
-            state={state}
-            email={state.email}
-            password={state.password}
-            setEmail={setEmail}
-            setPassword={setPassword}
+              dispatch={dispatch}
+              state={state}
+              email={state.email}
+              password={state.password}
+              setEmail={setEmail}
+              setPassword={setPassword}
             />
           }
         />
