@@ -5,6 +5,7 @@ import useChart from '../../hooks/useChart';
 import useStatement from '../../hooks/useStatement';
 import Chart from "react-apexcharts";
 import moment from "moment";
+
 const StockListDetailsItem = ({ tickerCurrent }) => {
   const [multiplier, setMultiplier] = useState(1);
   const [timespan, setTimespan] = useState('day');
@@ -37,6 +38,8 @@ const StockListDetailsItem = ({ tickerCurrent }) => {
 
   const { data2, loading2, error2 } = useChart(`${tickerCurrent}/range/${multiplier}/${timespan}/${start}/${end}?adjusted=true&sort=asc&limit=120&`);
 
+  
+
   const handleMultiplierChange = (event) => {
     setMultiplier(event.target.value);
   };
@@ -58,32 +61,31 @@ const StockListDetailsItem = ({ tickerCurrent }) => {
   };
 
   useEffect(() => {
-
-    if (!data2 || !Array.isArray(data2.results)) return;
-
-
+    if (!data2 || !data2.results || !Array.isArray(data2.results)) return;
+  
     const formattedData = data2.results.map(item => {
       return [item.t, [item.o, item.h, item.l, item.c]];
     });
-
+  
     setSeries([{ data: formattedData }]);
-
   }, [data2]);
-
-  if (loading) return <div>Loading...</div>;
-  if (error) return <div>Error: {error.message}</div>;
-  if (loading2) return <div>Loading Chart...</div>;
-  if (error2) return <div>Error Loading Chart: {error.message}</div>;
-  if (loading3) return <div>Loading Financials...</div>;
-  if (error3) return <div>Error Loading Financials: {error.message}</div>;
-
-  if (loading || !data) return <div>Loading...</div>; // Check if data is loading or undefined
-
-  if (error) return <div>Error: {error.message}</div>; // Check if there's an error
-
-  // Check if data.results is undefined
-  if (!data.results) {
+  
+  if (loading || loading2 || loading3) return <div>Loading...</div>; // Check if any data is loading
+  
+  if (error || error2 || error3) {
+    return (
+      <div>
+        Error: {error?.message || error2?.message || error3?.message}
+      </div>
+    );
+  }
+  
+  // Check if data.results is undefined or empty
+  if (!data || !data.results || data.results.length === 0) {
     return <div>No results found</div>;
+  }
+  if (!data3 || !data3.results || data3.results.length === 0) {
+    return <div>No financial data found</div>;
   }
 
   // Continue with rendering if data.results is defined
@@ -134,7 +136,7 @@ const StockListDetailsItem = ({ tickerCurrent }) => {
           {companyInfo.name && <li><strong>Name:</strong> {companyInfo.name}</li>}
           {companyInfo.market && <li><strong>Market:</strong> {companyInfo.market}</li>}
           {companyInfo.locale && <li><strong>Locale:</strong> {companyInfo.locale}</li>}
-          {companyInfo.primary_exchange && <li><strong>Primary Exchange:</strong> {companyInfo.primary_exchange}</li>}
+          
           {companyInfo.type && <li><strong>Type:</strong> {companyInfo.type}</li>}
           {companyInfo.active !== undefined && <li><strong>Active:</strong> {companyInfo.active.toString()}</li>}
           {companyInfo.currency_name && <li><strong>Currency Name:</strong> {companyInfo.currency_name}</li>}

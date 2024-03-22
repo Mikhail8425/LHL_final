@@ -162,7 +162,7 @@ const [postData, setPostData] = useState({
               social={sidebar.social}
             />
           </Grid>
-          <Button variant="contained" color="primary" onClick={handleOpenModal}>Create New Post</Button>
+          
         </main>
       </Container>
       <Footer
@@ -218,8 +218,7 @@ const [postData, setPostData] = useState({
   </DialogActions>
 </Dialog>
 
-      {/* Button to open the modal */}
-      <Button onClick={handleOpenModal} variant="contained" color="primary">Add New Post</Button>
+      
     </ThemeProvider>
   );
 }
