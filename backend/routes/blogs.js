@@ -44,11 +44,11 @@ blogs.post('/', async (req, res) => {
 });
 
 // Update a post by ID
-blogs.put('/:id', async (req, res) => {
-  const { id } = req.params;
-  const { title, date, description, image, user_id, username, image_label, likes } = req.body;
+blogs.put('/', async (req, res) => {
+  
+  const { id, title, date, description, image, user_id, username, image_label, likes } = req.body;
   try {
-    const result = await query('UPDATE posts SET title = $1, date = $2, description = $3, image = $4, user_id = $5, username = $6, image_label = $7, likes = $8 WHERE id = $9 RETURNING *', [title, date, description, image, user_id, username, image_label, likes, id]);
+    const result = await query('UPDATE posts SET title = $1, date = $2, description = $3, image = $4, image_label = $5, likes = $6 WHERE id = $7 RETURNING *', [title, date, description, image, image_label, likes, id]);
     if (result.rows.length === 0) {
       return res.status(404).json({ message: 'Post not found' });
     }
@@ -60,16 +60,19 @@ blogs.put('/:id', async (req, res) => {
 });
 
 // Delete a post by ID
-blogs.delete('/:id', async (req, res) => {
-  const { id } = req.params;
+blogs.delete('/', async (req, res) => {
+  const { id, user_id } = req.body;
+  console.log("Deleting post with ID:", id, "and user ID:", user_id);
   try {
-    const result = await query('DELETE FROM posts WHERE id = $1 RETURNING *', [id]);
+    const result = await query('DELETE FROM posts WHERE id = $1 AND user_id = $2 RETURNING *', [id, user_id]);
     if (result.rows.length === 0) {
+      console.log("Post not found");
       return res.status(404).json({ message: 'Post not found' });
     }
+    console.log("Post deleted successfully:", result.rows[0]);
     res.json({ message: 'Post deleted successfully' });
   } catch (err) {
-    console.error(err);
+    console.error("Internal Server Error:", err);
     res.status(500).send('Internal Server Error');
   }
 });

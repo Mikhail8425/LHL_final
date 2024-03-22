@@ -40,12 +40,12 @@ const sections = [
 ];
 
 const mainFeaturedPost = {
-  title: 'Title of a longer featured blog post',
+  title: 'Welcome to Stock Market Magnet Forums!',
   description:
-    "Multiple lines of text that form the lede, informing new readers quickly and efficiently about what's most interesting in this post's contents.",
+    "Join our community to discuss hot stock tips, share insights, and upvote posts from fellow members. Let's keep the conversation focused on the stock market and related topics. Start exploring and engaging with like-minded investors today!",
   image: 'https://www.shutterstock.com/shutterstock/photos/416888221/display_1500/stock-photo-stock-market-or-forex-trading-graph-and-candlestick-chart-suitable-for-financial-investment-concept-416888221.jpg',
   imageText: 'main image description',
-  linkText: 'Continue reading…',
+  linkText: '',
 };
 
 const sidebar = {
@@ -82,25 +82,25 @@ export default function Blog() {
 
 
 
-const getCurrentDate = () => {
-  const today = new Date();
-  const year = today.getFullYear();
-  const month = String(today.getMonth() + 1).padStart(2, '0');
-  const day = String(today.getDate()).padStart(2, '0');
-  return `${year}-${month}-${day}`;
-};
+  const getCurrentDate = () => {
+    const today = new Date();
+    const year = today.getFullYear();
+    const month = String(today.getMonth() + 1).padStart(2, '0');
+    const day = String(today.getDate()).padStart(2, '0');
+    return `${year}-${month}-${day}`;
+  };
 
-const [postData, setPostData] = useState({
-  title: '',
-  date: getCurrentDate(), // Set initial state with today's date
-  description: '',
-  likes: 0,
-  image: '',
-  image_label: '',
-  user_id: user_id,
-  username: user_name
-  // Add more fields here as needed
-});
+  const [postData, setPostData] = useState({
+    title: '',
+    date: getCurrentDate(), // Set initial state with today's date
+    description: '',
+    likes: 0,
+    image: '',
+    image_label: '',
+    user_id: user_id,
+    username: user_name
+    // Add more fields here as needed
+  });
 
 
   const handleOpenModal = () => {
@@ -123,7 +123,7 @@ const [postData, setPostData] = useState({
     }
     handleCloseModal();
   };
-  
+
 
   const fetchPosts = async () => {
     try {
@@ -144,25 +144,37 @@ const [postData, setPostData] = useState({
     <ThemeProvider theme={defaultTheme}>
       <CssBaseline />
       <Container maxWidth="lg">
-      <Button variant="contained" color="primary" onClick={handleOpenModal}>Create New Post</Button>
+
         <Header title="Blog" sections={sections} />
         <main>
           <MainFeaturedPost post={mainFeaturedPost} />
+          {user_id && (
+  <Button 
+    variant="contained" 
+    color="primary" 
+    onClick={handleOpenModal} 
+    style={{ 
+      width: '100%', // Set width to 85%
+      margin: '0 auto', // Center horizontally
+      marginBottom: '20px' // Add space on the bottom
+    }}
+  >
+    Create New Post
+  </Button>
+)}
+
+
+
           <Grid container spacing={4}>
             {newPosts.map((post) => (
               <FeaturedPost key={post.title} post={post} />
             ))}
           </Grid>
           <Grid container spacing={5} sx={{ mt: 3 }}>
-            <Main title="From the firehose" posts={posts} />
-            <Sidebar
-              title={sidebar.title}
-              description={sidebar.description}
-              archives={sidebar.archives}
-              social={sidebar.social}
-            />
+
+
           </Grid>
-          
+
         </main>
       </Container>
       <Footer
@@ -171,54 +183,54 @@ const [postData, setPostData] = useState({
       />
       {/* Modal for adding new posts */}
       <Dialog open={openModal} onClose={handleCloseModal}>
-  <DialogTitle>Add New Post</DialogTitle>
-  <DialogContent>
-    <TextField
-      autoFocus
-      margin="dense"
-      id="title"
-      label="Title"
-      fullWidth
-      value={postData.title}
-      onChange={(e) => setPostData({ ...postData, title: e.target.value })}
-    />
-    <TextField
-      margin="dense"
-      id="description"
-      label="Description"
-      fullWidth
-      multiline
-      rows={4}
-      value={postData.description}
-      onChange={(e) => setPostData({ ...postData, description: e.target.value })}
-    />
-    <TextField
-      margin="dense"
-      id="image"
-      label="Image URL"
-      fullWidth
-      value={postData.image}
-      onChange={(e) => setPostData({ ...postData, image: e.target.value })}
-    />
-    <TextField
-      margin="dense"
-      id="description"
-      label="imageDescription"
-      fullWidth
-      multiline
-      rows={4}
-      value={postData.image_label}
-      onChange={(e) => setPostData({ ...postData, image_label: e.target.value })}
-    />
-    {/* Add more fields as needed */}
-  </DialogContent>
-  <DialogActions>
-    <Button onClick={handleCloseModal}>Cancel</Button>
-    <Button onClick={handleAddPost} variant="contained" color="primary">Add Post</Button>
-  </DialogActions>
-</Dialog>
+        <DialogTitle>Add New Post</DialogTitle>
+        <DialogContent>
+          <TextField
+            autoFocus
+            margin="dense"
+            id="title"
+            label="Title"
+            fullWidth
+            value={postData.title}
+            onChange={(e) => setPostData({ ...postData, title: e.target.value })}
+          />
+          <TextField
+            margin="dense"
+            id="description"
+            label="Description"
+            fullWidth
+            multiline
+            rows={4}
+            value={postData.description}
+            onChange={(e) => setPostData({ ...postData, description: e.target.value })}
+          />
+          <TextField
+            margin="dense"
+            id="image"
+            label="Image URL"
+            fullWidth
+            value={postData.image}
+            onChange={(e) => setPostData({ ...postData, image: e.target.value })}
+          />
+          <TextField
+            margin="dense"
+            id="description"
+            label="imageDescription"
+            fullWidth
+            multiline
+            rows={4}
+            value={postData.image_label}
+            onChange={(e) => setPostData({ ...postData, image_label: e.target.value })}
+          />
+          {/* Add more fields as needed */}
+        </DialogContent>
+        <DialogActions>
+          <Button onClick={handleCloseModal}>Cancel</Button>
+          <Button onClick={handleAddPost} variant="contained" color="primary">Add Post</Button>
+        </DialogActions>
+      </Dialog>
 
-      
+
     </ThemeProvider>
   );
 }
