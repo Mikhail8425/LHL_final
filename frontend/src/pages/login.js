@@ -236,50 +236,116 @@ export default function LoginPage(props) {
 
     );
   } else {
-    return <div className="login-form">
-    <div className="form-group">
-      <div>
-        <h2>Manage Your Account</h2>
-      </div>
-      <label htmlFor="email">Change Email</label>
-      <div className="form-change">
-        <input
-          type="email"
-          value={newEmail}
-          onChange={(e) => setNewEmail(e.target.value)}
-          placeholder="Enter new email"
-          className="form-control"
+    return (
+    <ThemeProvider theme={defaultTheme}>
+      <Grid container component="main" sx={{ height: '100vh' }}>
+        <CssBaseline />
+        <Grid
+          item
+          xs={false}
+          sm={4}
+          md={7}
+          sx={{
+            backgroundImage: 'url(https://source.unsplash.com/random?wallpapers)',
+            backgroundRepeat: 'no-repeat',
+            backgroundColor: (t) =>
+              t.palette.mode === 'light' ? t.palette.grey[50] : t.palette.grey[900],
+            backgroundSize: 'cover',
+            backgroundPosition: 'center',
+          }}
         />
-        <button className="btn-change" onClick={handleChangeEmail}>Change</button>
-      </div>
-
-    </div>
-    <div className="form-group">
-      <label htmlFor="password">Change Password</label>
-      <div className="form-change">
-        <input
-          type="password"
-          value={newPassword}
-          onChange={(e) => setNewPassword(e.target.value)}
-          placeholder="Enter new password"
-          className="form-control"
-        />
-        <button className="btn-change" onClick={handleChangePassword}>Change</button>
-      </div>
-    </div>
-    <div className="form-group">
-<label htmlFor="password">Delete User - {user_id}</label>
-<div className="form-change">
-<input
- type="text"
- value={newId}
- onChange={(e) => setNewId(e.target.value)}
- placeholder="Input account ID to delete your account"
-  className="form-control"
+        <Grid item xs={12} sm={8} md={5} component={Paper} elevation={6} square>
+          <Box
+            sx={{
+              my: 8,
+              mx: 4,
+              display: 'flex',
+              flexDirection: 'column',
+              alignItems: 'center',
+            }}
+          >
+            <Avatar sx={{ m: 1, bgcolor: 'secondary.main' }}>
+              <LockOutlinedIcon />
+            </Avatar>
+            <Typography component="h1" variant="h5">
+              Manage your account
+            </Typography>
+            <Box component="form" noValidate onSubmit={handleSubmit} sx={{ mt: 1 }}>
+            <TextField
+  margin="normal"
+  required
+  fullWidth
+  id="email"
+  label="Enter a new email"
+  name="email"
+  autoComplete="email"
+  autoFocus
+  type="email"
+  value={newEmail}
+  onChange={(e) => setNewEmail(e.target.value)}
+  placeholder="Enter new email"
 />
-<button className="btn-change" onClick={handleDelete}> Delete </button>
-</div>
-</div>
-  </div>;
+<Button
+  onClick={handleChangeEmail}
+  fullWidth
+  variant="contained"
+  sx={{ mt: 3, mb: 2 }}
+  
+>Change Email</Button>
+
+<TextField
+  margin="normal"
+  required
+  fullWidth
+  name="password"
+  label="Enter a new password"
+  type="password"
+  id="password"
+  autoComplete="current-password"
+  value={newPassword}
+  onChange={(e) => setNewPassword(e.target.value)}
+/>
+<Button
+  onClick={handleChangePassword}
+  fullWidth
+  variant="contained"
+  sx={{ mt: 3, mb: 2 }}
+>Change Password</Button>
+<div>Delete account for user #{user_id}</div>
+<TextField
+  margin="normal"
+  required
+  fullWidth
+  name="id"
+  label="Input account ID to delete your account"
+  type="text"
+  id="id"
+  autoComplete="current-password"
+  value={newId}
+  onChange={(e) => setNewId(e.target.value)}
+  placeholder="Input account ID to delete your account"
+/>
+<Button
+  onClick={handleDelete}
+  fullWidth
+  variant="contained"
+  sx={{ mt: 3, mb: 2 }}
+>Delete Account Permanently</Button>
+
+
+              <Grid container>
+                <Grid item xs>
+                  
+                </Grid>
+                <Grid item>
+                  
+                </Grid>
+              </Grid>
+              <Copyright sx={{ mt: 5 }} />
+            </Box>
+          </Box>
+        </Grid>
+      </Grid>
+    </ThemeProvider>)
   }
 }
