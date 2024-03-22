@@ -5,6 +5,8 @@ const cookies = new Cookies();
 
 
 const Plans = () => {
+  const user_id = cookies.get("user_id");
+  console.log(user_id);
   const plans = [
     {
       id: 1,
@@ -22,8 +24,8 @@ const Plans = () => {
     }
   ];
 
-  const handlePlanSelection = () => {
-    console.log('abc')
+  const handlePlanSelection = (user_id) => {
+    console.log('handlePlanSelection')
   };
 
   return (
