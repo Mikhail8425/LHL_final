@@ -13,6 +13,7 @@ import Typography from '@mui/material/Typography';
 import Container from '@mui/material/Container';
 import { createTheme, ThemeProvider } from '@mui/material/styles';
 import axios from "axios";
+import { useNavigate } from "react-router-dom";
 
 import emailjs from '@emailjs/browser';
 
@@ -34,7 +35,7 @@ function Copyright(props) {
 const defaultTheme = createTheme();
 
 export default function SignUp2() {
-
+  const navigate = useNavigate();
   const [formData, setFormData] = useState({
     email: "",
     password: "",
@@ -93,7 +94,7 @@ export default function SignUp2() {
         first_name: "",
         last_name: ""
       });
-
+      navigate("/login");
     } catch (error) {
       console.error("Registration failed:", error);
       alert("Registration failed. Please try again.");
