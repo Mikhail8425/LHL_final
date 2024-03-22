@@ -16,7 +16,8 @@ import Watchlist from "./pages/watchlist";
 import Stock from "./pages/stock";
 import LoginPage from "./pages/login";
 import StockListDetailsItem from "./components/component/StockListDetailsItem";
-import SignUp2 from "./components/component/SignUpItem";
+import AboutUsItem from "./components/component/aboutUsItem";
+import AboutUs from "./pages/test";
 import Blog from "./components/component/blogcomponents/Blog";
 import "./styles/app.scss";
 
@@ -91,19 +92,7 @@ function App() {
           }
         />
 
-<Route
-          path="/test"
-          element={
-            <SignUp2
-            dispatch={dispatch}
-            state={state}
-            email={state.email}
-            password={state.password}
-            setEmail={setEmail}
-            setPassword={setPassword}
-            />
-          }
-        />
+
       </Routes>
     </Router>
   );
