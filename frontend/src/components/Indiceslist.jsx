@@ -2,6 +2,7 @@ import React, { useState, useEffect } from "react";
 import "../styles/indices.scss";
 import axios from "axios";
 
+
 const Indiceslist = () => {
   const [indicesData, setIndicesData] = useState(null);
   const [loading, setLoading] = useState(true);
@@ -20,28 +21,33 @@ const Indiceslist = () => {
 
     fetchData();
   }, []);
+  console.log('indicesData', indicesData);
 
   return (
     <div className="indices">
       <div className="indices-title">
         <h3>INDICES</h3>
       </div>
-      <div className="indices-info">
-        <p>Name</p>
-        <p>Price</p>
-        <p>Range</p>
-      </div>
-      {loading ? (
-        <p>Loading...</p>
-      ) : (
-        indicesData && (
-          <div className="indices-info">
-            <p>{indicesData.compData.symbol}</p>
-            <p>{indicesData.compData.open}</p>
-            <p>{indicesData.compData.high - indicesData.compData.low}</p>
-          </div>
-        )
-      )}
+      <section className="indices-section">
+        <div className="indices-info">
+          <p>Name</p>
+          <p>Price</p>
+          <p>High</p>
+          <p>Low</p>
+        </div>
+        {loading ? (
+          <p>Loading...</p>
+        ) : (
+          indicesData && (
+            <div className="indices-info">
+              <p>{indicesData.compData.symbol}</p>
+              <p>$ {indicesData.compData.open.toFixed(2)}</p>
+              <p>$ {indicesData.compData.high.toFixed(2)}</p>
+              <p>$ {indicesData.compData.low.toFixed(2)}</p>
+            </div>
+          )
+        )}
+      </section>
     </div>
   );
 };

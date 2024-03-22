@@ -1,5 +1,5 @@
 .indices {
-  width: 300px;
+  width: 250px;
   margin-top: 24px;
   background-color: #f8f8f8;
   padding: 25px;
@@ -27,5 +27,23 @@
   .indices{
     margin: 30px;
     width: 500px;
+  }
+}
+
+.indices {
+  .indices-section {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .indices-info {
+    display: flex;
+    flex-direction: column;
+    margin-right: 20px;
+    p {
+      margin: 0;
+    }
   }
 }
