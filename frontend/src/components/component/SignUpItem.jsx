@@ -13,15 +13,16 @@ import Typography from '@mui/material/Typography';
 import Container from '@mui/material/Container';
 import { createTheme, ThemeProvider } from '@mui/material/styles';
 import axios from "axios";
+import { useNavigate } from "react-router-dom";
 
 import emailjs from '@emailjs/browser';
 
 function Copyright(props) {
   return (
     <Typography variant="body2" color="text.secondary" align="center" {...props}>
-      {'Copyright © reworked mui component '}
+      {'Copyright © '}
       <Link color="inherit" href="https://mui.com/">
-        MUI.com
+        Your Website
       </Link>{' '}
       {new Date().getFullYear()}
       {'.'}
@@ -34,7 +35,7 @@ function Copyright(props) {
 const defaultTheme = createTheme();
 
 export default function SignUp2() {
-
+  const navigate = useNavigate();
   const [formData, setFormData] = useState({
     email: "",
     password: "",
@@ -93,7 +94,7 @@ export default function SignUp2() {
         first_name: "",
         last_name: ""
       });
-
+      navigate("/login");
     } catch (error) {
       console.error("Registration failed:", error);
       alert("Registration failed. Please try again.");
@@ -102,7 +103,7 @@ export default function SignUp2() {
 
   return (
     <ThemeProvider theme={defaultTheme}>
-      <Container  component="main" maxWidth="xs">
+      <Container component="main" maxWidth="xs">
         <CssBaseline />
         <Box
           sx={{
@@ -118,8 +119,8 @@ export default function SignUp2() {
           <Typography component="h1" variant="h5">
             Sign up
           </Typography>
-          <Box component="form" noValidate onSubmit={handleSubmit} sx={{ mt: 3,  }}>
-            <Grid container spacing={2} >
+          <Box component="form" noValidate onSubmit={handleSubmit} sx={{ mt: 3 }}>
+            <Grid container spacing={2}>
               <Grid item xs={12} sm={6}>
                 <TextField
                   autoComplete="given-name"

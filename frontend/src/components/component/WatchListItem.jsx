@@ -12,18 +12,18 @@ const WatchListItem = ({ symbol, navigateToDetailsPage, addtoWatchList }) => {
   useEffect(() => {
     if (symbol) {
       setStockData(data);
-      console.log("Data received for", symbol, ":", data); // Log received data
+      // console.log("Data received for", symbol, ":", data); // Log received data
     }
   }, [data, symbol]);
 
   const handleViewDetails = () => {
-    console.log("View Details for:", symbol);
+    // console.log("View Details for:", symbol);
     // Handle navigation to details page
     navigateToDetailsPage(symbol, navigate);
   };
 
   const handleAddToWatchlist = () => {
-    console.log("Add to Watchlist:", symbol);
+    // console.log("Add to Watchlist:", symbol);
     addtoWatchList(symbol);
     window.location.reload();
   };

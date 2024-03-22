@@ -12,7 +12,7 @@ const user_email = cookies.get("email");
 const Navbar = (props) => {
   const { dispatch, state } = props;
   const user_id = cookies.get("user_id");
-  console.log("User ID:", user_id);
+  // console.log("User ID:", user_id);
 
   const handleLogout = () => {
     cookies.remove("user_id");
@@ -41,6 +41,9 @@ const Navbar = (props) => {
           </NavLink>
           <NavLink to="/stock" activeStyle>
             Stock
+          </NavLink>
+          <NavLink to="/test" activeStyle>
+            Test
           </NavLink>
           {user_id ? (
             <>

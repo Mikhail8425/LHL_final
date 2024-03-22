@@ -92,7 +92,7 @@ const StockListDetailsItem = ({ tickerCurrent }) => {
   // Continue with rendering if data.results is defined
   const companyInfo = data.results;
   const financeInfo = data3.results;
-  console.log("financeinfo", financeInfo);
+  // console.log("financeinfo", financeInfo);
 
   return (
 

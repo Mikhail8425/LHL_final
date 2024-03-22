@@ -10,12 +10,15 @@ import useApplicationData from './hooks/useApplicationData';
 import Home from "./pages";
 import About from "./pages/about";
 import DiscussionBoard from "./pages/DiscussionBoard";
+import Plans from "./pages/plans";
 import SignUp from "./pages/RegistrationPage";
 import EmailForm from "./pages/emailform";
 import Watchlist from "./pages/watchlist";
 import Stock from "./pages/stock";
 import LoginPage from "./pages/login";
 import StockListDetailsItem from "./components/component/StockListDetailsItem";
+import AboutUsItem from "./components/component/aboutUsItem";
+import AboutUs from "./pages/test";
 import Blog from "./components/component/blogcomponents/Blog";
 import "./styles/app.scss";
 
@@ -35,10 +38,10 @@ function App() {
           path="/emailform"
           element={<EmailForm />}
         />
-        <Route 
-          path="/discussionboard" 
+        <Route
+          path="/discussionboard"
           element={<Blog
-             />
+          />
           }
         />
         <Route
@@ -51,6 +54,13 @@ function App() {
               tickerCurrent={state.tickerCurrent}
               handleViewDetails={handleViewDetails}
               addtoWatchList={addtoWatchList}
+            />
+          }
+        />
+        <Route 
+          path="/plans"  
+          element={
+            <Plans
             />
           }
         />
@@ -89,6 +99,8 @@ function App() {
             />
           }
         />
+
+        
       </Routes>
     </Router>
   );

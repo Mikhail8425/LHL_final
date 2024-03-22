@@ -12,6 +12,7 @@ const cookies = new Cookies();
 const user_id = cookies.get("user_id");
 
 const user_email = cookies.get("email");
+const user_username = cookies.get("user_name");
 
 
 const Navbar = (props) => {
@@ -23,41 +24,46 @@ const Navbar = (props) => {
 
   const { dispatch, state } = props;
   const user_id = cookies.get("user_id");
-  console.log("User ID:", user_id);
+  // console.log("User ID:", user_id);
 
   const handleLogout = () => {
     cookies.remove("user_id");
+    cookies.remove("user_name");
+    cookies.remove("email");
     dispatch({ type: "SET_LOGIN_STATE" });
   };
 
-    return (
-        <>
-            <nav className="nav">
-                <div className="nav-logo">
-                    <NavLink to="/stock" activeclassname="active">
-                        <img src={logo} alt="logo" />
-                    </NavLink>
-                </div>
-                <div className="nav-menu">
-                    <NavLink to="/stock" className="nav-link" activeclassname="active">
-                        Overview
-                    </NavLink>
-                    <NavLink to="/discussionboard" className="nav-link" activeclassname="active">
-                        Blogs
-                    </NavLink>
-                    <NavLink to="/watchlist" className="nav-link" activeclassname="active">
-                        My Watchlist
-                    </NavLink>
-                    <NavLink to="/about" className="nav-link" activeclassname="active">
-                        About Us
-                    </NavLink>
-                    <NavLink to="/emailform" className="nav-link" activeclassname="active">
-                        Contact
-                    </NavLink>
-                    {user_id ? (
-                        <NavLink to="/login" className="nav-link" activeStyle>
-                            Manage Account
-                        </NavLink>
+  return (
+    <>
+      <nav className="nav">
+        <div className="nav-logo">
+          <NavLink to="/stock" activeclassname="active">
+            <img src={logo} alt="logo" />
+          </NavLink>
+        </div>
+        <div className="nav-menu">
+          <NavLink to="/stock" className="nav-link" activeclassname="active">
+            Overview
+          </NavLink>
+          <NavLink to="/Plans" className="nav-link" activeclassname="active">
+            Plans
+          </NavLink>
+          <NavLink to="/discussionboard" className="nav-link" activeclassname="active">
+            Blogs
+          </NavLink>
+          <NavLink to="/watchlist" className="nav-link" activeclassname="active">
+            My Watchlist
+          </NavLink>
+          <NavLink to="/about" className="nav-link" activeclassname="active">
+            About Us
+          </NavLink>
+          <NavLink to="/emailform" className="nav-link" activeclassname="active">
+            Contact
+          </NavLink>
+          {user_id ? (
+            <NavLink to="/login" className="nav-link" activeStyle>
+              Manage Account
+            </NavLink>
 
           ) : (
             ""
@@ -67,7 +73,7 @@ const Navbar = (props) => {
           {user_id ? (
             <>
               <div className="logged-in">
-                <div className="nav-user">Logged in as: <span>{user_email}</span></div>
+                <div className="nav-user">Logged in as: <span>{user_username}</span></div>
                 <span>/</span>
                 <button className="nav-link" onClick={handleLogout}>Logout</button>
               </div>
