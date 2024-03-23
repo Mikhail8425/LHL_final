@@ -68,7 +68,7 @@ function App() {
           path="/stock"
           element={
             <Stock
-              stocks={state.stockData}
+              
               navigateToDetailsPage={navigateToDetailsPage}
               tickerCurrent={state.tickerCurrent}
               handleViewDetails={handleViewDetails}

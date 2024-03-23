@@ -50,7 +50,7 @@ export default function LoginPage(props) {
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
-      const response = await axios.post(`${backendUrl}/login`, { email, password });
+      const response = await axios.post(`/login`, { email, password });
       // console.log(response.data);
 
       // Set a cookie with the value of the user
@@ -83,7 +83,7 @@ export default function LoginPage(props) {
       const user_id = cookies.get("user_id");
       // console.log("User ID:", user_id);
       // Make an HTTP request to change the email
-      const response = await axios.put(`${backendUrl}/login`, {
+      const response = await axios.put(`/login`, {
         email: newEmail, id: user_id
       });
       // console.log(response.data);
@@ -100,7 +100,7 @@ export default function LoginPage(props) {
       const user_id = cookies.get("user_id");
       // console.log("User ID:", user_id);
       // Make an HTTP request to change the password
-      const response = await axios.put(`${backendUrl}/login`, {
+      const response = await axios.put(`/login`, {
         password: newPassword, id: user_id
       });
       // console.log(response.data);
@@ -117,7 +117,7 @@ export default function LoginPage(props) {
       const user_id = cookies.get("user_id");
       // console.log("User ID:", user_id);
       // Make an HTTP request to delete the user account
-      const response = await axios.delete(`${backendUrl}/register`, {
+      const response = await axios.delete(`/register`, {
         data: { id: user_id } // Include the user ID in the request body
       });
       // console.log(response.data);
@@ -218,9 +218,7 @@ export default function LoginPage(props) {
                 </Button>
                 <Grid container>
                   <Grid item xs>
-                    <Link href="#" variant="body2">
-                      Forgot password?
-                    </Link>
+                    
                   </Grid>
                   <Grid item>
                     <Link href="/sign-up" variant="body2">

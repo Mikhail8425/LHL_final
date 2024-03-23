@@ -134,8 +134,8 @@ const StockListDetailsItem = ({ tickerCurrent }) => {
 
           <div className='company-details'>
             <li>
-            
-                   {companyInfo.name && <li><strong>Stock:</strong> {companyInfo.name} ({companyInfo.ticker})</li>}
+
+              {companyInfo.name && <li><strong>Stock:</strong> {companyInfo.name} ({companyInfo.ticker})</li>}
               {companyInfo.market && <li><strong>Market:</strong> {companyInfo.market}</li>}
               {companyInfo.locale && <li><strong>Locale:</strong> {companyInfo.locale}</li>}
               {companyInfo.currency_name && <li><strong>Currency Name:</strong> {companyInfo.currency_name}</li>}
@@ -159,19 +159,32 @@ const StockListDetailsItem = ({ tickerCurrent }) => {
         <div className='company-info-container'>
           <div className="company-info">
             <div className='company-title'>
-              {companyInfo.branding.logo_url && <li><img src={companyInfo.branding.logo_url + '?apiKey=5zppMBtonCBY1SJ42kijFfL2V7co5_MN'} alt="Logo" style={{ width: '100px', height: 'auto' }} /></li>}
+              {companyInfo.branding.logo_url &&
+                <img src={`${companyInfo.branding.logo_url}?apiKey=5zppMBtonCBY1SJ42kijFfL2V7co5_MN`} alt="Logo" style={{ width: '100px', height: 'auto' }} />
+              }
             </div>
-            <li>
-              {companyInfo.description && <li>{companyInfo.description}</li>}
+            <ul>
+              {companyInfo.description &&
+                <li>{companyInfo.description}</li>
+              }
               <div className='company-links'>
-                {companyInfo.phone_number && <li><strong>Phone Number:</strong> {companyInfo.phone_number}</li>}
-                {companyInfo.address && <li><strong>Address:</strong> {companyInfo.address.address1}, {companyInfo.address.city}, {companyInfo.address.state} {companyInfo.address.postal_code}</li>}
-                {companyInfo.homepage_url && <li><strong>Homepage URL:</strong> <a href={companyInfo.homepage_url}>{companyInfo.homepage_url}</a></li>}
-                {companyInfo.total_employees && <li><strong>Total Employees:</strong> {companyInfo.total_employees}</li>}
+                {companyInfo.phone_number &&
+                  <li><strong>Phone Number:</strong> {companyInfo.phone_number}</li>
+                }
+                {companyInfo.address &&
+                  <li><strong>Address:</strong> {companyInfo.address.address1}, {companyInfo.address.city}, {companyInfo.address.state} {companyInfo.address.postal_code}</li>
+                }
+                {companyInfo.homepage_url &&
+                  <li><strong>Homepage URL:</strong> <a href={companyInfo.homepage_url}>{companyInfo.homepage_url}</a></li>
+                }
+                {companyInfo.total_employees &&
+                  <li><strong>Total Employees:</strong> {companyInfo.total_employees}</li>
+                }
               </div>
-            </li>
+            </ul>
           </div>
         </div>
+
 
 
         <div className='financials-container'>

@@ -1,7 +1,6 @@
 import { useEffect, useReducer } from 'react';
 
-const apiKey = '5zppMBtonCBY1SJ42kijFfL2V7co5_MN';
-const baseUrl = 'https://api.polygon.io/v2';
+
 
 // Define your reducer function
 const dataReducer = (state, action) => {
@@ -26,7 +25,7 @@ const useApi = (endpoint) => {
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const response = await fetch(`${baseUrl}${endpoint}apiKey=${apiKey}`);
+        const response = await fetch(``);
         if (!response.ok) {
           throw new Error('Network response was not ok');
         }
