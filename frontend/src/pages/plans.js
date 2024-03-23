@@ -7,7 +7,7 @@ const cookies = new Cookies();
 
 const Plans = () => {
   const user_id = cookies.get("user_id");
-  console.log(user_id);
+  // console.log(user_id);
   const plans = [
     {
       id: "Monthly",
@@ -26,18 +26,17 @@ const Plans = () => {
   ];
 
   const handlePlanSelection = async (userId, planName) => {
-    console.log('User ID:', userId);
-    console.log('Plan Name:', planName);
+    console.log('User ID:', userId, 'Plan Name:', planName);
     try {
       const response = await axios.post('/plans', {
         userId: userId,
         planName: planName,
       });
   
-      console.log('Post created successfully:', response.data);
+      console.log('Plan added successfully:', response.data);
       return response.data;
     } catch (error) {
-      console.error('Error creating post:', error);
+      console.error('Error adding plan:', error);
       throw error;
     }
   };
