@@ -17,6 +17,7 @@ const registerRouter = require('./routes/register');
 const apiRouter = require('./routes/api');
 const indicesRouter = require('./routes/indices');
 const blogsRouter = require('./routes/blogs');
+const plansRouter = require('./routes/plans');
 const app = express();
 
 app.use(cors({ origin: 'http://localhost:3000' }));
@@ -54,5 +55,6 @@ app.use('/register', registerRouter);
 app.use('/api', apiRouter);
 app.use('/indices', indicesRouter);
 app.use('/blogs', blogsRouter);
+app.use('/plans', plansRouter);
 
 module.exports = app;

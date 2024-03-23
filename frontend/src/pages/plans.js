@@ -1,12 +1,13 @@
 import React from "react";
 import "../styles/plans.scss";
 import Cookies from "universal-cookie";
-const cookies = new Cookies();
+import axios from "axios";
 
+const cookies = new Cookies();
 
 const Plans = () => {
   const user_id = cookies.get("user_id");
-  // console.log(user_id);
+  console.log(user_id);
   const plans = [
     {
       id: "Monthly",
@@ -24,9 +25,21 @@ const Plans = () => {
     }
   ];
 
-  const handlePlanSelection = (planId) => {
-    console.log('User ID:', user_id);
-    console.log('Plan ID:', planId);
+  const handlePlanSelection = async (userId, planName) => {
+    console.log('User ID:', userId);
+    console.log('Plan Name:', planName);
+    try {
+      const response = await axios.post('/plans', {
+        userId: userId,
+        planName: planName,
+      });
+  
+      console.log('Post created successfully:', response.data);
+      return response.data;
+    } catch (error) {
+      console.error('Error creating post:', error);
+      throw error;
+    }
   };
 
   return (
@@ -35,7 +48,7 @@ const Plans = () => {
       <ul>
         {plans.map(plan => (
           <li key={plan.id}>
-            <button className="plan-button" onClick={() => handlePlanSelection(plan.id)}>
+            <button className="plan-button" onClick={() => handlePlanSelection(user_id, plan.planName)}>
               <h3>{plan.planName}</h3>
               <p>${plan.price.toFixed(2)} / {plan.billingCycle}</p>
               <p>{plan.description}</p>
