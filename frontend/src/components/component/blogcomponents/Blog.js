@@ -142,40 +142,37 @@ export default function Blog() {
 
   return (
     <ThemeProvider theme={defaultTheme}>
+
       <CssBaseline />
+
       <Container maxWidth="lg">
 
         <Header title="Blog" sections={sections} />
+
         <main>
           <MainFeaturedPost post={mainFeaturedPost} />
           {user_id && (
-  <Button 
-    variant="contained" 
-    color="primary" 
-    onClick={handleOpenModal} 
-    style={{ 
-      width: '100%', // Set width to 85%
-      margin: '0 auto', // Center horizontally
-      marginBottom: '20px' // Add space on the bottom
-    }}
-  >
-    Create New Post
-  </Button>
-)}
-
-
-
+            <Button
+              variant="contained"
+              color="primary"
+              onClick={handleOpenModal}
+              style={{
+                width: '100%', // Set width to 85%
+                margin: '0 auto', // Center horizontally
+                marginBottom: '20px' // Add space on the bottom
+              }}
+            >
+              Create New Post
+            </Button>
+          )}
           <Grid container spacing={4}>
             {newPosts.map((post) => (
               <FeaturedPost key={post.title} post={post} />
             ))}
           </Grid>
-          <Grid container spacing={5} sx={{ mt: 3 }}>
-
-
-          </Grid>
-
+          <Grid container spacing={5} sx={{ mt: 3 }}></Grid>
         </main>
+
       </Container>
       <Footer
         title="Footer"
@@ -224,13 +221,14 @@ export default function Blog() {
           />
           {/* Add more fields as needed */}
         </DialogContent>
+
         <DialogActions>
           <Button onClick={handleCloseModal}>Cancel</Button>
           <Button onClick={handleAddPost} variant="contained" color="primary">Add Post</Button>
         </DialogActions>
+
       </Dialog>
-
-
+      
     </ThemeProvider>
   );
 }
