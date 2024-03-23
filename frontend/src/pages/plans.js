@@ -6,26 +6,27 @@ const cookies = new Cookies();
 
 const Plans = () => {
   const user_id = cookies.get("user_id");
-  console.log(user_id);
+  // console.log(user_id);
   const plans = [
     {
-      id: 1,
-      name: 'Monthly Plan',
+      id: "Monthly",
+      planName: 'Monthly Plan',
       price: 19.99,
       billingCycle: 'month',
       description: 'This is a great plan for getting started.'
     },
     {
-      id: 2,
-      name: 'Yearly Plan',
+      id: "Yearly",
+      planName: 'Yearly Plan',
       price: 199.99,
       billingCycle: 'year',
       description: 'This is a great plan for saving money.'
     }
   ];
 
-  const handlePlanSelection = (user_id) => {
-    console.log('handlePlanSelection')
+  const handlePlanSelection = (planId) => {
+    console.log('User ID:', user_id);
+    console.log('Plan ID:', planId);
   };
 
   return (
@@ -35,7 +36,7 @@ const Plans = () => {
         {plans.map(plan => (
           <li key={plan.id}>
             <button className="plan-button" onClick={() => handlePlanSelection(plan.id)}>
-              <h3>{plan.name}</h3>
+              <h3>{plan.planName}</h3>
               <p>${plan.price.toFixed(2)} / {plan.billingCycle}</p>
               <p>{plan.description}</p>
               {/* You can add more details here, like features included in each plan */}
