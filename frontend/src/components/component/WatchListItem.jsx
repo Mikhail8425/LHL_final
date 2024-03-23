@@ -1,15 +1,42 @@
 import React, { useState, useEffect } from "react";
 import PropTypes from 'prop-types';
 import { useNavigate } from 'react-router-dom';
-import useApi from '../../hooks/useApi';
+
 import RemoveIcon from "../icon/Removeicon";
 import "../../styles/stockinfo.scss";
+import axios from 'axios';
 
 const WatchListItem = ({ symbol, navigateToDetailsPage, addtoWatchList }) => {
   const [stockData, setStockData] = useState(null);
-  const apiEndpoint = `/snapshot/locale/us/markets/stocks/tickers/${symbol}?`;
-  const { data, loading, error } = useApi(apiEndpoint);
+  const [data, setData] = useState(null);
+  const [searchQuery, setSearchQuery] = useState(symbol);
+  console.log('searchquery', searchQuery)
+ 
+  
+  const [loading, setLoading] = useState(true);
   const navigate = useNavigate();
+  const [error, setError] = useState(null);
+
+  const fetchData = async () => {
+    setLoading(true);
+    try {
+      const response = await axios.get('/api/stocks', {
+        params: {
+          submittedQuery: searchQuery.toUpperCase()
+        }
+      });
+      setData(response.data);
+      console.log(response.data)
+      setLoading(false);
+    } catch (error) {
+      setError(error.message);
+      setLoading(false);
+    }
+  };
+
+  useEffect(() => {
+    fetchData(); // Call fetchData when the component mounts or when the symbol changes
+  }, [symbol]);
 
   useEffect(() => {
     if (symbol) {
@@ -19,13 +46,10 @@ const WatchListItem = ({ symbol, navigateToDetailsPage, addtoWatchList }) => {
   }, [data, symbol]);
 
   const handleViewDetails = () => {
-    // console.log("View Details for:", symbol);
-    // Handle navigation to details page
     navigateToDetailsPage(symbol, navigate);
   };
 
   const handleAddToWatchlist = () => {
-    // console.log("Add to Watchlist:", symbol);
     addtoWatchList(symbol);
     window.location.reload();
   };

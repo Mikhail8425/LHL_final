@@ -4,6 +4,11 @@ import axios from "axios";
 import WatchListItem from '../components/component/WatchListItem';
 import "./../styles/stockinfo.scss";
 
+
+
+
+const backendUrl = process.env.REACT_APP_BACKEND_URL;
+
 const Watchlist = (props) => {
   const [tickerSymbols, setTickerSymbols] = useState([]);
   const [loading, setLoading] = useState(true); // Add loading state
@@ -14,7 +19,7 @@ const Watchlist = (props) => {
     const getWatchlist = async () => {
       console.log('getWatchlist is getting the list for user_id', user_id);
       try {
-        const response = await axios.get(`http://localhost:3001/watchlists/${user_id}`);
+        const response = await axios.get(`${backendUrl}/watchlists/${user_id}`);
         // console.log(response.data);
         const symbols = response.data.map(item => item.ticker_symbol);
         setTickerSymbols(symbols);

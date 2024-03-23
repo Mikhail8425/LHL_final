@@ -16,6 +16,9 @@ import axios from "axios";
 
 import emailjs from '@emailjs/browser';
 
+const backendUrl = process.env.REACT_APP_BACKEND_URL;
+
+
 function Copyright(props) {
   return (
     <Typography variant="body2" color="text.secondary" align="center" {...props}>
@@ -62,7 +65,7 @@ export default function SignUp2() {
     e.preventDefault();
     // Make HTTP request to register user
     try {
-      const response = await axios.post("http://localhost:3001/register", formData);
+      const response = await axios.post(`${backendUrl}/register`, formData);
       // console.log(response.data); // Log the response from the server
       const serviceId = 'service_dmqchgw';
       const templateId = 'template_6t5wma1';

@@ -20,7 +20,7 @@ import { createTheme, ThemeProvider } from '@mui/material/styles';
 
 import Cookies from "universal-cookie";
 const cookies = new Cookies();
-
+const backendUrl = process.env.REACT_APP_BACKEND_URL;
 
 function Copyright(props) {
   return (
@@ -50,7 +50,7 @@ export default function LoginPage(props) {
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
-      const response = await axios.post("http://localhost:3001/login", { email, password });
+      const response = await axios.post(`${backendUrl}/login`, { email, password });
       // console.log(response.data);
 
       // Set a cookie with the value of the user
@@ -83,7 +83,7 @@ export default function LoginPage(props) {
       const user_id = cookies.get("user_id");
       // console.log("User ID:", user_id);
       // Make an HTTP request to change the email
-      const response = await axios.put("http://localhost:3001/login", {
+      const response = await axios.put(`${backendUrl}/login`, {
         email: newEmail, id: user_id
       });
       // console.log(response.data);
@@ -100,7 +100,7 @@ export default function LoginPage(props) {
       const user_id = cookies.get("user_id");
       // console.log("User ID:", user_id);
       // Make an HTTP request to change the password
-      const response = await axios.put("http://localhost:3001/login", {
+      const response = await axios.put(`${backendUrl}/login`, {
         password: newPassword, id: user_id
       });
       // console.log(response.data);
@@ -117,7 +117,7 @@ export default function LoginPage(props) {
       const user_id = cookies.get("user_id");
       // console.log("User ID:", user_id);
       // Make an HTTP request to delete the user account
-      const response = await axios.delete("http://localhost:3001/register", {
+      const response = await axios.delete(`${backendUrl}/register`, {
         data: { id: user_id } // Include the user ID in the request body
       });
       // console.log(response.data);
