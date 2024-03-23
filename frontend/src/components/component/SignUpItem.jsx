@@ -56,9 +56,6 @@ export default function SignUp2() {
     }));
   };
 
-
-
-
   const handleSubmit = async (e) => {
     e.preventDefault();
     // Make HTTP request to register user
