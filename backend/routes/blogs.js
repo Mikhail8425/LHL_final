@@ -62,14 +62,14 @@ blogs.put('/', async (req, res) => {
 // Delete a post by ID
 blogs.delete('/', async (req, res) => {
   const { id, user_id } = req.body;
-  console.log("Deleting post with ID:", id, "and user ID:", user_id);
+ 
   try {
     const result = await query('DELETE FROM posts WHERE id = $1 AND user_id = $2 RETURNING *', [id, user_id]);
     if (result.rows.length === 0) {
-      console.log("Post not found");
+     
       return res.status(404).json({ message: 'Post not found' });
     }
-    console.log("Post deleted successfully:", result.rows[0]);
+    
     res.json({ message: 'Post deleted successfully' });
   } catch (err) {
     console.error("Internal Server Error:", err);

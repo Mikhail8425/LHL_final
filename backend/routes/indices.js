@@ -11,13 +11,13 @@ const fetch = require('node-fetch'); // Import node-fetch to make HTTP requests
 async function fetchData(symbol, formattedDate) {
   const apiKey = process.env.POLY_KEY;
   const url = `https://api.polygon.io/v1/open-close/I:${symbol}/${formattedDate}?apiKey=${apiKey}`;
-  console.log('Fetching data from URL:', url);
+  
   const response = await fetch(url);
   if (!response.ok) {
     throw new Error(`Failed to fetch data for ${symbol}: ${response.statusText}`);
   }
   const data = await response.json();
-  console.log('Data received:', data);
+  
   return data;
 }
 
@@ -38,7 +38,7 @@ indices.get('/', async (req, res) => {
       fetchData('NDX', formattedDate),
     ]);
 
-    console.log('COMP data:', compData);
+   
 
 
     res.json({ compData });

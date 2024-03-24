@@ -47,7 +47,7 @@ export default function LoginPage(props) {
     e.preventDefault();
     try {
       const response = await axios.post("http://localhost:3001/login", { email, password });
-      // console.log(response.data);
+      
 
       // Set a cookie with the value of the user
       cookies.set("user_id", response.data.userId, { path: "/" });
@@ -56,7 +56,7 @@ export default function LoginPage(props) {
       // Change login state to true
       dispatch({ type: "SET_LOGIN_STATE" });
     } catch (error) {
-      console.log(error);
+      
       alert("Login failed!");
     }
   };
@@ -76,12 +76,12 @@ export default function LoginPage(props) {
   const handleChangeEmail = async () => {
     try {
       const user_id = cookies.get("user_id");
-      // console.log("User ID:", user_id);
+     
       // Make an HTTP request to change the email
       const response = await axios.put("http://localhost:3001/login", {
         email: newEmail, id: user_id
       });
-      // console.log(response.data);
+    
       alert("Email changed successfully!");
     } catch (error) {
       console.error("Error changing email:", error);
@@ -93,12 +93,12 @@ export default function LoginPage(props) {
     try {
 
       const user_id = cookies.get("user_id");
-      // console.log("User ID:", user_id);
+      
       // Make an HTTP request to change the password
       const response = await axios.put("http://localhost:3001/login", {
         password: newPassword, id: user_id
       });
-      // console.log(response.data);
+     
       alert("Password changed successfully!");
     } catch (error) {
       console.error("Error changing password:", error);
@@ -110,12 +110,12 @@ export default function LoginPage(props) {
   const handleDelete = async () => {
     try {
       const user_id = cookies.get("user_id");
-      // console.log("User ID:", user_id);
+      
       // Make an HTTP request to delete the user account
       const response = await axios.delete("http://localhost:3001/register", {
         data: { id: user_id } // Include the user ID in the request body
       });
-      // console.log(response.data);
+      
       alert("User deleted successfully!");
       handleLogout(); // Log out the user after deleting the account
     } catch (error) {
@@ -263,6 +263,10 @@ export default function LoginPage(props) {
         <button className="btn-change" onClick={handleChangePassword}>Change</button>
       </div>
     </div>
+
+    
+
+    
     <div className="form-group">
 <label htmlFor="password">Delete User - {user_id}</label>
 <div className="form-change">

@@ -27,13 +27,13 @@ const EmailForm = () => {
 
     emailjs.send(serviceId, templateId, templateParams, publicKey)
       .then((response) => {
-        // console.log('SUCCESS!', response);
+      
         setName('');
         setEmail('');
         setMessage('');
       })
       .catch((error) => {
-        console.log('FAILED...', error);
+       
       });
   };
   return (

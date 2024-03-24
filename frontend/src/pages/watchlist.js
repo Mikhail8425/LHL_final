@@ -7,7 +7,7 @@ import "./../styles/stockinfo.scss";
 
 
 
-const backendUrl = process.env.REACT_APP_BACKEND_URL;
+
 
 const Watchlist = (props) => {
   const [tickerSymbols, setTickerSymbols] = useState([]);
@@ -17,10 +17,10 @@ const Watchlist = (props) => {
 
   useEffect(() => {
     const getWatchlist = async () => {
-      console.log('getWatchlist is getting the list for user_id', user_id);
+      
       try {
-        const response = await axios.get(`${backendUrl}/watchlists/${user_id}`);
-        // console.log(response.data);
+        const response = await axios.get(`/watchlists/${user_id}`);
+        
         const symbols = response.data.map(item => item.ticker_symbol);
         setTickerSymbols(symbols);
         setLoading(false); // Update loading state after fetching data

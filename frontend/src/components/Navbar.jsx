@@ -24,7 +24,7 @@ const Navbar = (props) => {
 
   const { dispatch, state } = props;
   const user_id = cookies.get("user_id");
-  // console.log("User ID:", user_id);
+ 
 
   const handleLogout = () => {
     cookies.remove("user_id");
@@ -42,18 +42,25 @@ const Navbar = (props) => {
           </NavLink>
         </div>
         <div className="nav-menu">
+        {user_id && (
           <NavLink to="/stock" className="nav-link" activeclassname="active">
             Overview
           </NavLink>
-          <NavLink to="/Plans" className="nav-link" activeclassname="active">
-            Plans
-          </NavLink>
+        )}
+          {/* Conditionally render Plans link if user_id is true */}
+          {user_id && (
+            <NavLink to="/Plans" className="nav-link" activeclassname="active">
+              Plans
+            </NavLink>
+          )}
           <NavLink to="/discussionboard" className="nav-link" activeclassname="active">
             Blogs
           </NavLink>
+          {user_id && (
           <NavLink to="/watchlist" className="nav-link" activeclassname="active">
             My Watchlist
           </NavLink>
+          )}
           <NavLink to="/about" className="nav-link" activeclassname="active">
             About Us
           </NavLink>
@@ -64,7 +71,6 @@ const Navbar = (props) => {
             <NavLink to="/login" className="nav-link" activeStyle>
               Manage Account
             </NavLink>
-
           ) : (
             ""
           )}

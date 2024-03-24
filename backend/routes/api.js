@@ -37,13 +37,12 @@ api.get('/stocks', async (req, res) => {
       ? `/snapshot/locale/us/markets/stocks/tickers/${submittedQuery}?`
       : '/snapshot/locale/us/markets/stocks/tickers?';
 
-    // Construct the complete URL with the limit parameter
+    
     const apiUrl = `${baseUrl}${apiEndpoint}apiKey=${apiKey}&limit=${limit}`;
 
-    // Log the URL being hit
-    console.log('URL being hit:', apiUrl);
+    
 
-    // Make the API call to Polygon.io
+  
     const response = await fetch(apiUrl);
     if (!response.ok) {
       throw new Error('Network response was not ok');

@@ -12,12 +12,12 @@ const StockListItem = ({ stock, onViewDetails, navigateToDetailsPage, addtoWatch
   const navigate = useNavigate();
 
   const handleViewDetails = (ticker) => {
-    // console.log("Ticker:", ticker);
+   
     navigateToDetailsPage(ticker, navigate);
   };
 
   const handleAddToWatchlist = (ticker) => {
-    // console.log("Ticker:", ticker);
+  
     addtoWatchList(ticker);
   }
 

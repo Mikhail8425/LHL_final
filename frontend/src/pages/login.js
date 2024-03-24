@@ -51,7 +51,7 @@ export default function LoginPage(props) {
     e.preventDefault();
     try {
       const response = await axios.post(`/login`, { email, password });
-      // console.log(response.data);
+
 
       // Set a cookie with the value of the user
       cookies.set("user_id", response.data.userId, { path: "/" });
@@ -61,7 +61,7 @@ export default function LoginPage(props) {
       dispatch({ type: "SET_LOGIN_STATE" });
       window.location.reload();
     } catch (error) {
-      console.log(error);
+
       alert("Login failed!");
     }
   };
@@ -69,6 +69,7 @@ export default function LoginPage(props) {
   const [newEmail, setNewEmail] = useState("");
   const [newPassword, setNewPassword] = useState("");
   const [newId, setNewId] = useState("");
+  const [newUsername, setNewUsername] = useState("");
 
   const handleLogout = () => {
     // Dispatch an action to reset the login state
@@ -81,13 +82,29 @@ export default function LoginPage(props) {
   const handleChangeEmail = async () => {
     try {
       const user_id = cookies.get("user_id");
-      // console.log("User ID:", user_id);
+
       // Make an HTTP request to change the email
       const response = await axios.put(`/login`, {
         email: newEmail, id: user_id
       });
-      // console.log(response.data);
+
       alert("Email changed successfully!");
+    } catch (error) {
+      console.error("Error changing email:", error);
+      alert("Failed to change email. Please try again.");
+    }
+  };
+
+  const handleChangeUsername = async () => {
+    try {
+      const user_id = cookies.get("user_id");
+
+      // Make an HTTP request to change the email
+      const response = await axios.put(`/login`, {
+        username: newUsername, id: user_id
+      });
+
+      alert("Username changed successfully!");
     } catch (error) {
       console.error("Error changing email:", error);
       alert("Failed to change email. Please try again.");
@@ -98,12 +115,12 @@ export default function LoginPage(props) {
     try {
 
       const user_id = cookies.get("user_id");
-      // console.log("User ID:", user_id);
+
       // Make an HTTP request to change the password
       const response = await axios.put(`/login`, {
         password: newPassword, id: user_id
       });
-      // console.log(response.data);
+
       alert("Password changed successfully!");
     } catch (error) {
       console.error("Error changing password:", error);
@@ -115,12 +132,12 @@ export default function LoginPage(props) {
   const handleDelete = async () => {
     try {
       const user_id = cookies.get("user_id");
-      // console.log("User ID:", user_id);
+
       // Make an HTTP request to delete the user account
       const response = await axios.delete(`/register`, {
         data: { id: user_id } // Include the user ID in the request body
       });
-      // console.log(response.data);
+
       alert("User deleted successfully!");
       handleLogout(); // Log out the user after deleting the account
     } catch (error) {
@@ -291,6 +308,28 @@ export default function LoginPage(props) {
                   sx={{ mt: 3, mb: 2 }}
 
                 >Change Email</Button>
+
+                <TextField
+                  margin="normal"
+                  required
+                  fullWidth
+                  id="username"
+                  label="Enter a new username"
+                  name="username"
+                  autoComplete="username"
+                  autoFocus
+                  type="text"
+                  value={newUsername}
+                  onChange={(e) => setNewUsername(e.target.value)}
+                  placeholder="Enter new username"
+                />
+                <Button
+                  onClick={handleChangeUsername}
+                  fullWidth
+                  variant="contained"
+                  sx={{ mt: 3, mb: 2 }}
+
+                >Change Username</Button>
 
                 <TextField
                   margin="normal"

@@ -111,11 +111,11 @@ function FeaturedPost(props) {
   
       // Send the updated post data to the backend
       const response = await axios.put(`/blogs`, updatedPostData);
-  console.log(response)
+  
       // Update the state with the updated post data (if needed)
       // setCurrentPostData(response.data);
   
-      // Optionally, you can also update other state variables or perform any other actions here
+      
       handleCloseModal();
       window.location.reload(); // Reload the page
     } catch (error) {

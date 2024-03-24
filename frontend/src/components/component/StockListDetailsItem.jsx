@@ -7,6 +7,7 @@ import Chart from "react-apexcharts";
 import moment from "moment";
 import "../../styles/stockdetails.scss";
 
+
 const StockListDetailsItem = ({ tickerCurrent }) => {
   const [multiplier, setMultiplier] = useState(1);
   const [timespan, setTimespan] = useState('day');
@@ -92,7 +93,7 @@ const StockListDetailsItem = ({ tickerCurrent }) => {
   // Continue with rendering if data.results is defined
   const companyInfo = data.results;
   const financeInfo = data3.results;
-  // console.log("financeinfo", financeInfo);
+  
 
   return (
 
@@ -186,7 +187,7 @@ const StockListDetailsItem = ({ tickerCurrent }) => {
         </div>
 
 
-
+        {data3 && data3.results && (
         <div className='financials-container'>
           <div className="financials">
             <h3>Financial Information</h3>
@@ -207,7 +208,7 @@ const StockListDetailsItem = ({ tickerCurrent }) => {
                 ))
               }
             </select>
-
+            
             <ul>
               {selectedItemId && data3 && data3.results && data3.results.map((item, index) => (
                 item.id === selectedItemId && (
@@ -236,6 +237,7 @@ const StockListDetailsItem = ({ tickerCurrent }) => {
             </ul>
           </div>
         </div>
+        )}
       </div>
     </div>
   );

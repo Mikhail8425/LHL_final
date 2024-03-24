@@ -21,7 +21,7 @@ const Indiceslist = () => {
 
     fetchData();
   }, []);
-  console.log('indicesData', indicesData);
+  
 
   return (
     <div className="indices">

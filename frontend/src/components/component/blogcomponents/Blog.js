@@ -114,7 +114,7 @@ export default function Blog() {
   const handleAddPost = async () => {
     try {
       const response = await axios.post("/blogs", postData);
-      // console.log("New post added:", response.data);
+      
       // Assuming your backend returns the newly created post in the response
       // You can add code here to update the state with the new post or fetch the posts again to refresh the list
       window.location.reload(); // Reload the page

@@ -58,9 +58,9 @@ login.post("/", async (request, response) => {
 
 // Route to change email
 login.put('/', async (req, res) => {
-  const { email, password, id: userId } = req.body;
+  const { email, password, id: userId, username } = req.body;
 
-  // console.log("email", "password", "id", email, password, userId, req.body);
+  
 
   try {
     if (email) {
@@ -73,7 +73,7 @@ login.put('/', async (req, res) => {
       `;
       const result = await query(updateEmailQuery, [email, userId]);
       res.json(result.rows[0]);
-    } else if (password) {
+    } if (password) {
       // Update password
       const hashedPassword = await bcrypt.hash(password, 10);
       const updatePasswordQuery = `
@@ -83,7 +83,17 @@ login.put('/', async (req, res) => {
       `;
       await query(updatePasswordQuery, [hashedPassword, userId]);
       res.send("Password updated successfully");
-    } else {
+    }if (username) {
+      // Update email
+      const updateUsernameQuery = `
+        UPDATE users 
+        SET username = $1
+        WHERE id = $2
+        RETURNING *;
+      `;
+      const result = await query(updateUsernameQuery, [username, userId]);
+      res.json(result.rows[0]);}
+       else {
       res.status(400).send("Bad request: Neither email nor password provided.");
     }
   } catch (error) {

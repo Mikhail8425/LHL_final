@@ -30,7 +30,7 @@ const useStatement = (endpoint) => {
           throw new Error('Network response was not ok');
         }
         const data3 = await response.json();
-        // console.log("Stock data fetched successfully:", data2);
+       
         dispatch({ type: 'FETCH_SUCCESS', payload: data3});
       } catch (error) {
         dispatch({ type: 'FETCH_ERROR', payload: error.message });

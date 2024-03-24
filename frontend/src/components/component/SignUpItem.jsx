@@ -61,7 +61,7 @@ export default function SignUp2() {
     // Make HTTP request to register user
     try {
       const response = await axios.post("http://localhost:3001/register", formData);
-      // console.log(response.data); // Log the response from the server
+      
       const serviceId = 'service_dmqchgw';
       const templateId = 'template_6t5wma1';
       const publicKey = 'VbbEmsg2jvp21wFyq';
@@ -75,13 +75,13 @@ export default function SignUp2() {
 
       emailjs.send(serviceId, templateId, templateParams, publicKey)
         .then((response) => {
-          // console.log('SUCCESS!', response);
+        
           setName('');
           setEmail('');
           setMessage('');
         })
         .catch((error) => {
-          console.log('FAILED...', error);
+          
         });
       alert("Registration successful!");
 

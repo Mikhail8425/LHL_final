@@ -30,7 +30,7 @@ const useApi = (endpoint) => {
           throw new Error('Network response was not ok');
         }
         const data = await response.json();
-        // console.log("Stock data fetched successfully:", data);
+       
         dispatch({ type: 'FETCH_SUCCESS', payload: data });
       } catch (error) {
         dispatch({ type: 'FETCH_ERROR', payload: error.message });

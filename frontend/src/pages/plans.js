@@ -7,7 +7,7 @@ const cookies = new Cookies();
 
 const Plans = () => {
   const user_id = cookies.get("user_id");
-  // console.log(user_id);
+ 
   const plans = [
     {
       id: "Monthly",

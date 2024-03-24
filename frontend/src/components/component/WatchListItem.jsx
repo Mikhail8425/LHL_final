@@ -10,7 +10,7 @@ const WatchListItem = ({ symbol, navigateToDetailsPage, addtoWatchList }) => {
   const [stockData, setStockData] = useState(null);
   const [data, setData] = useState(null);
   const [searchQuery, setSearchQuery] = useState(symbol);
-  console.log('searchquery', searchQuery)
+  
  
   
   const [loading, setLoading] = useState(true);
@@ -26,7 +26,7 @@ const WatchListItem = ({ symbol, navigateToDetailsPage, addtoWatchList }) => {
         }
       });
       setData(response.data);
-      console.log(response.data)
+      
       setLoading(false);
     } catch (error) {
       setError(error.message);
@@ -41,7 +41,7 @@ const WatchListItem = ({ symbol, navigateToDetailsPage, addtoWatchList }) => {
   useEffect(() => {
     if (symbol) {
       setStockData(data);
-      // console.log("Data received for", symbol, ":", data); // Log received data
+      
     }
   }, [data, symbol]);
 
