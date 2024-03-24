@@ -130,7 +130,7 @@ const StockListDetailsItem = ({ tickerCurrent }) => {
               <label>End:</label>
               <input type="date" value={end} onChange={handleEndChange} />
             </div>
-
+<button>Add to Watchlist</button>
           </div>
 
           <div className='company-details'>

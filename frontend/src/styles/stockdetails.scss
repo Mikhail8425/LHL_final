@@ -30,7 +30,10 @@
   width: 100%;
   justify-content: center;
   border: 1px solid grey;
-  
+  transition: box-shadow 0.3s ease;
+}
+.stock-chart:hover{
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
 }
 
 .company-title {
@@ -50,6 +53,11 @@
   margin: 5px; /* Add margin around each item */
   border: 1px solid #ccc; /* Add a border to each item */
   padding: 10px; /* Add padding inside each item */
+  transition: box-shadow 0.3s ease; /* Add transition for smooth effect */
+}
+
+.company-details li:hover {
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.5); /* Add box shadow when hovered */
 }
 
 .controls {
@@ -91,7 +99,9 @@
   justify-content: center;
   padding: 30px;
   margin-bottom: 30px;
+  transition: box-shadow 0.3s ease;
 }
+
 
 .company-info {
   list-style-type: none;
@@ -99,7 +109,11 @@
   background-color: #f8f8f8;
   padding: 20px;
   border: 1px solid grey;
-  border-radius: 10px
+  border-radius: 10px;
+  transition: box-shadow 0.3s ease;
+}
+.company-info:hover{
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
 }
 
 .company-info h3 {

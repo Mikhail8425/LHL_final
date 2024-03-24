@@ -14,8 +14,11 @@
   border-style: solid;
   border-radius: 8px;
   width: 300px;
+  transition: box-shadow 0.3s ease;
 }
-
+.stock-info:hover{
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
+}
 @media screen and (max-width: 768px) {
   .stock-info {
     width: 100%; /* Full width on smaller screens */
@@ -173,6 +176,10 @@
 
 .search-form {
   display: flex;
+  transition: box-shadow 0.3s ease;
+}
+.search-form:hover{
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
 }
 
 .search-input {
