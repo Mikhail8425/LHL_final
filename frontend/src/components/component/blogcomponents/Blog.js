@@ -175,8 +175,7 @@ export default function Blog() {
 
       </Container>
       <Footer
-        title="Footer"
-        description="Something here to give the footer a purpose!"
+        
       />
       {/* Modal for adding new posts */}
       <Dialog open={openModal} onClose={handleCloseModal}>
