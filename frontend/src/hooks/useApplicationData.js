@@ -98,7 +98,7 @@ const useApplicationData = () => {
   
 
     // Make HTTP request to add to watchlist
-    axios.post("http://localhost:3001/watchlists", { user_id, ticker_symbol: ticker })
+    axios.post("/watchlists", { user_id, ticker_symbol: ticker })
       .then((response) => {
         
         alert("Added to watchlist successfully!");
