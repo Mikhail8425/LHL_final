@@ -1,4 +1,4 @@
-import React from "react";
+import React, {useState} from "react";
 import Navbar from "./components/Navbar";
 
 import {
@@ -26,11 +26,17 @@ function App() {
 
   const { state, handleViewDetails, navigateToDetailsPage, addtoWatchList, setEmail, setPassword, dispatch } = useApplicationData();
 
+  const [darkMode, setDarkMode] = useState(false);
+
+  
+  const toggleDarkMode = () => {
+    setDarkMode(prevMode => !prevMode);
+  };
 
   return (
     <Router>
       <Navbar dispatch={dispatch}
-        state={state} />
+        state={state} darkMode={darkMode} setDarkMode={setDarkMode} toggleDarkMode={toggleDarkMode}/>
       <Routes>
         <Route exact path="/" element={<Home />} />
         <Route path="/about" element={<About />} />

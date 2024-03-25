@@ -100,3 +100,31 @@
   margin-left: -100px;
 }
 
+.navdark-mode-nav {
+  height: 100px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 5px 120px;
+  position: relative;
+  background-color: #282828;
+
+  // Dark mode styles for links
+  .nav-link {
+    color: white;
+    &:hover {
+      color: #acabab;
+    }
+    &.active {
+      color: lightgray;
+    }
+  }
+
+  .nav-user {
+    color: white;
+  }
+
+  .logged-in span {
+    color: white;
+  }
+}

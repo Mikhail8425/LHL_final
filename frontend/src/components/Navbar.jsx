@@ -5,6 +5,7 @@ import SunIcon from "../components/icon/Sunicon";
 import MoonIcon from "../components/icon/Moonicon";
 import "../styles/navbar.scss";
 import logo from "../assets/stocklogo.png";
+import darklogo from "../assets/darkmodelogo.png"
 import Cookies from "universal-cookie";
 const cookies = new Cookies();
 
@@ -16,13 +17,8 @@ const user_username = cookies.get("user_name");
 
 
 const Navbar = (props) => {
-  const [dark, setDark] = useState(false);
 
-  const toggleDarkMode = () => {
-    setDark(!dark);
-  };
-
-  const { dispatch, state } = props;
+  const { dispatch, state, toggleDarkMode, darkMode } = props;
   const user_id = cookies.get("user_id");
  
 
@@ -35,10 +31,10 @@ const Navbar = (props) => {
 
   return (
     <>
-      <nav className="nav">
+      <nav className={`nav${darkMode ? 'dark-mode-nav' : ''}`}>
         <div className="nav-logo">
           <NavLink to="/stock" activeclassname="active">
-            <img src={logo} alt="logo" />
+            <img src={darkMode? darklogo : logo} alt="logo" />
           </NavLink>
         </div>
         <div className="nav-menu">
@@ -96,8 +92,8 @@ const Navbar = (props) => {
             </>
           )}
         </div>
-        <div className="dark-mode" onClick={toggleDarkMode}>
-          {dark ? <SunIcon /> : <MoonIcon />}
+        <div className="dark-mode" onClick={() =>toggleDarkMode()}>
+          {darkMode ? <SunIcon /> : <MoonIcon />}
         </div>
       </nav>
     </>
