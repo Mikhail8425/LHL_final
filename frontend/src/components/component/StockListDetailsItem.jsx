@@ -8,7 +8,7 @@ import moment from "moment";
 import "../../styles/stockdetails.scss";
 
 
-const StockListDetailsItem = ({ tickerCurrent }) => {
+const StockListDetailsItem = ({ tickerCurrent, darkMode }) => {
   const [multiplier, setMultiplier] = useState(1);
   const [timespan, setTimespan] = useState('day');
   const [start, setStart] = useState('2024-01-01');
@@ -97,7 +97,7 @@ const StockListDetailsItem = ({ tickerCurrent }) => {
 
   return (
 
-    <div className="stock-item">
+    <div className={`stock-item${darkMode ? 'dark-mode' : ''}`}>
       <div className='stock-container'>
 
         <div className="mixed-chart">
@@ -130,7 +130,6 @@ const StockListDetailsItem = ({ tickerCurrent }) => {
               <label>End:</label>
               <input type="date" value={end} onChange={handleEndChange} />
             </div>
-<button>Add to Watchlist</button>
           </div>
 
           <div className='company-details'>

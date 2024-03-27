@@ -5,7 +5,7 @@ import Addicon from "../icon/Addicon"
 import RemoveIcon from "../icon/Removeicon";
 import "../../styles/stockinfo.scss";
 
-const StockListItem = ({ stock, onViewDetails, navigateToDetailsPage, addtoWatchList }) => {
+const StockListItem = ({ stock, onViewDetails, navigateToDetailsPage, addtoWatchList, darkMode }) => {
   
   // Destructuring the stock object
   const { ticker, todaysChangePerc, todaysChange, updated, day, min, prevDay } = stock;
@@ -32,7 +32,7 @@ const StockListItem = ({ stock, onViewDetails, navigateToDetailsPage, addtoWatch
  
 
   return (
-    <div className="stock-info">
+    <div className={`stock-info${darkMode ? 'dark-mode' : ''}`}>
       <div className="stock-symbol">
         <p>{ticker}</p>
         <Addicon onClick={() =>  handleAddToWatchlist(ticker)}/>

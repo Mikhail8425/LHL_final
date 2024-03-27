@@ -168,3 +168,28 @@
 }
 
 
+.stock-itemdark-mode {
+  display: flex;
+  justify-content: center;
+  flex-direction: column; /* Display items in a column */
+  align-items: center; /* Center items horizontally */
+
+  .stock-container {
+    background-color: #d8d8d8;
+    color: black;
+  }
+
+  .company-details strong {
+    color: #252525;
+  }
+
+  .financials select {
+    background-color: #d8d8d8;
+
+  }
+
+  .company-info {
+    background-color: #d8d8d8;
+    color: black;
+  }
+}

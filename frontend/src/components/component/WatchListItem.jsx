@@ -6,7 +6,7 @@ import RemoveIcon from "../icon/Removeicon";
 import "../../styles/stockinfo.scss";
 import axios from 'axios';
 
-const WatchListItem = ({ symbol, navigateToDetailsPage, addtoWatchList }) => {
+const WatchListItem = ({ symbol, navigateToDetailsPage, addtoWatchList, darkMode }) => {
   const [stockData, setStockData] = useState(null);
   const [data, setData] = useState(null);
   const [searchQuery, setSearchQuery] = useState(symbol);
@@ -77,7 +77,7 @@ const WatchListItem = ({ symbol, navigateToDetailsPage, addtoWatchList }) => {
 
   return (
     <div className="stock-item">
-      <div className="stock-info">
+      <div className={`stock-info${darkMode ? 'dark-mode' : ''}`}>
       <div className="stock-symbol">
         <p>{symbol}</p>
         <RemoveIcon onClick={handleAddToWatchlist}/>

@@ -3,7 +3,7 @@ import "../styles/indices.scss";
 import axios from "axios";
 
 
-const Indiceslist = () => {
+const Indiceslist = (props) => {
   const [indicesData, setIndicesData] = useState(null);
   const [loading, setLoading] = useState(true);
 
@@ -24,7 +24,7 @@ const Indiceslist = () => {
   
 
   return (
-    <div className="indices">
+    <div className={`indices${props.darkMode ? 'dark-mode' : ''}`}>
       <div className="indices-title">
         <h3>INDICES</h3>
       </div>

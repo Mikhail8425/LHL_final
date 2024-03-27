@@ -215,3 +215,37 @@
   flex-wrap: wrap;
 }
 
+.stock-infodark-mode {
+  position: relative;
+  margin: 24px auto;
+  padding: 8px;
+  border-width: 0.5px;
+  border-color: lightgray;
+  border-style: solid;
+  border-radius: 8px;
+  width: 300px;
+  transition: box-shadow 0.3s ease;
+
+  .stock-symbol {
+    background-color: #7a7a7a;
+  }
+
+
+
+  .stock-change span {
+    color: white;
+  }
+
+  .stock-day-info {
+    color: #bcbcbc;
+  }
+
+  .updated-time {
+    color: #bcbcbc;
+  }
+
+  .button { 
+    color: white;
+  }
+
+}

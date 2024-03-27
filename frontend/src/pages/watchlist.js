@@ -57,6 +57,7 @@ const Watchlist = (props) => {
                 navigateToDetailsPage={props.navigateToDetailsPage}
                 addtoWatchList={props.addtoWatchList}
                 handleViewDetails={props.handleViewDetails}
+                darkMode={props.darkMode} 
               />
             ))}
           </ul>

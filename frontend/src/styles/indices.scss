@@ -47,3 +47,32 @@
     }
   }
 }
+
+.indicesdark-mode {
+  width: 250px;
+  height: 150px;
+  margin-top: 24px;
+  background-color: #7a7a7a;
+  padding: 25px;
+  border-radius: 8px;
+
+  .indices-title h3 {
+    color: #323232;
+  }
+  
+  .indices-section {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+  }
+
+  .indices-info {
+    display: flex;
+    flex-direction: column;
+    margin-right: 20px;
+    p {
+      margin: 5px;
+      color: white;
+    }
+  }
+}

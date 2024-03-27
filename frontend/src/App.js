@@ -34,81 +34,92 @@ function App() {
   };
 
   return (
-    <Router>
-      <Navbar dispatch={dispatch}
-        state={state} darkMode={darkMode} setDarkMode={setDarkMode} toggleDarkMode={toggleDarkMode}/>
-      <Routes>
-        <Route exact path="/" element={<Home />} />
-        <Route path="/about" element={<About />} />
-        <Route
-          path="/emailform"
-          element={<EmailForm />}
-        />
-        <Route
-          path="/discussionboard"
-          element={<Blog
+    <div className={`App${darkMode ? 'dark-mode' : ''}`}>
+      <Router>
+        <Navbar dispatch={dispatch}
+          state={state} darkMode={darkMode} setDarkMode={setDarkMode} toggleDarkMode={toggleDarkMode}/>
+        <Routes>
+          <Route exact path="/" element={<Home />} />
+          <Route path="/about" element={<About />} />
+          <Route
+            path="/emailform"
+            element={<EmailForm />}
           />
-          }
-        />
-        <Route
-          path="/watchlist"
-          element={
-            <Watchlist
-              state={state}
+          <Route
+            path="/discussionboard"
+            element={<Blog
+            />
+            }
+          />
+          <Route
+            path="/watchlist"
+            element={
+              <Watchlist
+                state={state}
+                stocks={state.stockData}
+                navigateToDetailsPage={navigateToDetailsPage}
+                tickerCurrent={state.tickerCurrent}
+                handleViewDetails={handleViewDetails}
+                addtoWatchList={addtoWatchList}
+                darkMode={darkMode} 
+                setDarkMode={setDarkMode} 
+                toggleDarkMode={toggleDarkMode}
+              />
+            }
+          />
+          <Route 
+            path="/plans"  
+            element={
+              <Plans
+              />
+            }
+          />
+          <Route
+            path="/stock"
+            element={
+              <Stock
+                
+                navigateToDetailsPage={navigateToDetailsPage}
+                tickerCurrent={state.tickerCurrent}
+                handleViewDetails={handleViewDetails}
+                addtoWatchList={addtoWatchList}
+                darkMode={darkMode} 
+                setDarkMode={setDarkMode} 
+                toggleDarkMode={toggleDarkMode}
+              />
+            }
+          />
+          <Route
+            path="/stock/:ticker"
+            element={<StockListDetailsItem
               stocks={state.stockData}
-              navigateToDetailsPage={navigateToDetailsPage}
               tickerCurrent={state.tickerCurrent}
-              handleViewDetails={handleViewDetails}
-              addtoWatchList={addtoWatchList}
-            />
-          }
-        />
-        <Route 
-          path="/plans"  
-          element={
-            <Plans
-            />
-          }
-        />
-        <Route
-          path="/stock"
-          element={
-            <Stock
-              
               navigateToDetailsPage={navigateToDetailsPage}
-              tickerCurrent={state.tickerCurrent}
-              handleViewDetails={handleViewDetails}
-              addtoWatchList={addtoWatchList}
-            />
-          }
-        />
-        <Route
-          path="/stock/:ticker"
-          element={<StockListDetailsItem
-            stocks={state.stockData}
-            tickerCurrent={state.tickerCurrent}
-            navigateToDetailsPage={navigateToDetailsPage}
-            addtoWatchList={addtoWatchList} />
-          }
-        />
-        <Route path="/sign-up" element={<SignUp />} />
-        <Route
-          path="/login"
-          element={
-            <LoginPage
-              dispatch={dispatch}
-              state={state}
-              email={state.email}
-              password={state.password}
-              setEmail={setEmail}
-              setPassword={setPassword}
-            />
-          }
-        />
+              addtoWatchList={addtoWatchList} 
+              darkMode={darkMode} 
+              setDarkMode={setDarkMode} 
+              toggleDarkMode={toggleDarkMode}/>
+            }
+          />
+          <Route path="/sign-up" element={<SignUp />} />
+          <Route
+            path="/login"
+            element={
+              <LoginPage
+                dispatch={dispatch}
+                state={state}
+                email={state.email}
+                password={state.password}
+                setEmail={setEmail}
+                setPassword={setPassword}
+              />
+            }
+          />
 
-        
-      </Routes>
-    </Router>
+          
+        </Routes>
+      </Router>
+    </div>
   );
 }
 

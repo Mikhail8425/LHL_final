@@ -49,7 +49,7 @@ const StockList = (props) => {
   return (
     <div>
       {/* Search bar */}
-      <div className="search">
+      <div className={`search${props.darkMode ? 'dark-mode' : ''}`}>
         <form className="search-form" onSubmit={handleSubmit}>
           <input
             type="text"
@@ -82,6 +82,9 @@ const StockList = (props) => {
               navigateToDetailsPage={props.navigateToDetailsPage}
               addtoWatchList={props.addtoWatchList}
               handleViewDetails={props.handleViewDetails}
+              darkMode={props.darkMode} 
+              setDarkMode={props.setDarkMode} 
+              toggleDarkMode={props.toggleDarkMode}
             />
           ))}
           <div className="stock-single">
@@ -92,11 +95,15 @@ const StockList = (props) => {
               navigateToDetailsPage={props.navigateToDetailsPage}
               handleViewDetails={props.handleViewDetails}
               addtoWatchList={props.addtoWatchList}
+              darkMode={props.darkMode} 
+              setDarkMode={props.setDarkMode} 
+              toggleDarkMode={props.toggleDarkMode}
+              
             />
           )}
           </div>
         </div>
-        {!searchQuery && <IndicesList />}
+        {!searchQuery && <IndicesList darkMode={props.darkMode} setDarkMode={props.setDarkMode} toggleDarkMode={props.toggleDarkMode}/>}
       </div>
     </div>
   );
